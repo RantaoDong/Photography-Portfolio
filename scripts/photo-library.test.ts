@@ -7,8 +7,12 @@ import {
 	checkConsistency,
 	commitImport,
 	commitRemoval,
+	deriveMetadataOptions,
+	GalleryConflictError,
 	nextPhotoNumber,
 	readGalleryFile,
+	readGallerySnapshot,
+	updateGalleryPhotos,
 	writeGalleryFileAtomic,
 } from './photo-library.ts';
 
@@ -42,6 +46,90 @@ describe('photo library workflow', () => {
 
 		expect(report.missingFiles.map((photo) => photo.id)).toEqual(['photo-0002']);
 		expect(report.orphanFiles).toEqual(['photos/orphan.jpg']);
+		expect(report.duplicateIds).toEqual([]);
+		expect(report.duplicateFiles).toEqual([]);
+	});
+
+	it('reports duplicate IDs and metadata filenames without deleting anything', async () => {
+		const duplicateId = { ...createPhoto('photo-0001'), file: 'photos/other.jpg' };
+		const duplicateFile = { ...createPhoto('photo-0003'), file: 'photos/photo-0002.jpg' };
+		const gallery = createGallery([
+			createPhoto('photo-0001'),
+			duplicateId,
+			createPhoto('photo-0002'),
+			duplicateFile,
+		]);
+
+		const report = await checkConsistency(gallery, photosDirectory);
+
+		expect(report.duplicateIds).toEqual(['photo-0001']);
+		expect(report.duplicateFiles).toEqual(['photos/photo-0002.jpg']);
+	});
+
+	it('derives reusable taxonomy options from the current metadata', () => {
+		const first = createPhoto('photo-0001');
+		const second = {
+			...createPhoto('photo-0002'),
+			taxonomy: { year: ['2025'], place: ['Berlin'], subject: ['Architecture', 'Street'] },
+		};
+
+		expect(deriveMetadataOptions(createGallery([first, second]))).toEqual({
+			years: ['2026', '2025'],
+			places: ['Berlin', 'Stockholm'],
+			subjects: ['Architecture', 'Street'],
+		});
+	});
+
+	it('updates All visibility independently from taxonomy dimensions', () => {
+		const gallery = createGallery([createPhoto('photo-0001')]);
+		const updated = updateGalleryPhotos(gallery, ['photo-0001'], {
+			browse: { all: false },
+		});
+
+		expect(updated.photos[0].browse).toEqual({
+			all: false,
+			year: true,
+			place: true,
+			subject: true,
+		});
+	});
+
+	it('applies explicit subject operations without overwriting other batch metadata', () => {
+		const first = createPhoto('photo-0001');
+		const second = {
+			...createPhoto('photo-0002'),
+			taxonomy: { year: ['2025'], place: ['Berlin'], subject: ['Architecture'] },
+		};
+		const gallery = createGallery([first, second]);
+
+		const added = updateGalleryPhotos(gallery, [first.id, second.id], {
+			subjects: { operation: 'add', values: ['Event'] },
+		});
+		expect(added.photos[0].taxonomy.subject).toEqual(['Street', 'Event']);
+		expect(added.photos[1].taxonomy.subject).toEqual(['Architecture', 'Event']);
+		expect(added.photos[1].taxonomy.year).toEqual(['2025']);
+		expect(added.photos[1].taxonomy.place).toEqual(['Berlin']);
+
+		const removed = updateGalleryPhotos(added, [first.id, second.id], {
+			subjects: { operation: 'remove', values: ['Event'] },
+		});
+		expect(removed.photos[0].taxonomy.subject).toEqual(['Street']);
+		expect(removed.photos[1].taxonomy.subject).toEqual(['Architecture']);
+
+		const replaced = updateGalleryPhotos(removed, [first.id, second.id], {
+			subjects: { operation: 'replace', values: ['Performance'] },
+		});
+		expect(replaced.photos.map((photo) => photo.taxonomy.subject)).toEqual([
+			['Performance'],
+			['Performance'],
+		]);
+	});
+
+	it('supports hiding a photo without deleting its file or metadata', () => {
+		const gallery = createGallery([createPhoto('photo-0001')]);
+		const updated = updateGalleryPhotos(gallery, ['photo-0001'], { published: false });
+		expect(updated.photos[0].published).toBe(false);
+		expect(updated.photos[0].file).toBe('photos/photo-0001.jpg');
 	});
 
 	it('uses the highest existing sequential ID or filename', () => {
@@ -107,6 +195,18 @@ describe('photo library workflow', () => {
 		]);
 	});
 
+	it('refuses to replace YAML when its revision changed after loading', async () => {
+		const gallery = createGallery([createPhoto('photo-0001')]);
+		await writeGalleryFileAtomic(gallery, metadataFile);
+		const snapshot = await readGallerySnapshot(metadataFile);
+		await fs.appendFile(metadataFile, '\n# external edit\n');
+
+		await expect(
+			writeGalleryFileAtomic(gallery, metadataFile, snapshot.revision),
+		).rejects.toBeInstanceOf(GalleryConflictError);
+		expect(await fs.readFile(metadataFile, 'utf8')).toContain('# external edit');
+	});
+
 	function paths() {
 		return {
 			repositoryRoot: root,
@@ -134,7 +234,7 @@ function createPhoto(id: string): GalleryPhoto {
 		id,
 		file: `photos/${id}.jpg`,
 		taxonomy: { year: ['2026'], place: ['Stockholm'], subject: ['Street'] },
-		browse: { year: true, place: true, subject: true },
+		browse: { all: true, year: true, place: true, subject: true },
 		featured: false,
 	};
 }

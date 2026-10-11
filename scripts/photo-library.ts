@@ -1,4 +1,4 @@
-import { randomUUID } from 'node:crypto';
+import { createHash, randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -22,6 +22,35 @@ const importExtensions = new Set(['.jpg', '.jpeg']);
 export interface ConsistencyReport {
 	missingFiles: GalleryPhoto[];
 	orphanFiles: string[];
+	duplicateIds: string[];
+	duplicateFiles: string[];
+}
+
+export interface MetadataOptions {
+	years: string[];
+	places: string[];
+	subjects: string[];
+}
+
+export interface SubjectUpdate {
+	operation: 'add' | 'remove' | 'replace';
+	values: string[];
+}
+
+export interface PhotoMetadataUpdate {
+	year?: string | null;
+	place?: string | null;
+	subjects?: SubjectUpdate;
+	browse?: Partial<GalleryPhoto['browse']>;
+	featured?: boolean;
+	published?: boolean;
+}
+
+export class GalleryConflictError extends Error {
+	constructor() {
+		super('gallery.yaml changed since it was loaded. Refresh the manager and try again.');
+		this.name = 'GalleryConflictError';
+	}
 }
 
 export interface ImportPlan {
@@ -32,15 +61,23 @@ export interface ImportPlan {
 }
 
 export async function readGalleryFile(metadataFile = libraryPaths.metadataFile) {
+	return (await readGallerySnapshot(metadataFile)).gallery;
+}
+
+export async function readGallerySnapshot(
+	metadataFile = libraryPaths.metadataFile,
+	validate = true,
+) {
 	const content = await fs.readFile(metadataFile, 'utf8');
 	const gallery = yaml.load(content) as GalleryData;
-	validateGallery(gallery);
-	return gallery;
+	if (validate) validateGallery(gallery);
+	return { gallery, revision: createRevision(content) };
 }
 
 export async function writeGalleryFileAtomic(
 	gallery: GalleryData,
 	metadataFile = libraryPaths.metadataFile,
+	expectedRevision?: string,
 ) {
 	validateGallery(gallery);
 	const temporaryFile = `${metadataFile}.tmp-${randomUUID()}`;
@@ -48,6 +85,10 @@ export async function writeGalleryFileAtomic(
 
 	try {
 		await fs.writeFile(temporaryFile, content, { encoding: 'utf8', flag: 'wx' });
+		if (expectedRevision) {
+			const current = await fs.readFile(metadataFile, 'utf8');
+			if (createRevision(current) !== expectedRevision) throw new GalleryConflictError();
+		}
 		await fs.rename(temporaryFile, metadataFile);
 	} finally {
 		await fs.rm(temporaryFile, { force: true });
@@ -88,7 +129,85 @@ export async function checkConsistency(
 		.map((file) => toMetadataPath(file, photosDirectory))
 		.filter((file) => !metadataFiles.has(file));
 
-	return { missingFiles, orphanFiles };
+	return {
+		missingFiles,
+		orphanFiles,
+		duplicateIds: findDuplicates(gallery.photos.map((photo) => photo.id)),
+		duplicateFiles: findDuplicates(
+			gallery.photos.map((photo) => normalizeMetadataPath(photo.file)),
+		),
+	};
+}
+
+export function deriveMetadataOptions(gallery: GalleryData): MetadataOptions {
+	return {
+		years: collectValues(gallery.photos.flatMap((photo) => photo.taxonomy?.year ?? [])).sort(
+			(a, b) => b.localeCompare(a, undefined, { numeric: true }),
+		),
+		places: collectValues(gallery.photos.flatMap((photo) => photo.taxonomy?.place ?? [])).sort(),
+		subjects: collectValues(
+			gallery.photos.flatMap((photo) => photo.taxonomy?.subject ?? []),
+		).sort(),
+	};
+}
+
+export function updateGalleryPhotos(
+	gallery: GalleryData,
+	photoIds: string[],
+	update: PhotoMetadataUpdate,
+) {
+	validateGallery(gallery);
+	const selected = new Set(photoIds);
+	if (selected.size === 0) throw new Error('Select at least one photo.');
+	const missing = [...selected].filter((id) => !gallery.photos.some((photo) => photo.id === id));
+	if (missing.length > 0) throw new Error(`Unknown photo ID(s): ${missing.join(', ')}`);
+
+	const photos = gallery.photos.map((photo) => {
+		if (!selected.has(photo.id)) return photo;
+		const updated: GalleryPhoto = {
+			...photo,
+			taxonomy: {
+				year: [...photo.taxonomy.year],
+				place: [...photo.taxonomy.place],
+				subject: [...photo.taxonomy.subject],
+			},
+			browse: { ...photo.browse, ...update.browse },
+		};
+
+		if (update.year !== undefined) updated.taxonomy.year = update.year ? [update.year.trim()] : [];
+		if (update.place !== undefined)
+			updated.taxonomy.place = update.place ? [update.place.trim()] : [];
+		if (update.subjects) {
+			const values = collectValues(update.subjects.values);
+			if (update.subjects.operation === 'replace') updated.taxonomy.subject = values;
+			if (update.subjects.operation === 'add')
+				updated.taxonomy.subject = collectValues([...updated.taxonomy.subject, ...values]);
+			if (update.subjects.operation === 'remove') {
+				const removed = new Set(values);
+				updated.taxonomy.subject = updated.taxonomy.subject.filter((value) => !removed.has(value));
+			}
+		}
+		if (update.featured !== undefined) updated.featured = update.featured;
+		if (update.published !== undefined) updated.published = update.published;
+		return updated;
+	});
+
+	const result = { ...gallery, photos };
+	validateGallery(result);
+	return result;
+}
+
+export async function commitPhotoUpdate(
+	photoIds: string[],
+	update: PhotoMetadataUpdate,
+	expectedRevision: string,
+	metadataFile = libraryPaths.metadataFile,
+) {
+	const snapshot = await readGallerySnapshot(metadataFile);
+	if (snapshot.revision !== expectedRevision) throw new GalleryConflictError();
+	const gallery = updateGalleryPhotos(snapshot.gallery, photoIds, update);
+	await writeGalleryFileAtomic(gallery, metadataFile, snapshot.revision);
+	return readGallerySnapshot(metadataFile);
 }
 
 export function nextPhotoNumber(gallery: GalleryData, diskFiles: string[] = []) {
@@ -109,6 +228,7 @@ export async function commitImport(
 	plans: ImportPlan[],
 	gallery: GalleryData,
 	paths = libraryPaths,
+	expectedRevision?: string,
 ) {
 	if (plans.length === 0) return;
 	await validateImportPlans(plans, gallery, paths.photosDirectory);
@@ -131,6 +251,7 @@ export async function commitImport(
 		await writeGalleryFileAtomic(
 			{ ...gallery, photos: [...gallery.photos, ...plans.map((plan) => plan.photo)] },
 			paths.metadataFile,
+			expectedRevision,
 		);
 		metadataCommitted = true;
 		for (const item of stagedFiles) await fs.rm(item.source);
@@ -151,6 +272,7 @@ export async function commitRemoval(
 	photos: GalleryPhoto[],
 	gallery: GalleryData,
 	paths = libraryPaths,
+	expectedRevision?: string,
 ) {
 	if (photos.length === 0) return;
 	const selectedIds = new Set(photos.map((photo) => photo.id));
@@ -172,6 +294,7 @@ export async function commitRemoval(
 		await writeGalleryFileAtomic(
 			{ ...gallery, photos: gallery.photos.filter((photo) => !selectedIds.has(photo.id)) },
 			paths.metadataFile,
+			expectedRevision,
 		);
 		metadataCommitted = true;
 		for (const item of stagedFiles) await fs.rm(item.original);
@@ -194,13 +317,14 @@ export function formatPhoto(photo: GalleryPhoto) {
 		photo.taxonomy.place.join(', ') || 'No place',
 		photo.taxonomy.subject.join(', ') || 'No subject',
 	];
-	const visible = (['year', 'place', 'subject'] as const)
-		.filter((dimension) => photo.browse[dimension])
+	const visible = (['all', 'year', 'place', 'subject'] as const)
+		.filter((dimension) =>
+			dimension === 'all' ? photo.browse.all !== false : photo.browse[dimension],
+		)
 		.map((dimension) => dimension[0].toUpperCase() + dimension.slice(1));
 	return [
 		values.join(' | '),
 		`Visible in: ${visible.join(', ') || 'Nowhere'}`,
-		photo.series ? `Series: ${photo.series}` : undefined,
 		photo.featured ? 'Featured: yes' : undefined,
 	]
 		.filter(Boolean)
@@ -228,7 +352,7 @@ export async function listPhotoFiles(directory = libraryPaths.photosDirectory): 
 	}
 }
 
-function validateGallery(gallery: GalleryData) {
+export function validateGallery(gallery: GalleryData) {
 	if (!gallery || !Array.isArray(gallery.browseDimensions) || !Array.isArray(gallery.photos))
 		throw new Error('gallery.yaml must contain browseDimensions and photos arrays.');
 	const ids = new Set<string>();
@@ -247,15 +371,37 @@ function validateGallery(gallery: GalleryData) {
 			if (photo.browse[dimension] && photo.taxonomy[dimension].length === 0)
 				throw new Error(`${photo.id} cannot be visible in ${dimension} without a value.`);
 		}
+		if (photo.browse.all !== undefined && typeof photo.browse.all !== 'boolean')
+			throw new Error(`${photo.id}.browse.all must be true or false when provided.`);
 		if (typeof photo.featured !== 'boolean')
 			throw new Error(`${photo.id} must declare featured as true or false.`);
-		for (const field of ['title', 'description', 'series'] as const) {
+		if (photo.published !== undefined && typeof photo.published !== 'boolean')
+			throw new Error(`${photo.id}.published must be true or false when provided.`);
+		for (const field of ['title', 'description'] as const) {
 			if (photo[field] !== undefined && photo[field] !== null && typeof photo[field] !== 'string')
 				throw new Error(`${photo.id}.${field} must be a string when provided.`);
 		}
 		ids.add(photo.id);
 		files.add(file);
 	}
+}
+
+function collectValues(values: string[]) {
+	return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
+}
+
+function findDuplicates(values: string[]) {
+	const seen = new Set<string>();
+	const duplicates = new Set<string>();
+	for (const value of values) {
+		if (seen.has(value)) duplicates.add(value);
+		seen.add(value);
+	}
+	return [...duplicates].sort();
+}
+
+function createRevision(content: string) {
+	return createHash('sha256').update(content).digest('hex');
 }
 
 async function validateImportPlans(
@@ -279,7 +425,7 @@ async function validateImportPlans(
 	}
 }
 
-function resolvePhotoPath(file: string, photosDirectory: string) {
+export function resolvePhotoPath(file: string, photosDirectory = libraryPaths.photosDirectory) {
 	const normalized = normalizeMetadataPath(file);
 	if (!normalized.startsWith('photos/'))
 		throw new Error(`Photo path must start with photos/: ${file}`);

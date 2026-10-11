@@ -19,6 +19,7 @@ export const createGalleryPhoto = async (
 			subject: [],
 		},
 		browse: {
+			all: true,
 			year: false,
 			place: false,
 			subject: false,

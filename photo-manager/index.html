@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="photo-manager-token" content="__MANAGER_TOKEN__" />
+		<title>Photo Manager</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<header class="app-header">
+			<div>
+				<p class="eyebrow">Local workspace</p>
+				<h1>Photo Manager</h1>
+			</div>
+			<div class="header-actions">
+				<button id="status-button" class="button secondary">Library status</button>
+				<button id="refresh-button" class="button secondary">Refresh</button>
+				<button id="import-button" class="button primary">Import new photos</button>
+			</div>
+		</header>
+
+		<section class="toolbar" aria-label="Library controls">
+			<label class="search-field">
+				<span class="sr-only">Search photographs</span>
+				<input id="search-input" type="search" placeholder="Search ID, place, or subject…" />
+			</label>
+			<label class="filter-field">
+				<span class="sr-only">Browse gallery view</span>
+				<select id="browse-filter" aria-label="Browse gallery view">
+					<option value="all">All photographs</option>
+				</select>
+			</label>
+			<label class="filter-field visibility-filter">
+				<span class="sr-only">Public visibility</span>
+				<select id="visibility-filter" aria-label="Public visibility">
+					<option value="public">Public only</option>
+					<option value="all">All, including hidden</option>
+					<option value="hidden">Hidden only</option>
+				</select>
+			</label>
+			<button id="select-all-button" class="button quiet">Select visible</button>
+			<button id="clear-selection-button" class="button quiet">Clear selection</button>
+			<span id="selection-count" class="selection-count">0 selected</span>
+			<button id="delete-button" class="button danger" disabled>Delete selected</button>
+		</section>
+
+		<div id="notice" class="notice" hidden></div>
+
+		<main class="workspace">
+			<section class="library" aria-labelledby="library-title">
+				<div class="section-heading">
+					<h2 id="library-title">Library</h2>
+					<span id="library-count" class="muted"></span>
+				</div>
+				<div id="photo-grid" class="photo-grid" aria-live="polite"></div>
+			</section>
+
+			<aside id="editor-panel" class="editor-panel" aria-live="polite">
+				<div class="empty-state">
+					<h2>Metadata</h2>
+					<p>Select one or more photographs to edit their metadata.</p>
+				</div>
+			</aside>
+		</main>
+
+		<dialog id="status-dialog" class="dialog">
+			<div class="dialog-header">
+				<div>
+					<p class="eyebrow">Validation</p>
+					<h2>Library status</h2>
+				</div>
+				<button class="icon-button" data-close-dialog="status-dialog" aria-label="Close">×</button>
+			</div>
+			<div id="status-content"></div>
+		</dialog>
+
+		<dialog id="delete-dialog" class="dialog narrow">
+			<div class="dialog-header">
+				<div>
+					<p class="eyebrow danger-text">Permanent action</p>
+					<h2>Delete photographs</h2>
+				</div>
+				<button class="icon-button" data-close-dialog="delete-dialog" aria-label="Close">×</button>
+			</div>
+			<p>The following image files and metadata entries will be removed:</p>
+			<div id="delete-preview" class="preview-list"></div>
+			<label class="confirmation-row">
+				<input id="delete-confirmation" type="checkbox" />
+				I have reviewed this removal.
+			</label>
+			<div class="dialog-actions">
+				<button class="button secondary" data-close-dialog="delete-dialog">Cancel</button>
+				<button id="confirm-delete-button" class="button danger" disabled>
+					Delete permanently
+				</button>
+			</div>
+		</dialog>
+
+		<dialog id="import-dialog" class="dialog wide">
+			<div class="dialog-header">
+				<div>
+					<p class="eyebrow">Incoming folder</p>
+					<h2>Import photographs</h2>
+				</div>
+				<button class="icon-button" data-close-dialog="import-dialog" aria-label="Close">×</button>
+			</div>
+			<div id="import-content"></div>
+		</dialog>
+
+		<script type="module" src="/app.js"></script>
+	</body>
+</html>

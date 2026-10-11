@@ -25,6 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore Astro image cache
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.astro
+          key: ${{ runner.os }}-astro-images-${{ hashFiles('package-lock.json', 'astro.config.mts', 'src/gallery/photos/**') }}
+          restore-keys: |
+            ${{ runner.os }}-astro-images-
+
       - name: Build the Astro site
         run: npm run build
 

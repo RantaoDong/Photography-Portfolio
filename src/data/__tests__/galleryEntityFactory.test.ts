@@ -14,7 +14,7 @@ describe('createGalleryPhoto', () => {
 		expect(photo.id).toBe('photos-kuku-trees');
 		expect(photo.file).toBe('photos/kuku-trees.jpg');
 		expect(photo.taxonomy.year).toEqual([]);
-		expect(photo.browse).toEqual({ year: false, place: false, subject: false });
+		expect(photo.browse).toEqual({ all: true, year: false, place: false, subject: false });
 		expect(photo.featured).toBe(false);
 		expect(photo.technical?.capturedAt).toEqual(new Date('2025-02-21T09:17:14.000Z'));
 		expect(photo.technical?.fNumber).toBe(8);

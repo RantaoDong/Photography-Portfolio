@@ -58,6 +58,7 @@ export const getBrowseDimensions = async (
 	return gallery.browseDimensions.map((dimension) => {
 		const names = new Set<string>();
 		for (const photo of gallery.photos) {
+			if (photo.published === false) continue;
 			if (!photo.browse[dimension.id]) continue;
 			for (const value of photo.taxonomy[dimension.id]) names.add(value);
 		}
@@ -97,8 +98,10 @@ const loadGalleryData = async (galleryPath: string): Promise<GalleryData> => {
 function filterPhotos(photos: GalleryPhoto[], options: GetImagesOptions) {
 	const { dimension, category, featuredOnly } = options;
 	let result = photos;
+	result = result.filter((photo) => photo.published !== false);
 
 	if (featuredOnly) result = result.filter((photo) => photo.featured);
+	else if (!dimension) result = result.filter((photo) => photo.browse.all !== false);
 
 	if (category && !dimension) {
 		throw new ImageStoreError('A dimension is required for category filtering');
@@ -168,9 +171,6 @@ function validateGalleryData(gallery: GalleryData) {
 			throw new ImageStoreError(`Photo ${photo.id} title must be a string`);
 		if (photo.description !== undefined && typeof photo.description !== 'string')
 			throw new ImageStoreError(`Photo ${photo.id} description must be a string`);
-		if (photo.series !== undefined && photo.series !== null && typeof photo.series !== 'string')
-			throw new ImageStoreError(`Photo ${photo.id} series must be a string`);
-
 		for (const dimensionId of browseDimensionIds) {
 			if (!Array.isArray(photo.taxonomy?.[dimensionId])) {
 				throw new ImageStoreError(`Photo ${photo.id} is missing taxonomy.${dimensionId}`);
@@ -184,9 +184,15 @@ function validateGalleryData(gallery: GalleryData) {
 				);
 			}
 		}
+		if (photo.browse.all !== undefined && typeof photo.browse.all !== 'boolean') {
+			throw new ImageStoreError(`Photo ${photo.id} browse.all must be a boolean`);
+		}
 
 		if (typeof photo.featured !== 'boolean') {
 			throw new ImageStoreError(`Photo ${photo.id} must declare featured as a boolean`);
+		}
+		if (photo.published !== undefined && typeof photo.published !== 'boolean') {
+			throw new ImageStoreError(`Photo ${photo.id} published must be a boolean`);
 		}
 	}
 
@@ -230,7 +236,6 @@ function processImages(photos: GalleryPhoto[], galleryPath: string): Image[] {
 			src: imageModule.default,
 			title: photo.title,
 			description: photo.description,
-			series: photo.series,
 			taxonomy: photo.taxonomy,
 		});
 		return images;

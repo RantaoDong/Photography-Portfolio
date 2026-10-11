@@ -48,7 +48,7 @@ describe('Gallery Generator', () => {
 		expect(photo.taxonomy.year).toEqual([]);
 		expect(photo.taxonomy.place).toEqual([]);
 		expect(photo.taxonomy.subject).toEqual([]);
-		expect(photo.browse).toEqual({ year: false, place: false, subject: false });
+		expect(photo.browse).toEqual({ all: true, year: false, place: false, subject: false });
 		expect(photo.featured).toBe(false);
 	});
 
@@ -56,13 +56,12 @@ describe('Gallery Generator', () => {
 		const photo = findPhoto('photos/kuku-trees.jpg');
 		photo.title = 'Custom Title';
 		photo.description = 'Custom Description';
-		photo.series = 'Custom Series';
 		photo.taxonomy = {
 			year: ['2025'],
 			place: ['Stockholm'],
 			subject: ['Performance', 'Event'],
 		};
-		photo.browse = { year: false, place: false, subject: true };
+		photo.browse = { all: false, year: false, place: false, subject: true };
 		photo.featured = true;
 		photo.features = { color: { average: '#222222' } };
 		photo.technical = { ...photo.technical, focalLength: 10 };
@@ -72,7 +71,6 @@ describe('Gallery Generator', () => {
 		const updated = findPhoto('photos/kuku-trees.jpg');
 		expect(updated.title).toBe(photo.title);
 		expect(updated.description).toBe(photo.description);
-		expect(updated.series).toBe(photo.series);
 		expect(updated.taxonomy).toEqual(photo.taxonomy);
 		expect(updated.browse).toEqual(photo.browse);
 		expect(updated.featured).toBe(true);

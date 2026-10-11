@@ -19,14 +19,17 @@ const { images } = Astro.props;
 				class="photo-item glightbox absolute transition-transform hover:scale-[1.02] hover:z-10"
 				data-gallery="gallery1"
 				data-type="image"
+				data-width={image.src.width}
+				data-height={image.src.height}
 				data-glightbox={image.description ? `title: ${image.description}` : undefined}
 			>
 				<Image
 					src={image.src}
-					quality={90}
+					width={960}
+					widths={[480, 960, 1600]}
+					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+					quality={80}
 					format="webp"
-					width={image.src.width}
-					height={image.src.height}
 					class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
 					alt={image.title || 'Photograph'}
 				/>

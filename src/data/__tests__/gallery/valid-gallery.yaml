@@ -30,6 +30,7 @@ photos:
       place: [Stockholm]
       subject: [Performance]
     browse:
+      all: true
       year: false
       place: false
       subject: true
@@ -39,12 +40,12 @@ photos:
 
   - id: landscape
     file: photos/landscape.jpg
-    series: Test Series
     taxonomy:
       year: ['2024']
       place: [Berlin]
       subject: [Landscape, Architecture]
     browse:
+      all: false
       year: true
       place: true
       subject: true
@@ -57,7 +58,22 @@ photos:
       place: []
       subject: []
     browse:
+      all: true
       year: false
       place: false
       subject: false
     featured: false
+
+  - id: hidden-photo
+    file: photos/kuku-bubble.jpg
+    taxonomy:
+      year: ['2023']
+      place: [Hidden Place]
+      subject: [Hidden Subject]
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: false

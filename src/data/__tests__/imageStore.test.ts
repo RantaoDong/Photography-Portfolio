@@ -12,12 +12,11 @@ const GALLERY = {
 };
 
 describe('Image Store', () => {
-	it('retrieves all existing images and skips a missing file', async () => {
+	it('retrieves images enabled for All and skips a missing file', async () => {
 		const images = await getImages({ galleryPath: GALLERY.VALID });
-		expect(images).toHaveLength(3);
+		expect(images).toHaveLength(2);
 		expect(images[0].src).toEqual(kukuTrees);
 		expect(images[1].src).toEqual(popoView);
-		expect(images[2].src).toEqual(landscape);
 		expect(images[0].title).toBeUndefined();
 		expect(images[0].description).toBeUndefined();
 		expect(images[1].title).toBe('Popo View');
@@ -60,7 +59,7 @@ describe('Image Store', () => {
 		expect(byYear[0].src).toEqual(kukuTrees);
 	});
 
-	it('supports multiple subjects and an optional series', async () => {
+	it('supports multiple subjects', async () => {
 		const architecture = await getImages({
 			galleryPath: GALLERY.VALID,
 			dimension: 'subject',
@@ -69,7 +68,18 @@ describe('Image Store', () => {
 		expect(architecture).toHaveLength(1);
 		expect(architecture[0].src).toEqual(landscape);
 		expect(architecture[0].taxonomy.subject).toEqual(['Landscape', 'Architecture']);
-		expect(architecture[0].series).toBe('Test Series');
+	});
+
+	it('keeps a photo out of All while allowing it in a dimension', async () => {
+		const all = await getImages({ galleryPath: GALLERY.VALID });
+		const architecture = await getImages({
+			galleryPath: GALLERY.VALID,
+			dimension: 'subject',
+			category: 'architecture',
+		});
+
+		expect(all.some((image) => image.src === landscape)).toBe(false);
+		expect(architecture[0].src).toEqual(landscape);
 	});
 
 	it('retrieves featured photos independently of taxonomy', async () => {
@@ -77,6 +87,21 @@ describe('Image Store', () => {
 		expect(images).toHaveLength(2);
 		expect(images[0].src).toEqual(popoView);
 		expect(images[1].src).toEqual(landscape);
+	});
+
+	it('keeps unpublished photos out of public results and category options', async () => {
+		const images = await getImages({ galleryPath: GALLERY.VALID });
+		const dimensions = await getBrowseDimensions(GALLERY.VALID);
+
+		expect(images).toHaveLength(2);
+		expect(dimensions.find((item) => item.id === 'year')?.categories).not.toContainEqual({
+			id: '2023',
+			name: '2023',
+		});
+		expect(dimensions.find((item) => item.id === 'subject')?.categories).not.toContainEqual({
+			id: 'hidden-subject',
+			name: 'Hidden Subject',
+		});
 	});
 
 	it('derives visible categories from photo metadata', async () => {
@@ -99,9 +124,8 @@ describe('Image Store', () => {
 	describe('sorting', () => {
 		it('sorts by capture date', async () => {
 			const images = await getImages({ galleryPath: GALLERY.VALID, sortBy: 'captureDate' });
-			expect(images[0].src).toEqual(landscape);
-			expect(images[1].src).toEqual(popoView);
-			expect(images[2].src).toEqual(kukuTrees);
+			expect(images[0].src).toEqual(popoView);
+			expect(images[1].src).toEqual(kukuTrees);
 		});
 
 		it('supports descending order', async () => {
@@ -112,7 +136,6 @@ describe('Image Store', () => {
 			});
 			expect(images[0].src).toEqual(kukuTrees);
 			expect(images[1].src).toEqual(popoView);
-			expect(images[2].src).toEqual(landscape);
 		});
 	});
 

@@ -21,7 +21,10 @@ export interface BrowseDimensionWithCategories extends BrowseDimension {
 }
 
 export type PhotoTaxonomy = Record<BrowseDimensionId, string[]>;
-export type BrowseVisibility = Record<BrowseDimensionId, boolean>;
+export type BrowseVisibility = Record<BrowseDimensionId, boolean> & {
+	/** Controls visibility on the gallery's top-level All page. Missing means visible. */
+	all?: boolean;
+};
 
 export interface TechnicalMetadata {
 	focalLength?: number;
@@ -43,10 +46,10 @@ export interface GalleryPhoto {
 	file: string;
 	title?: string;
 	description?: string;
-	series?: string | null;
 	taxonomy: PhotoTaxonomy;
 	browse: BrowseVisibility;
 	featured: boolean;
+	published?: boolean;
 	technical?: TechnicalMetadata;
 	features?: PhotoFeatures;
 }
@@ -61,7 +64,6 @@ export interface Image {
 	src: ImageMetadata;
 	title?: string;
 	description?: string;
-	series?: string | null;
 	taxonomy: PhotoTaxonomy;
 }
 

@@ -46,7 +46,9 @@ interface LayoutBox {
 	forcedAspectRatio?: boolean;
 }
 
-export async function setupGallery() {
+let lightboxInitialized = false;
+
+export function setupGallery() {
 	if (typeof document === 'undefined') return;
 
 	const container = document.getElementById('photo-grid');
@@ -62,33 +64,28 @@ export async function setupGallery() {
 		return;
 	}
 
-	// Wait for all images to load
-	const imageElements = await waitForImagesToLoad(container);
-
-	// Get actual image dimensions after loading
-	const layout = createLayoutFor(imageElements, container);
+	const layout = createLayoutFor(imageLinks, container);
 	console.log('Generated layout:', layout);
 
 	applyImagesStyleBasedOnLayout(imageLinks, layout);
 	applyContainerStyleBasedOnLayout(container, layout);
 
-	// Initialize GLightbox
-	GLightbox({
-		selector: '.glightbox',
-		openEffect: 'zoom',
-		closeEffect: 'fade',
-		width: 'auto',
-		height: 'auto',
-	});
+	if (!lightboxInitialized) {
+		GLightbox({
+			selector: '.glightbox',
+			openEffect: 'zoom',
+			closeEffect: 'fade',
+			width: 'auto',
+			height: 'auto',
+		});
+		lightboxInitialized = true;
+	}
 }
 
-function createLayoutFor(
-	imageElements: HTMLImageElement[],
-	container: HTMLElement,
-): JustifiedLayoutResult {
-	const imageSizes = imageElements.map((img) => ({
-		width: img.naturalWidth || img.width || 300,
-		height: img.naturalHeight || img.height || 200,
+function createLayoutFor(imageLinks: HTMLElement[], container: HTMLElement): JustifiedLayoutResult {
+	const imageSizes = imageLinks.map((link) => ({
+		width: Number(link.dataset.width) || 300,
+		height: Number(link.dataset.height) || 200,
 	}));
 
 	const layout = justifiedLayout(imageSizes, {
@@ -98,25 +95,6 @@ function createLayoutFor(
 		containerPadding: 0,
 	});
 	return layout;
-}
-
-async function waitForImagesToLoad(container: HTMLElement) {
-	const imageElements = Array.from(container.querySelectorAll('img')) as HTMLImageElement[];
-
-	await Promise.all(
-		imageElements.map(
-			(img) =>
-				new Promise((resolve) => {
-					if (img.complete) {
-						resolve(null);
-					} else {
-						img.onload = () => resolve(null);
-						img.onerror = () => resolve(null);
-					}
-				}),
-		),
-	);
-	return imageElements;
 }
 
 function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: JustifiedLayoutResult) {

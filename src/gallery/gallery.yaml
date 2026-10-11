@@ -99,6 +99,7899 @@ photos:
       year: true
       place: true
       subject: true
+    featured: true
+    technical: {}
+    features: {}
+    published: true
+  - id: photo-0007
+    file: photos/photo-0007.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
     featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0008
+    file: photos/photo-0008.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0009
+    file: photos/photo-0009.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0010
+    file: photos/photo-0010.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0011
+    file: photos/photo-0011.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0012
+    file: photos/photo-0012.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0013
+    file: photos/photo-0013.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0014
+    file: photos/photo-0014.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0015
+    file: photos/photo-0015.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0016
+    file: photos/photo-0016.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0017
+    file: photos/photo-0017.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0018
+    file: photos/photo-0018.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0019
+    file: photos/photo-0019.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0020
+    file: photos/photo-0020.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0021
+    file: photos/photo-0021.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0022
+    file: photos/photo-0022.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0023
+    file: photos/photo-0023.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0024
+    file: photos/photo-0024.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0025
+    file: photos/photo-0025.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0026
+    file: photos/photo-0026.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Budapest
+      subject:
+        - Street/City
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0027
+    file: photos/photo-0027.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0028
+    file: photos/photo-0028.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0029
+    file: photos/photo-0029.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0030
+    file: photos/photo-0030.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0031
+    file: photos/photo-0031.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0032
+    file: photos/photo-0032.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0033
+    file: photos/photo-0033.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0034
+    file: photos/photo-0034.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0035
+    file: photos/photo-0035.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0036
+    file: photos/photo-0036.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0037
+    file: photos/photo-0037.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0038
+    file: photos/photo-0038.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0039
+    file: photos/photo-0039.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0040
+    file: photos/photo-0040.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      year: true
+      place: true
+      subject: true
+      all: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0041
+    file: photos/photo-0041.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0042
+    file: photos/photo-0042.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0043
+    file: photos/photo-0043.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0044
+    file: photos/photo-0044.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0045
+    file: photos/photo-0045.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0046
+    file: photos/photo-0046.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0047
+    file: photos/photo-0047.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0048
+    file: photos/photo-0048.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0049
+    file: photos/photo-0049.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - WashingtonDC
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0050
+    file: photos/photo-0050.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0051
+    file: photos/photo-0051.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0052
+    file: photos/photo-0052.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0053
+    file: photos/photo-0053.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0054
+    file: photos/photo-0054.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0055
+    file: photos/photo-0055.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Uppsala
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0056
+    file: photos/photo-0056.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0057
+    file: photos/photo-0057.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0058
+    file: photos/photo-0058.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0059
+    file: photos/photo-0059.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0060
+    file: photos/photo-0060.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0061
+    file: photos/photo-0061.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0062
+    file: photos/photo-0062.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0063
+    file: photos/photo-0063.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0064
+    file: photos/photo-0064.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0065
+    file: photos/photo-0065.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0066
+    file: photos/photo-0066.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0067
+    file: photos/photo-0067.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0068
+    file: photos/photo-0068.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0069
+    file: photos/photo-0069.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0070
+    file: photos/photo-0070.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0071
+    file: photos/photo-0071.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0072
+    file: photos/photo-0072.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0073
+    file: photos/photo-0073.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0074
+    file: photos/photo-0074.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0075
+    file: photos/photo-0075.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0076
+    file: photos/photo-0076.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0077
+    file: photos/photo-0077.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - NewYork
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0078
+    file: photos/photo-0078.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0079
+    file: photos/photo-0079.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0080
+    file: photos/photo-0080.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0081
+    file: photos/photo-0081.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0082
+    file: photos/photo-0082.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0083
+    file: photos/photo-0083.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0084
+    file: photos/photo-0084.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0085
+    file: photos/photo-0085.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0086
+    file: photos/photo-0086.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0087
+    file: photos/photo-0087.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0088
+    file: photos/photo-0088.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0089
+    file: photos/photo-0089.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0090
+    file: photos/photo-0090.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0091
+    file: photos/photo-0091.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0092
+    file: photos/photo-0092.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0093
+    file: photos/photo-0093.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0094
+    file: photos/photo-0094.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: false
+      year: false
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0095
+    file: photos/photo-0095.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: false
+      year: false
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0096
+    file: photos/photo-0096.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: false
+      year: false
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0097
+    file: photos/photo-0097.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Athens
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0098
+    file: photos/photo-0098.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Athens
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0099
+    file: photos/photo-0099.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Athens
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0100
+    file: photos/photo-0100.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Athens
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0101
+    file: photos/photo-0101.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0102
+    file: photos/photo-0102.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0103
+    file: photos/photo-0103.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0104
+    file: photos/photo-0104.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0105
+    file: photos/photo-0105.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0106
+    file: photos/photo-0106.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0107
+    file: photos/photo-0107.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0108
+    file: photos/photo-0108.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0109
+    file: photos/photo-0109.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0110
+    file: photos/photo-0110.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0111
+    file: photos/photo-0111.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0112
+    file: photos/photo-0112.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0113
+    file: photos/photo-0113.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0114
+    file: photos/photo-0114.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0115
+    file: photos/photo-0115.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0116
+    file: photos/photo-0116.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0117
+    file: photos/photo-0117.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0118
+    file: photos/photo-0118.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0119
+    file: photos/photo-0119.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0120
+    file: photos/photo-0120.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0121
+    file: photos/photo-0121.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0122
+    file: photos/photo-0122.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Gdansk
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0123
+    file: photos/photo-0123.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Gdansk
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0124
+    file: photos/photo-0124.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Gdansk
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0125
+    file: photos/photo-0125.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Gdansk
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0126
+    file: photos/photo-0126.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Gotland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0127
+    file: photos/photo-0127.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Gotland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0128
+    file: photos/photo-0128.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Gotland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0129
+    file: photos/photo-0129.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Gotland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0130
+    file: photos/photo-0130.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Gotland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0131
+    file: photos/photo-0131.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0132
+    file: photos/photo-0132.jpg
+    taxonomy:
+      year:
+        - '2026'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0133
+    file: photos/photo-0133.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0134
+    file: photos/photo-0134.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0135
+    file: photos/photo-0135.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0136
+    file: photos/photo-0136.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0137
+    file: photos/photo-0137.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0138
+    file: photos/photo-0138.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0139
+    file: photos/photo-0139.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0140
+    file: photos/photo-0140.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0141
+    file: photos/photo-0141.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0142
+    file: photos/photo-0142.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0143
+    file: photos/photo-0143.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0144
+    file: photos/photo-0144.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0145
+    file: photos/photo-0145.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0146
+    file: photos/photo-0146.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0147
+    file: photos/photo-0147.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0148
+    file: photos/photo-0148.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0149
+    file: photos/photo-0149.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0150
+    file: photos/photo-0150.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0151
+    file: photos/photo-0151.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0152
+    file: photos/photo-0152.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0153
+    file: photos/photo-0153.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0154
+    file: photos/photo-0154.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0155
+    file: photos/photo-0155.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0156
+    file: photos/photo-0156.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0157
+    file: photos/photo-0157.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0158
+    file: photos/photo-0158.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0159
+    file: photos/photo-0159.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0160
+    file: photos/photo-0160.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0161
+    file: photos/photo-0161.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0162
+    file: photos/photo-0162.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0163
+    file: photos/photo-0163.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0164
+    file: photos/photo-0164.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0165
+    file: photos/photo-0165.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0166
+    file: photos/photo-0166.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0167
+    file: photos/photo-0167.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0168
+    file: photos/photo-0168.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0169
+    file: photos/photo-0169.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0170
+    file: photos/photo-0170.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0171
+    file: photos/photo-0171.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0172
+    file: photos/photo-0172.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0173
+    file: photos/photo-0173.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0174
+    file: photos/photo-0174.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0175
+    file: photos/photo-0175.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0176
+    file: photos/photo-0176.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0177
+    file: photos/photo-0177.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0178
+    file: photos/photo-0178.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0179
+    file: photos/photo-0179.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Iceland
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0180
+    file: photos/photo-0180.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0181
+    file: photos/photo-0181.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0182
+    file: photos/photo-0182.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0183
+    file: photos/photo-0183.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0184
+    file: photos/photo-0184.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0185
+    file: photos/photo-0185.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0186
+    file: photos/photo-0186.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0187
+    file: photos/photo-0187.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0188
+    file: photos/photo-0188.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0189
+    file: photos/photo-0189.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0190
+    file: photos/photo-0190.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0191
+    file: photos/photo-0191.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0192
+    file: photos/photo-0192.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0193
+    file: photos/photo-0193.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0194
+    file: photos/photo-0194.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0195
+    file: photos/photo-0195.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0196
+    file: photos/photo-0196.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0197
+    file: photos/photo-0197.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0198
+    file: photos/photo-0198.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0199
+    file: photos/photo-0199.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0200
+    file: photos/photo-0200.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0201
+    file: photos/photo-0201.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0202
+    file: photos/photo-0202.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0203
+    file: photos/photo-0203.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0204
+    file: photos/photo-0204.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0205
+    file: photos/photo-0205.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0206
+    file: photos/photo-0206.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0207
+    file: photos/photo-0207.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0208
+    file: photos/photo-0208.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0209
+    file: photos/photo-0209.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0210
+    file: photos/photo-0210.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0211
+    file: photos/photo-0211.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0212
+    file: photos/photo-0212.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0213
+    file: photos/photo-0213.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0214
+    file: photos/photo-0214.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0215
+    file: photos/photo-0215.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0216
+    file: photos/photo-0216.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0217
+    file: photos/photo-0217.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Taiwan
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0218
+    file: photos/photo-0218.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0219
+    file: photos/photo-0219.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0220
+    file: photos/photo-0220.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0221
+    file: photos/photo-0221.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0222
+    file: photos/photo-0222.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0223
+    file: photos/photo-0223.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0224
+    file: photos/photo-0224.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0225
+    file: photos/photo-0225.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0226
+    file: photos/photo-0226.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0227
+    file: photos/photo-0227.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0228
+    file: photos/photo-0228.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0229
+    file: photos/photo-0229.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0230
+    file: photos/photo-0230.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0231
+    file: photos/photo-0231.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0232
+    file: photos/photo-0232.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0233
+    file: photos/photo-0233.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0234
+    file: photos/photo-0234.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0235
+    file: photos/photo-0235.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Vienna
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0236
+    file: photos/photo-0236.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0237
+    file: photos/photo-0237.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0238
+    file: photos/photo-0238.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0239
+    file: photos/photo-0239.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0240
+    file: photos/photo-0240.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0241
+    file: photos/photo-0241.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0242
+    file: photos/photo-0242.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0243
+    file: photos/photo-0243.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0244
+    file: photos/photo-0244.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0245
+    file: photos/photo-0245.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0246
+    file: photos/photo-0246.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0247
+    file: photos/photo-0247.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0248
+    file: photos/photo-0248.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0249
+    file: photos/photo-0249.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0250
+    file: photos/photo-0250.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0251
+    file: photos/photo-0251.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0252
+    file: photos/photo-0252.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Salzkammergut
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0253
+    file: photos/photo-0253.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0254
+    file: photos/photo-0254.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0255
+    file: photos/photo-0255.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0256
+    file: photos/photo-0256.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0257
+    file: photos/photo-0257.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0258
+    file: photos/photo-0258.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0259
+    file: photos/photo-0259.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Berlin
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0260
+    file: photos/photo-0260.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0261
+    file: photos/photo-0261.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0262
+    file: photos/photo-0262.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0263
+    file: photos/photo-0263.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0264
+    file: photos/photo-0264.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0265
+    file: photos/photo-0265.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0266
+    file: photos/photo-0266.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0267
+    file: photos/photo-0267.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0268
+    file: photos/photo-0268.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0269
+    file: photos/photo-0269.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0270
+    file: photos/photo-0270.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0271
+    file: photos/photo-0271.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0272
+    file: photos/photo-0272.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0273
+    file: photos/photo-0273.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0274
+    file: photos/photo-0274.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0275
+    file: photos/photo-0275.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0276
+    file: photos/photo-0276.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0277
+    file: photos/photo-0277.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0278
+    file: photos/photo-0278.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0279
+    file: photos/photo-0279.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0280
+    file: photos/photo-0280.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0281
+    file: photos/photo-0281.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0282
+    file: photos/photo-0282.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0283
+    file: photos/photo-0283.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0284
+    file: photos/photo-0284.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0285
+    file: photos/photo-0285.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0286
+    file: photos/photo-0286.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0287
+    file: photos/photo-0287.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0288
+    file: photos/photo-0288.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0289
+    file: photos/photo-0289.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0290
+    file: photos/photo-0290.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0291
+    file: photos/photo-0291.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0292
+    file: photos/photo-0292.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0293
+    file: photos/photo-0293.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0294
+    file: photos/photo-0294.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0295
+    file: photos/photo-0295.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0296
+    file: photos/photo-0296.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0297
+    file: photos/photo-0297.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0298
+    file: photos/photo-0298.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0299
+    file: photos/photo-0299.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0300
+    file: photos/photo-0300.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0301
+    file: photos/photo-0301.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0302
+    file: photos/photo-0302.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0303
+    file: photos/photo-0303.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0304
+    file: photos/photo-0304.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0305
+    file: photos/photo-0305.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place: []
+      subject:
+        - Performance
+    browse:
+      all: true
+      year: true
+      place: false
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0306
+    file: photos/photo-0306.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Paris
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0307
+    file: photos/photo-0307.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Paris
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0308
+    file: photos/photo-0308.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Paris
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0309
+    file: photos/photo-0309.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Paris
+      subject:
+        - Street/City
+    browse:
+      all: false
+      year: false
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0310
+    file: photos/photo-0310.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0311
+    file: photos/photo-0311.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0312
+    file: photos/photo-0312.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0313
+    file: photos/photo-0313.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0314
+    file: photos/photo-0314.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0315
+    file: photos/photo-0315.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0316
+    file: photos/photo-0316.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0317
+    file: photos/photo-0317.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0318
+    file: photos/photo-0318.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0319
+    file: photos/photo-0319.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0320
+    file: photos/photo-0320.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0321
+    file: photos/photo-0321.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0322
+    file: photos/photo-0322.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0323
+    file: photos/photo-0323.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0324
+    file: photos/photo-0324.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0325
+    file: photos/photo-0325.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0326
+    file: photos/photo-0326.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0327
+    file: photos/photo-0327.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0328
+    file: photos/photo-0328.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0329
+    file: photos/photo-0329.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0330
+    file: photos/photo-0330.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - London
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0331
+    file: photos/photo-0331.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0332
+    file: photos/photo-0332.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0333
+    file: photos/photo-0333.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0334
+    file: photos/photo-0334.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0335
+    file: photos/photo-0335.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0336
+    file: photos/photo-0336.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0337
+    file: photos/photo-0337.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0338
+    file: photos/photo-0338.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0339
+    file: photos/photo-0339.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0340
+    file: photos/photo-0340.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0341
+    file: photos/photo-0341.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0342
+    file: photos/photo-0342.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0343
+    file: photos/photo-0343.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0344
+    file: photos/photo-0344.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0345
+    file: photos/photo-0345.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0346
+    file: photos/photo-0346.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0347
+    file: photos/photo-0347.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0348
+    file: photos/photo-0348.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0349
+    file: photos/photo-0349.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Mallorca
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0350
+    file: photos/photo-0350.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Singapore
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0351
+    file: photos/photo-0351.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Singapore
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0352
+    file: photos/photo-0352.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Singapore
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0353
+    file: photos/photo-0353.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Singapore
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0354
+    file: photos/photo-0354.jpg
+    taxonomy:
+      year:
+        - '2025'
+      place:
+        - Singapore
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0355
+    file: photos/photo-0355.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0356
+    file: photos/photo-0356.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0357
+    file: photos/photo-0357.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0358
+    file: photos/photo-0358.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0359
+    file: photos/photo-0359.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0360
+    file: photos/photo-0360.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0361
+    file: photos/photo-0361.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0362
+    file: photos/photo-0362.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0363
+    file: photos/photo-0363.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0364
+    file: photos/photo-0364.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Events
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0365
+    file: photos/photo-0365.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0366
+    file: photos/photo-0366.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0367
+    file: photos/photo-0367.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0368
+    file: photos/photo-0368.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0369
+    file: photos/photo-0369.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0370
+    file: photos/photo-0370.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0371
+    file: photos/photo-0371.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0372
+    file: photos/photo-0372.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0373
+    file: photos/photo-0373.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0374
+    file: photos/photo-0374.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0375
+    file: photos/photo-0375.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0376
+    file: photos/photo-0376.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0377
+    file: photos/photo-0377.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0378
+    file: photos/photo-0378.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0379
+    file: photos/photo-0379.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0380
+    file: photos/photo-0380.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0381
+    file: photos/photo-0381.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0382
+    file: photos/photo-0382.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0383
+    file: photos/photo-0383.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0384
+    file: photos/photo-0384.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0385
+    file: photos/photo-0385.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Copenhagen
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0386
+    file: photos/photo-0386.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0387
+    file: photos/photo-0387.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0388
+    file: photos/photo-0388.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0389
+    file: photos/photo-0389.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0390
+    file: photos/photo-0390.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0391
+    file: photos/photo-0391.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0392
+    file: photos/photo-0392.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0393
+    file: photos/photo-0393.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0394
+    file: photos/photo-0394.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0395
+    file: photos/photo-0395.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0396
+    file: photos/photo-0396.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0397
+    file: photos/photo-0397.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0398
+    file: photos/photo-0398.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0399
+    file: photos/photo-0399.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0400
+    file: photos/photo-0400.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0401
+    file: photos/photo-0401.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0402
+    file: photos/photo-0402.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0403
+    file: photos/photo-0403.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0404
+    file: photos/photo-0404.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0405
+    file: photos/photo-0405.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0406
+    file: photos/photo-0406.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0407
+    file: photos/photo-0407.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0408
+    file: photos/photo-0408.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0409
+    file: photos/photo-0409.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0410
+    file: photos/photo-0410.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0411
+    file: photos/photo-0411.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0412
+    file: photos/photo-0412.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0413
+    file: photos/photo-0413.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0414
+    file: photos/photo-0414.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0415
+    file: photos/photo-0415.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0416
+    file: photos/photo-0416.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0417
+    file: photos/photo-0417.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0418
+    file: photos/photo-0418.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0419
+    file: photos/photo-0419.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0420
+    file: photos/photo-0420.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0421
+    file: photos/photo-0421.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0422
+    file: photos/photo-0422.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0423
+    file: photos/photo-0423.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0424
+    file: photos/photo-0424.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0425
+    file: photos/photo-0425.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0426
+    file: photos/photo-0426.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0427
+    file: photos/photo-0427.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0428
+    file: photos/photo-0428.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0429
+    file: photos/photo-0429.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0430
+    file: photos/photo-0430.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0431
+    file: photos/photo-0431.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0432
+    file: photos/photo-0432.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0433
+    file: photos/photo-0433.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0434
+    file: photos/photo-0434.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0435
+    file: photos/photo-0435.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - BalticSea
+      subject:
+        - Nature
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0436
+    file: photos/photo-0436.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0437
+    file: photos/photo-0437.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Helsinki
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0438
+    file: photos/photo-0438.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0439
+    file: photos/photo-0439.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0440
+    file: photos/photo-0440.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0441
+    file: photos/photo-0441.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0442
+    file: photos/photo-0442.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0443
+    file: photos/photo-0443.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0444
+    file: photos/photo-0444.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: true
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0445
+    file: photos/photo-0445.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0446
+    file: photos/photo-0446.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Street/City
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0447
+    file: photos/photo-0447.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
+    technical: {}
+    features: {}
+  - id: photo-0448
+    file: photos/photo-0448.jpg
+    taxonomy:
+      year:
+        - '2024'
+      place:
+        - Stockholm
+      subject:
+        - Nightscape
+    browse:
+      all: true
+      year: true
+      place: true
+      subject: true
+    featured: false
+    published: true
     technical: {}
     features: {}

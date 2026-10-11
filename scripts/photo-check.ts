@@ -3,13 +3,13 @@ import { createInterface } from 'node:readline/promises';
 import {
 	checkConsistency,
 	libraryPaths,
-	readGalleryFile,
+	readGallerySnapshot,
 	writeGalleryFileAtomic,
 } from './photo-library.ts';
 import { askYesNo } from './photo-import.ts';
 
 async function main() {
-	const gallery = await readGalleryFile();
+	const { gallery } = await readGallerySnapshot(libraryPaths.metadataFile, false);
 	const report = await checkConsistency(gallery);
 
 	console.log('Photo library consistency check\n===============================');
@@ -25,7 +25,24 @@ async function main() {
 		for (const file of report.orphanFiles) console.log(`- ${file}`);
 	}
 
-	if (report.missingFiles.length === 0 && report.orphanFiles.length === 0) {
+	if (report.duplicateIds.length === 0) console.log('\nDuplicate photo IDs: none');
+	else {
+		console.log(`\nDuplicate photo IDs (${report.duplicateIds.length}):`);
+		for (const id of report.duplicateIds) console.log(`- ${id}`);
+	}
+
+	if (report.duplicateFiles.length === 0) console.log('\nDuplicate metadata filenames: none');
+	else {
+		console.log(`\nDuplicate metadata filenames (${report.duplicateFiles.length}):`);
+		for (const file of report.duplicateFiles) console.log(`- ${file}`);
+	}
+
+	if (
+		report.missingFiles.length === 0 &&
+		report.orphanFiles.length === 0 &&
+		report.duplicateIds.length === 0 &&
+		report.duplicateFiles.length === 0
+	) {
 		console.log('\nEverything is synchronized.');
 		return;
 	}

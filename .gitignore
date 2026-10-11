@@ -25,5 +25,7 @@ pnpm-debug.log*
 
 # app
 src/data/__tests__/gallery/gallery.yaml
-incoming/*
-!incoming/.gitkeep
+
+# local import staging area; keep the folder, never commit staged photographs
+/incoming/**
+!/incoming/.gitkeep

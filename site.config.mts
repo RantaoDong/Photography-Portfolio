@@ -11,7 +11,7 @@ export default {
 	title: 'RD',
 	browserTitle: 'Rantao_photogrpahy',
 	owner: 'Rantao Dong',
-	profileImage: 'profile.webp',
+	profileImage: 'profile.jpg',
 	socialLinks: [
 		{
 			name: 'Instagram',

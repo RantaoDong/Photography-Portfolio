@@ -16,7 +16,6 @@ import {
 interface Answers {
 	taxonomy: PhotoTaxonomy;
 	browse: BrowseVisibility;
-	series?: string;
 	featured: boolean;
 }
 
@@ -55,7 +54,6 @@ async function main() {
 				technical: {},
 				features: {},
 			};
-			if (answers.series) photo.series = answers.series;
 			plans.push({ source, id, fileName, photo });
 		}
 
@@ -83,15 +81,15 @@ async function askMetadata(prompt: Interface, defaults?: Answers): Promise<Answe
 	const year = await askYear(prompt, defaults?.taxonomy.year[0]);
 	const place = await askList(prompt, 'Place(s)', defaults?.taxonomy.place);
 	const subject = await askList(prompt, 'Subject(s)', defaults?.taxonomy.subject);
-	const series = await askText(prompt, 'Series (optional)', defaults?.series);
 	const taxonomy: PhotoTaxonomy = { year: year ? [year] : [], place, subject };
 	const browse: BrowseVisibility = {
+		all: await askYesNo(prompt, 'Show in All?', defaults?.browse.all ?? true),
 		year: await askVisibility(prompt, 'Year', taxonomy.year, defaults?.browse.year),
 		place: await askVisibility(prompt, 'Place', taxonomy.place, defaults?.browse.place),
 		subject: await askVisibility(prompt, 'Subject', taxonomy.subject, defaults?.browse.subject),
 	};
 	const featured = await askYesNo(prompt, 'Featured?', defaults?.featured ?? false);
-	return { taxonomy, browse, series: series || undefined, featured };
+	return { taxonomy, browse, featured };
 }
 
 async function askYear(prompt: Interface, defaultValue?: string) {
