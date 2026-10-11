@@ -10,6 +10,6 @@
 		"types": ["astro/client"]
 	},
 	"extends": "astro/tsconfigs/strict",
-	"include": [".astro/types.d.ts", "src/**/*"],
+	"include": [".astro/types.d.ts", "src/**/*", "scripts/**/*"],
 	"exclude": ["dist"]
 }

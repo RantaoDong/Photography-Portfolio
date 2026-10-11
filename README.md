@@ -1,126 +1,94 @@
-# 📸 Astro Photography Portfolio Template
+# Rantao Dong Photography Portfolio
 
-[![Build & Test](https://github.com/rockem/astro-photography-portfolio/actions/workflows/test.yml/badge.svg)](https://github.com/rockem/astro-photography-portfolio/actions/workflows/test.yml)
+A personal photography portfolio built with Astro. Photographs can be browsed independently by year, place, or subject, with a minimal responsive gallery and lightbox presentation.
 
-A modern, fast, and highly customizable photography portfolio template built with [Astro](https://astro.build).
-Ideal for photographers who want to showcase their work through a sleek, performant, and professional website.
+## Development
 
-👉 [View the demo](https://rockem.github.io/astro-photography-portfolio/)
-
-## ✨ Features
-
-- Lightning-fast performance with Astro
-- Fully responsive design
-- Optimized image loading and handling
-- Easy to customize
-- Easy to organized gallery via a yaml file
-- Multiple albums support
-- Image zoom capabilities
-- Automatic deployment to GitHub pages
-- Script to automatically create a gallery from images
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Check [AstroJS](https://docs.astro.build/en/install-and-setup/) documentation for prerequisites
-- Basic knowledge of Astro and web development
-
-### Installation
-
-1. click "Use this template" on GitHub
-2. Clone your newly created template
-3. Install dependencies:
+Requirements: a current Node.js release and npm.
 
 ```bash
 npm install
-# or
-yarn install
+npm run dev
 ```
 
-3. Start the development server:
+Useful checks:
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm run lint
+npm test
+npm run build
+npm run preview
 ```
 
-## 📝 Make it your own
+## Site content
 
-### Configuration
+- General identity and social links: `site.config.mts`
+- About text: `src/content/about.md`
+- Profile image: `public/images/profile.webp`
+- Gallery metadata: `src/gallery/gallery.yaml`
+- Gallery images: `src/gallery/photos/`
+- GitHub Pages URL and base path: `astro.config.mts`
 
-Edit the `astro.config.ts` file to update your github pages details:
+## Photo workflow
 
-```typescript
-export default defineConfig({
-  site: '<github pages domain>',
-  base: '<repository name>',
-  // ...
-});
+### Import photographs
+
+1. Put exported, web-ready JPG or JPEG files into `incoming/`.
+2. Run `npm run photo:import`.
+3. Enter batch defaults for year, place, subjects, optional series, browsing visibility, and featured status.
+4. Accept those defaults or override them for individual photographs.
+5. Review the complete preview and confirm the import.
+
+Confirmed imports receive stable sequential IDs and filenames such as `photo-0001`. The files are moved into `src/gallery/photos/`, while their metadata is appended to `src/gallery/gallery.yaml`. EXIF data is not used to determine gallery taxonomy.
+
+### Check consistency
+
+```bash
+npm run photo:check
 ```
 
-Edit the `site.config.mts` file to update your personal information:
+This reports metadata entries with missing files and image files without metadata. It never silently deletes metadata. If stale metadata is found, removal requires interactive confirmation and defaults to no.
 
-```typescript
-export default {
-  title: 'SR',
-  favicon: 'favicon.ico',
-  owner: 'Sara Richard',
-  // ... Other configurations
-};
+### Remove photographs
+
+```bash
+npm run photo:remove
 ```
 
-### Customize site icon
+The command lists available photo IDs and accepts one or more selections. IDs can also be supplied directly:
 
-Replace `public/favicon.ico` with your icon and change the configuration
-if your file has a different name/location.
+```bash
+npm run photo:remove -- photo-0001 photo-0002
+```
 
-### Customize the About page
+Removal previews both the files and metadata, requires explicit confirmation, and uses a staged transaction with rollback protection.
 
-- Replace the profile image (see [site.config.mts](site.config.mts) for configuration)
-- Edit content in [about page](./src/pages/about.astro)
+## Metadata
 
-### Adding Your Photos
+All photo metadata remains in one YAML file. Titles, descriptions, series, technical data, and generated features are optional.
 
-1. Place your images in the `src/gallery/<album>` directory
-2. Update the gallery details in `src/gallery/gallery.yaml`. Optionally, you can run `npm run generate` to generate a
-   gallery.yaml file from the images in the directory.
-3. Update meta-data for images in the `src/gallery/gallery.yaml` file.
-4. Images are automatically optimized during build
+```yaml
+- id: photo-0001
+  file: photos/photo-0001.jpg
+  taxonomy:
+    year: ['2026']
+    place: [Stockholm]
+    subject: [Street]
+  browse:
+    year: true
+    place: true
+    subject: true
+  featured: false
+  technical: {}
+  features: {}
+```
 
-### Adding photos to the featured section
+`taxonomy` records a photograph's attributes. The corresponding `browse` flags independently control whether it appears under each browsing dimension. Set `featured: true` to show it in the homepage featured section.
 
-"featured" is a builtin collection, and images can be added to it by specifying it in the collections parameter like any
-other collection.
+## Deployment
 
-## 🛠️ Built With
+Pushing `main` runs the repository's GitHub Actions checks and deploys the generated `dist/` directory to GitHub Pages.
 
-- [Astro](https://astro.build) - The web framework for content-driven websites
-- [TypeScript](https://www.typescriptlang.org/) - For type safety
-- [TailwindCSS](https://tailwindcss.com) - For styling
-- [Sharp](https://sharp.pixelplumbing.com/) - For image optimization
-- [GLightbox](https://biati-digital.github.io/glightbox/) - Responsive lightbox gallery
+## Acknowledgement
 
-## ⚙️ Provided GitHub actions
-
-- [Build & Test](./.github/workflows/test.yml) - Ensure build integrity
-- [Quality](./.github/workflows/quality.yml) - Run pre-commit checks
-- [Deploy Astro Site](./.github/workflows/deploy.yml) - Publish to GitHub pages
-
-## 📄 License
-
-This project is licensed under the MIT License, see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request or an Issue.
-
-## 💖 Support
-
-If you find this template useful, please consider giving it a ⭐️ on GitHub!
-
-## 📧 Contact
-
-- [Instagram](https://www.instagram.com/lesegal/)
-- [GitHub](https://github.com/rockem)
+Adapted from [rockem/astro-photography-portfolio](https://github.com/rockem/astro-photography-portfolio).

@@ -3,16 +3,22 @@ import * as fs from 'node:fs';
 import yaml from 'js-yaml';
 import path from 'path';
 import fg from 'fast-glob';
-import { type GalleryData, loadGallery, NullGalleryData } from './galleryData.ts';
-import { createGalleryCollection, createGalleryImage } from './galleryEntityFactory.ts';
+import {
+	defaultBrowseDimensions,
+	type GalleryData,
+	loadGallery,
+	NullGalleryData,
+} from './galleryData.ts';
+import { createGalleryPhoto } from './galleryEntityFactory.ts';
 
-const defaultGalleryFileName = 'gallery.yaml';
+const galleryFileName = 'gallery.yaml';
+const photosDirectoryName = 'photos';
 
 async function generateGalleryFile(galleryDir: string): Promise<void> {
 	try {
-		let galleryObj = await loadExistingGallery(galleryDir);
-		galleryObj = mergeGalleriesObj(galleryObj, await createGalleryObjFrom(galleryDir));
-		await writeGalleryYaml(galleryDir, galleryObj);
+		const existingGallery = await loadExistingGallery(galleryDir);
+		const discoveredGallery = await createGalleryFromPhotos(galleryDir);
+		await writeGalleryYaml(galleryDir, mergeGalleries(existingGallery, discoveredGallery));
 	} catch (error) {
 		console.error('Failed to create gallery file:', error);
 		process.exit(1);
@@ -20,81 +26,51 @@ async function generateGalleryFile(galleryDir: string): Promise<void> {
 }
 
 async function loadExistingGallery(galleryDir: string) {
-	const existingGalleryFile = path.join(galleryDir, defaultGalleryFileName);
-	if (fs.existsSync(existingGalleryFile)) {
-		return await loadGallery(existingGalleryFile);
-	}
+	const existingGalleryFile = path.join(galleryDir, galleryFileName);
+	if (fs.existsSync(existingGalleryFile)) return await loadGallery(existingGalleryFile);
 	return NullGalleryData;
 }
 
-function mergeGalleriesObj(
-	targetGalleryObj: GalleryData,
-	sourceGalleryObj: GalleryData,
-): GalleryData {
+function mergeGalleries(target: GalleryData, source: GalleryData): GalleryData {
+	const photosByFile = new Map(target.photos.map((photo) => [photo.file, photo]));
+	for (const discoveredPhoto of source.photos) {
+		const existingPhoto = photosByFile.get(discoveredPhoto.file);
+		if (existingPhoto) {
+			existingPhoto.technical = discoveredPhoto.technical;
+		} else {
+			photosByFile.set(discoveredPhoto.file, discoveredPhoto);
+		}
+	}
+
 	return {
-		collections: getUpdatedCollectionList(targetGalleryObj, sourceGalleryObj),
-		images: getUpdatedImageList(targetGalleryObj, sourceGalleryObj),
+		browseDimensions:
+			target.browseDimensions?.length > 0 ? target.browseDimensions : defaultBrowseDimensions,
+		photos: Array.from(photosByFile.values()),
 	};
 }
 
-function getUpdatedImageList(targetGalleryObj: GalleryData, sourceGalleryObj: GalleryData) {
-	const imagesMap = new Map(targetGalleryObj.images.map((image) => [image.path, image]));
-	sourceGalleryObj.images.forEach((image) => {
-		const existingImage = imagesMap.get(image.path);
-		if (existingImage === undefined) {
-			imagesMap.set(image.path, image);
-		} else {
-			existingImage.exif = image.exif;
-		}
-	});
-	return Array.from(imagesMap.values());
-}
+async function createGalleryFromPhotos(galleryDir: string): Promise<GalleryData> {
+	const photosDir = path.join(galleryDir, photosDirectoryName);
+	if (!fs.existsSync(photosDir)) {
+		throw new Error(`Photos directory not found: ${photosDir}`);
+	}
 
-function getUpdatedCollectionList(targetGalleryObj: GalleryData, sourceGalleryObj: GalleryData) {
-	const collectionsMap = new Map(
-		targetGalleryObj.collections.map((collection) => [collection.id, collection]),
-	);
-	sourceGalleryObj.collections.forEach((collection) => {
-		if (!collectionsMap.get(collection.id)) {
-			collectionsMap.set(collection.id, collection);
-		}
-	});
-	return Array.from(collectionsMap.values());
-}
-
-async function createGalleryObjFrom(galleryDir: string): Promise<GalleryData> {
-	const imageFiles = await fg(`${galleryDir}/**/*.{jpg,jpeg,png}`, {
+	const imageFiles = await fg(`${photosDir.replaceAll('\\', '/')}/**/*.{jpg,jpeg,png,webp}`, {
 		dot: false,
 	});
 	return {
-		collections: createCollectionsFrom(imageFiles, galleryDir),
-		images: await createImagesFrom(imageFiles, galleryDir),
+		browseDimensions: defaultBrowseDimensions,
+		photos: await Promise.all(imageFiles.map((file) => createGalleryPhoto(galleryDir, file))),
 	};
 }
 
-function createCollectionsFrom(imageFiles: string[], galleryDir: string) {
-	const uniqueDirNames = new Set(
-		imageFiles.map((file) => path.dirname(path.relative(galleryDir, file))),
-	);
-
-	return [...uniqueDirNames]
-		.map((dir) => {
-			return createGalleryCollection(dir);
-		})
-		.filter((col) => col.id !== '.');
-}
-
-async function createImagesFrom(imageFiles: string[], galleryDir: string) {
-	return Promise.all(imageFiles.map((file) => createGalleryImage(galleryDir, file)));
-}
-
-async function writeGalleryYaml(galleryDir: string, galleryObj: GalleryData) {
-	const filePath = path.join(galleryDir, defaultGalleryFileName);
-	await fs.promises.writeFile(filePath, yaml.dump(galleryObj), 'utf8');
+async function writeGalleryYaml(galleryDir: string, gallery: GalleryData) {
+	const filePath = path.join(galleryDir, galleryFileName);
+	await fs.promises.writeFile(filePath, yaml.dump(gallery, { noRefs: true }), 'utf8');
 	console.log('Gallery file created/updated successfully at:', filePath);
 }
 
-program.argument('<path to images directory>');
+program.argument('<gallery directory>');
 program.parse();
 
 const directoryPath = program.args[0];

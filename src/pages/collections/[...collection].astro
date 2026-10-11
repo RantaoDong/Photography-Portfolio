@@ -1,23 +1,33 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import PhotoGrid from '../../components/PhotoGrid.astro';
-import { getCollections, getImages } from '../../data/imageStore';
+import { getBrowseDimensions, getImages, isBrowseDimensionId } from '../../data/imageStore';
 
-const allCollection = {
-	id: undefined,
-	name: 'All',
-};
-const collections = [allCollection, ...(await getCollections())];
+const browseDimensions = await getBrowseDimensions();
 const { collection } = Astro.params;
-const images = await getImages(collection ? { collection } : {});
+const [dimensionParam, categoryParam] = collection?.split('/') ?? [];
+const activeDimension =
+	dimensionParam && isBrowseDimensionId(dimensionParam) ? dimensionParam : undefined;
+const activeCategory = activeDimension ? categoryParam : undefined;
+const activeDimensionData = browseDimensions.find((dimension) => dimension.id === activeDimension);
+const images = activeDimension
+	? await getImages({ dimension: activeDimension, category: activeCategory })
+	: await getImages();
 const base = import.meta.env.BASE_URL;
 
 export const getStaticPaths = async () => {
-	return [{ id: undefined }, ...(await getCollections())].map((collection) => {
-		return {
-			params: { collection: collection.id },
-		};
-	});
+	const dimensions = await getBrowseDimensions();
+	return [
+		{ params: { collection: undefined } },
+		...dimensions.map((dimension) => ({
+			params: { collection: dimension.id },
+		})),
+		...dimensions.flatMap((dimension) =>
+			dimension.categories.map((category) => ({
+				params: { collection: `${dimension.id}/${category.id}` },
+			})),
+		),
+	];
 };
 ---
 
@@ -26,30 +36,79 @@ export const getStaticPaths = async () => {
 		<div class="container-custom">
 			<div class="mb-16 text-center">
 				<h1 class="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
-				<p class="text-gray-600 max-w-xl mx-auto">Explore my collection of photographic works</p>
+				<p class="text-gray-600 max-w-xl mx-auto">Browse photographs by year, place, or subject.</p>
 			</div>
 
-			<div class="flex justify-center mb-10">
+			<nav class="mb-10" aria-label="Gallery filters">
+				<p class="text-sm text-gray-500 text-center mb-3">Browse by</p>
 				<div class="flex flex-wrap gap-2 justify-center">
+					<a href={`${base}/collections/`}>
+						<div
+							class={`px-4 py-2 border ${
+								!activeDimension
+									? 'border-black bg-black text-white'
+									: 'border-gray-200 text-gray-700 hover:border-gray-300'
+							} transition-all`}
+						>
+							All
+						</div>
+					</a>
 					{
-						collections.map((collectionBtn) => (
-							<a href={`${base}/collections/${collectionBtn.id ? collectionBtn.id : ''}`}>
+						browseDimensions.map((dimension) => (
+							<a href={`${base}/collections/${dimension.id}`}>
 								<div
 									class={`px-4 py-2 border ${
-										collectionBtn.id === collection
+										dimension.id === activeDimension
 											? 'border-black bg-black text-white'
 											: 'border-gray-200 text-gray-700 hover:border-gray-300'
 									} transition-all`}
 								>
-									{collectionBtn.name}
+									{dimension.label}
 								</div>
 							</a>
 						))
 					}
 				</div>
-			</div>
 
-			<PhotoGrid images={images} />
+				{
+					activeDimensionData && (
+						<div class="flex flex-wrap gap-2 justify-center mt-4">
+							<a href={`${base}/collections/${activeDimensionData.id}`}>
+								<div
+									class={`px-4 py-2 border ${
+										!activeCategory
+											? 'border-black bg-black text-white'
+											: 'border-gray-200 text-gray-700 hover:border-gray-300'
+									} transition-all`}
+								>
+									All {activeDimensionData.label}s
+								</div>
+							</a>
+							{activeDimensionData.categories.map((category) => (
+								<a href={`${base}/collections/${activeDimensionData.id}/${category.id}`}>
+									<div
+										class={`px-4 py-2 border ${
+											category.id === activeCategory
+												? 'border-black bg-black text-white'
+												: 'border-gray-200 text-gray-700 hover:border-gray-300'
+										} transition-all`}
+									>
+										{category.name}
+									</div>
+								</a>
+							))}
+						</div>
+					)
+				}
+			</nav>
+
+			{
+				images.length > 0 ? (
+					<PhotoGrid images={images} />
+				) : (
+					<p class="text-center text-gray-500 py-16">No photographs in this category yet.</p>
+				)
+			}
 		</div>
 	</section>
 </MainLayout>

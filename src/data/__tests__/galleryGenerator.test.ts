@@ -2,154 +2,97 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { execa } from 'execa';
 import path from 'path';
 import * as fs from 'node:fs';
-import {
-	type GalleryData,
-	type GalleryImage,
-	loadGallery,
-	type Meta,
-	type ImageExif,
-} from '../galleryData.ts';
-import { expectContainsOnlyObjectsWith } from './expect_util.ts';
+import { type GalleryData, loadGallery } from '../galleryData.ts';
 import yaml from 'js-yaml';
 
 const testGalleryPath = 'src/data/__tests__/gallery';
-const testGalleryYaml = path.join('src/data/__tests__/gallery', 'gallery.yaml');
+const testGalleryYaml = path.join(testGalleryPath, 'gallery.yaml');
 const scriptPath = path.resolve(__dirname, '../gallery-generator.ts');
+const tsxCliPath = path.resolve('node_modules/tsx/dist/cli.mjs');
 
-describe('Test Gallery Generator', () => {
+describe('Gallery Generator', () => {
 	let gallery: GalleryData;
 
 	beforeAll(async () => {
-		await fs.promises.rm(path.join(testGalleryYaml), { force: true });
+		await fs.promises.rm(testGalleryYaml, { force: true });
 		await generateGallery();
 	});
 
 	async function generateGallery() {
-		await execa('npx', ['tsx', scriptPath, testGalleryPath]);
+		await execa(process.execPath, [tsxCliPath, scriptPath, testGalleryPath]);
 		gallery = await loadGallery(testGalleryYaml);
 	}
 
-	describe('Collections', () => {
-		it('should add directories as collections', () => {
-			expectContainsOnlyObjectsWith(gallery.collections, [{ id: 'kuku' }, { id: 'popo' }]);
-		});
-
-		it('should add collection camel case names', () => {
-			expectContainsOnlyObjectsWith(gallery.collections, [{ name: 'Kuku' }, { name: 'Popo' }]);
-		});
+	it('creates the three browse dimensions without deriving categories from folders', () => {
+		expect(gallery.browseDimensions).toEqual([
+			{ id: 'year', label: 'Year' },
+			{ id: 'place', label: 'Place' },
+			{ id: 'subject', label: 'Subject' },
+		]);
 	});
 
-	describe('Images', () => {
-		it('should add images path', () => {
-			expectContainsOnlyObjectsWith(gallery.images, [
-				{ path: 'kuku/kuku-trees.jpg' },
-				{ path: 'kuku/kuku-bubble.jpg' },
-				{ path: 'popo/popo-view.jpg' },
-				{ path: 'landscape.jpg' },
-			]);
-		});
-
-		it('should add images name and description', () => {
-			expectContainsOnlyObjectsWith(gallery.images, [
-				{ meta: { title: 'Kuku Trees', description: '' } },
-				{ meta: { title: 'Kuku Bubble', description: '' } },
-				{ meta: { title: 'Popo View', description: '' } },
-				{ meta: { title: 'Landscape', description: '' } },
-			]);
-		});
-
-		it('should add images to collection by directory', () => {
-			expectContainsOnlyObjectsWith(gallery.images, [
-				{ path: 'kuku/kuku-trees.jpg', meta: { collections: ['kuku'] } },
-				{ path: 'kuku/kuku-bubble.jpg', meta: { collections: ['kuku'] } },
-				{ path: 'popo/popo-view.jpg', meta: { collections: ['popo'] } },
-				{ path: 'landscape.jpg', meta: { collections: [] } },
-			]);
-		});
+	it('discovers every image below the neutral photos directory', () => {
+		expect(gallery.photos.map((photo) => photo.file).sort()).toEqual([
+			'photos/kuku-bubble.jpg',
+			'photos/kuku-trees.jpg',
+			'photos/landscape.jpg',
+			'photos/popo-view.jpg',
+		]);
 	});
 
-	describe('Error handling', () => {
-		it('should fail on invalid gallery path', async () => {
-			await expect(execa('npx', ['tsx', scriptPath, 'invalid-path'])).rejects.toThrow(
-				'Invalid directory path provided.',
-			);
-		});
+	it('creates stable IDs and safe visibility defaults', () => {
+		const photo = findPhoto('photos/kuku-trees.jpg');
+		expect(photo.id).toBe('photos-kuku-trees');
+		expect(photo.title).toBeUndefined();
+		expect(photo.description).toBeUndefined();
+		expect(photo.taxonomy.year).toEqual([]);
+		expect(photo.taxonomy.place).toEqual([]);
+		expect(photo.taxonomy.subject).toEqual([]);
+		expect(photo.browse).toEqual({ year: false, place: false, subject: false });
+		expect(photo.featured).toBe(false);
 	});
 
-	describe('Existing gallery', () => {
-		function findImageByPath(path: string): GalleryImage {
-			const image = gallery.images.find((img) => img.path === path);
-			if (!image) throw new Error(`Image [${path}] not found`);
-			return image;
-		}
+	it('preserves human metadata and generated feature data on regeneration', async () => {
+		const photo = findPhoto('photos/kuku-trees.jpg');
+		photo.title = 'Custom Title';
+		photo.description = 'Custom Description';
+		photo.series = 'Custom Series';
+		photo.taxonomy = {
+			year: ['2025'],
+			place: ['Stockholm'],
+			subject: ['Performance', 'Event'],
+		};
+		photo.browse = { year: false, place: false, subject: true };
+		photo.featured = true;
+		photo.features = { color: { average: '#222222' } };
+		photo.technical = { ...photo.technical, focalLength: 10 };
+		await writeGallery();
 
-		it('should not override an existing image meta data', async () => {
-			const imagePath = 'kuku/kuku-trees.jpg';
-			const imageCustomMeta = {
-				title: 'Custom Title',
-				description: 'Custom Description',
-				collections: ['featured'],
-			};
-
-			await updateGalleryImageMeta(imagePath, imageCustomMeta);
-
-			await generateGallery();
-
-			const updatedImage = findImageByPath(imagePath);
-			expect(updatedImage.meta).toEqual(imageCustomMeta);
-		});
-
-		async function updateGalleryImageMeta(path: string, imageMeta: Meta) {
-			const image = findImageByPath(path);
-			image.meta = imageMeta;
-			await writeGalleryFile();
-		}
-
-		async function writeGalleryFile() {
-			await fs.promises.writeFile(testGalleryYaml, yaml.dump(gallery), 'utf8');
-		}
-
-		it('should not update collection if already exists', async () => {
-			const collectionId = 'kuku';
-			const customCollectionName = 'Hello Kuku';
-
-			await updateCollectionName(collectionId, customCollectionName);
-
-			await generateGallery();
-
-			const updatedCollection = findCollectionById(collectionId);
-			expect(updatedCollection.name).toEqual(customCollectionName);
-		});
-
-		async function updateCollectionName(collectionId: string, collectionName: string) {
-			const collection = findCollectionById(collectionId);
-			if (!collection) throw new Error(`Collection [${collectionId}] not found`);
-			collection.name = collectionName;
-			await writeGalleryFile();
-		}
-
-		function findCollectionById(collectionId: string) {
-			const collection = gallery.collections.find((col) => col.id === collectionId);
-			if (!collection) throw new Error(`Collection [${collectionId}] not found`);
-			return collection;
-		}
-
-		it('should override existing exif data', async () => {
-			const imagePath = 'kuku/kuku-trees.jpg';
-			const image = findImageByPath(imagePath);
-
-			const actualExif = Object.assign({}, image.exif);
-
-			await updateGalleryImageExif(imagePath, { ...actualExif, focalLength: 10 });
-
-			await generateGallery();
-			expect(findImageByPath(imagePath).exif).toEqual(actualExif);
-		});
-
-		async function updateGalleryImageExif(path: string, imageExif: ImageExif) {
-			const image = findImageByPath(path);
-			image.exif = imageExif;
-			await writeGalleryFile();
-		}
+		await generateGallery();
+		const updated = findPhoto('photos/kuku-trees.jpg');
+		expect(updated.title).toBe(photo.title);
+		expect(updated.description).toBe(photo.description);
+		expect(updated.series).toBe(photo.series);
+		expect(updated.taxonomy).toEqual(photo.taxonomy);
+		expect(updated.browse).toEqual(photo.browse);
+		expect(updated.featured).toBe(true);
+		expect(updated.features).toEqual(photo.features);
+		expect(updated.technical?.focalLength).toBe(28);
 	});
+
+	it('fails on an invalid gallery path', async () => {
+		await expect(execa(process.execPath, [tsxCliPath, scriptPath, 'invalid-path'])).rejects.toThrow(
+			'Invalid directory path provided.',
+		);
+	});
+
+	function findPhoto(file: string) {
+		const photo = gallery.photos.find((entry) => entry.file === file);
+		if (!photo) throw new Error(`Photo [${file}] not found`);
+		return photo;
+	}
+
+	async function writeGallery() {
+		await fs.promises.writeFile(testGalleryYaml, yaml.dump(gallery), 'utf8');
+	}
 });

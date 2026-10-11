@@ -1,53 +1,75 @@
 import path from 'path';
-import type { GalleryImage } from './galleryData.ts';
 import exifr from 'exifr';
+import type { GalleryPhoto, TechnicalMetadata } from './galleryData.ts';
 
-export const createGalleryImage = async (
+export const createGalleryPhoto = async (
 	galleryDir: string,
 	file: string,
-): Promise<GalleryImage> => {
-	const relativePath = path.relative(galleryDir, file);
+): Promise<GalleryPhoto> => {
+	const relativePath = path.relative(galleryDir, file).replaceAll('\\', '/');
 	const exifData = await exifr.parse(file);
-	const image = {
-		path: relativePath,
-		meta: {
-			title: toReadableCaption(path.basename(relativePath, path.extname(relativePath))),
-			description: '',
-			collections: collectionIdForImage(relativePath),
-		},
-		exif: {},
-	};
-	if (exifData) {
-		image.exif = {
-			captureDate: exifData.DateTimeOriginal
-				? new Date(`${exifData.DateTimeOriginal} UTC`)
-				: undefined,
-			fNumber: exifData.FNumber,
-			focalLength: exifData.FocalLength,
-			iso: exifData.ISO,
-			model: exifData.Model,
-			shutterSpeed: 1 / exifData.ExposureTime,
-			lensModel: exifData.LensModel,
-		};
-	}
-	return image;
-};
+	const capturedAt = toCaptureDate(exifData?.DateTimeOriginal);
 
-function toReadableCaption(input: string): string {
-	return input
-		.replace(/[^a-zA-Z0-9]+/g, ' ') // Replace non-alphanumerics with space
-		.split(' ') // Split by space
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize
-		.join(' ');
-}
-
-function collectionIdForImage(relativePath: string) {
-	return path.dirname(relativePath) === '.' ? [] : [path.dirname(relativePath)];
-}
-
-export const createGalleryCollection = (dir: string) => {
 	return {
-		id: dir,
-		name: toReadableCaption(dir),
+		id: toStableId(relativePath),
+		file: relativePath,
+		taxonomy: {
+			year: [],
+			place: [],
+			subject: [],
+		},
+		browse: {
+			year: false,
+			place: false,
+			subject: false,
+		},
+		featured: false,
+		technical: createTechnicalMetadata(exifData, capturedAt),
 	};
 };
+
+function createTechnicalMetadata(
+	exifData: Record<string, unknown> | undefined,
+	capturedAt: Date | undefined,
+): TechnicalMetadata {
+	if (!exifData) return {};
+
+	const exposureTime = exifData.ExposureTime as number | undefined;
+	return {
+		capturedAt,
+		fNumber: exifData.FNumber as number | undefined,
+		focalLength: exifData.FocalLength as number | undefined,
+		iso: exifData.ISO as number | undefined,
+		model: exifData.Model as string | undefined,
+		shutterSpeed: exposureTime ? 1 / exposureTime : undefined,
+		lensModel: exifData.LensModel as string | undefined,
+		width: (exifData.ExifImageWidth ?? exifData.ImageWidth) as number | undefined,
+		height: (exifData.ExifImageHeight ?? exifData.ImageHeight) as number | undefined,
+	};
+}
+
+function toCaptureDate(value: unknown): Date | undefined {
+	if (value instanceof Date) {
+		return new Date(
+			Date.UTC(
+				value.getFullYear(),
+				value.getMonth(),
+				value.getDate(),
+				value.getHours(),
+				value.getMinutes(),
+				value.getSeconds(),
+			),
+		);
+	}
+	if (typeof value !== 'string') return undefined;
+	const date = new Date(`${value} UTC`);
+	return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
+function toStableId(relativePath: string) {
+	return relativePath
+		.slice(0, -path.extname(relativePath).length)
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
+}

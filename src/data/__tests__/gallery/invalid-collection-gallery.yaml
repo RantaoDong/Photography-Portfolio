@@ -1,10 +1,20 @@
-collections:
-  - id: kuku
-    name: Kuku
+browseDimensions:
+  - id: year
+    label: Year
+  - id: place
+    label: Place
+  - id: subject
+    label: Subject
 
-images:
-  - path: kuku/kuku-trees.jpg
-    meta:
-      title: Kuku Trees
-      description: Beautiful trees in the kuku album
-      collections: [kuku, invalid]
+photos:
+  - id: invalid-visibility
+    file: photos/kuku-trees.jpg
+    taxonomy:
+      year: ['2025']
+      place: []
+      subject: [Landscape]
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false

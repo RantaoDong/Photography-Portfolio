@@ -1,34 +1,63 @@
-collections:
-  - id: kuku
-    name: Kuku
-  - id: popo
-    name: Popo
+browseDimensions:
+  - id: year
+    label: Year
+  - id: place
+    label: Place
+  - id: subject
+    label: Subject
 
-images:
-  - path: kuku/kuku-trees.jpg
-    meta:
-      title: Kuku Trees
-      description: Beautiful trees in the kuku album
-      collections: [kuku]
-    exif:
-      captureDate: 2025-04-28T08:22:56.000Z
+photos:
+  - id: kuku-trees
+    file: photos/kuku-trees.jpg
+    taxonomy:
+      year: ['2025']
+      place: [Uppsala]
+      subject: [Landscape]
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: false
+    technical:
+      capturedAt: 2025-04-28T08:22:56.000Z
 
-  - path: popo/popo-view.jpg
-    meta:
-      title: Popo View
-      description: Amazing view from the popo album
-      collections: [featured, popo]
-    exif:
-      captureDate: 2025-03-27T08:22:56.000Z
+  - id: popo-view
+    file: photos/popo-view.jpg
+    title: Popo View
+    description: A performance photographed in Stockholm
+    taxonomy:
+      year: ['2025']
+      place: [Stockholm]
+      subject: [Performance]
+    browse:
+      year: false
+      place: false
+      subject: true
+    featured: true
+    technical:
+      capturedAt: 2025-03-27T08:22:56.000Z
 
-  - path: landscape.jpg
-    meta:
-      title: Landscape
-      description:
-      collections: [featured]
+  - id: landscape
+    file: photos/landscape.jpg
+    series: Test Series
+    taxonomy:
+      year: ['2024']
+      place: [Berlin]
+      subject: [Landscape, Architecture]
+    browse:
+      year: true
+      place: true
+      subject: true
+    featured: true
 
-  - path: popo/unknown.jpg
-    meta:
-      title: Unknown image
-      description: bla bla
-      collections: [popo]
+  - id: unknown-image
+    file: photos/unknown.jpg
+    taxonomy:
+      year: []
+      place: []
+      subject: []
+    browse:
+      year: false
+      place: false
+      subject: false
+    featured: false

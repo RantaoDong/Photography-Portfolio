@@ -1,15 +1,3 @@
-collections:
-  - id: kuku
-    name: Kuku
-  - id: popo
-    name: Popo
-
-images:
-  - alt: Kuku Trees
-    description: Beautiful trees in the kuku album
-    collections: [kuku]
-
-  - path: popo/popo-view.jpg
-    alt: Popo View
-    featured: true
-    collections: [popo]
+photos:
+  - id: invalid
+    file: photos/kuku-trees.jpg
