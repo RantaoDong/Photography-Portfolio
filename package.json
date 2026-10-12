@@ -15,7 +15,9 @@
 		"photo:check": "tsx scripts/photo-check.ts",
 		"photo:optimize": "tsx scripts/photo-optimize.ts",
 		"photo:remove": "tsx scripts/photo-remove.ts",
-		"photo:manage": "tsx scripts/photo-manager-server.ts"
+		"photo:manage": "tsx scripts/photo-manager-server.ts",
+		"color:analyze": "tsx scripts/color-analyze.ts",
+		"color:debug": "tsx scripts/color-debug-server.ts"
 	},
 	"devDependencies": {
 		"@tailwindcss/typography": "^0.5.16",

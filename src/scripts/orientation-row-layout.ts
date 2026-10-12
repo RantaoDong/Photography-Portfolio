@@ -19,6 +19,7 @@ export interface RowLayout {
 
 export interface RowLayoutOptions {
 	reorderWithinGroup?: boolean;
+	expandRowsToFullWidth?: boolean;
 }
 
 type Orientation = 'landscape' | 'portrait';
@@ -66,7 +67,10 @@ export function createOrientationRowLayout(
 			: createStableRows(items, containerWidth);
 
 		for (const row of rows) {
-			const rowHeight = calculateRowHeight(row, containerWidth);
+			const rowHeight =
+				options.expandRowsToFullWidth === false
+					? calculateTargetConstrainedHeight(row, containerWidth)
+					: calculateRowHeight(row, containerWidth);
 			const contentWidth =
 				row.reduce((sum, item) => sum + rowHeight * item.aspectRatio, 0) +
 				GAP * Math.max(0, row.length - 1);

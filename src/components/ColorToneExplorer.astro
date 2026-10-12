@@ -1,0 +1,149 @@
+---
+import 'glightbox/dist/css/glightbox.css';
+import '../styles/glightbox-custom.css';
+import { Image } from 'astro:assets';
+import type { Image as GalleryImage } from '../data/galleryData.ts';
+import type { ColorToneCandidate } from '../color/color-tone-matching.ts';
+
+interface Props {
+	images: GalleryImage[];
+	candidates: ColorToneCandidate[];
+}
+
+const { images, candidates } = Astro.props;
+---
+
+<section class="py-16 pt-24">
+	<div class="container-custom">
+		<div class="mb-10 text-center">
+			<h1 class="text-4xl md:text-5xl font-bold mb-4">Color Tone</h1>
+			<p class="text-gray-600 max-w-xl mx-auto">
+				Explore photographs through their overall color and tone.
+			</p>
+		</div>
+
+		<section class="color-tone-controls" aria-labelledby="color-tone-controls-title">
+			<h2 id="color-tone-controls-title" class="sr-only">Choose a color tone</h2>
+			<canvas
+				id="color-tone-wheel"
+				class="color-tone-wheel"
+				width="240"
+				height="240"
+				tabindex="0"
+				role="slider"
+				aria-label="Hue"
+				aria-valuemin="0"
+				aria-valuemax="359"></canvas>
+
+			<div class="control-actions">
+				<button id="color-tone-explore" class="primary-action" type="button" disabled
+					>Explore</button
+				>
+				<button id="color-tone-reset" class="secondary-action" type="button" hidden>Reset</button>
+			</div>
+		</section>
+
+		<section
+			id="color-tone-result-section"
+			class="mt-14"
+			aria-labelledby="color-tone-results-title"
+			hidden
+		>
+			<h2 id="color-tone-results-title" class="text-2xl font-semibold mb-8 text-center">
+				Photographs
+			</h2>
+			<p id="color-tone-empty" class="text-center text-gray-500 py-16" hidden>
+				No photographs match this color closely enough.
+			</p>
+			<div id="color-tone-results" class="relative w-full mx-auto overflow-hidden">
+				{
+					images.map((image) => (
+						<a
+							href={image.src.src}
+							class="color-tone-photo glightbox absolute transition-transform hover:scale-[1.02] hover:z-10"
+							data-photo-id={image.id}
+							data-gallery="color-tone-gallery"
+							data-type="image"
+							data-width={image.src.width}
+							data-height={image.src.height}
+							data-glightbox={image.description ? `title: ${image.description}` : undefined}
+							hidden
+						>
+							<Image
+								src={image.src}
+								width={960}
+								widths={[480, 960, 1600]}
+								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+								quality={80}
+								format="webp"
+								class="w-full h-full object-contain rounded-sm shadow-sm hover:shadow-lg transition-shadow"
+								alt={image.title || 'Photograph'}
+							/>
+						</a>
+					))
+				}
+			</div>
+		</section>
+	</div>
+</section>
+
+<script id="color-tone-data" type="application/json" set:html={JSON.stringify(candidates)} />
+
+<script>
+	import '../scripts/color-tone-explorer.ts';
+</script>
+
+<style>
+	.color-tone-controls {
+		width: min(100%, 17rem);
+		margin-inline: auto;
+		padding: 0.8rem;
+		border: 1px solid rgb(229 231 235);
+	}
+
+	.color-tone-wheel {
+		display: block;
+		width: 10.5rem;
+		height: 10.5rem;
+		margin-inline: auto;
+		cursor: crosshair;
+	}
+
+	.color-tone-wheel:focus-visible,
+	button:focus-visible {
+		outline: 2px solid black;
+		outline-offset: 2px;
+	}
+
+	.control-actions {
+		display: flex;
+		justify-content: center;
+		gap: 0.65rem;
+		margin-top: 1.25rem;
+	}
+
+	.control-actions button {
+		padding: 0.55rem 1rem;
+		border: 1px solid black;
+		font-size: 0.875rem;
+		transition:
+			background-color 150ms ease,
+			color 150ms ease,
+			opacity 150ms ease;
+	}
+
+	.primary-action {
+		background: black;
+		color: white;
+	}
+
+	.primary-action:disabled {
+		cursor: default;
+		opacity: 0.35;
+	}
+
+	.secondary-action {
+		background: white;
+		color: black;
+	}
+</style>

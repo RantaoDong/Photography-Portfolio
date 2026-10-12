@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Color Analysis Debug</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<header>
+			<div>
+				<h1>Color Analysis Debug</h1>
+				<p id="summary">Loading generated color features…</p>
+			</div>
+			<label class="picker">
+				<span>Matching color</span>
+				<input id="color-picker" type="color" value="#3366cc" />
+				<output id="color-value">#3366cc</output>
+			</label>
+		</header>
+		<main>
+			<section aria-labelledby="matches-heading">
+				<div class="section-heading">
+					<h2 id="matches-heading">Top matches</h2>
+					<label
+						>Results <input id="result-count" type="number" min="5" max="100" value="30"
+					/></label>
+				</div>
+				<div id="matches" class="matches" aria-live="polite"></div>
+			</section>
+			<section aria-labelledby="photos-heading">
+				<h2 id="photos-heading">All analyzed photographs</h2>
+				<div id="photos" class="photo-grid"></div>
+			</section>
+		</main>
+		<template id="error-template"><p class="error"></p></template>
+		<script src="/app.js" defer></script>
+	</body>
+</html>

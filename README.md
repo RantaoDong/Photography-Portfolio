@@ -94,6 +94,34 @@ npm run photo:remove -- photo-0001 photo-0002
 
 Removal previews both the files and metadata, requires explicit confirmation, and uses a staged transaction with rollback protection.
 
+## Local color analysis
+
+Generate color features for every photograph currently registered in `src/gallery/gallery.yaml`:
+
+```bash
+npm run color:analyze
+```
+
+The command analyzes registered photographs whether public or hidden and replaces
+`src/generated/photo-color-features.json` atomically. The generated file contains its schema and
+analysis versions, analysis settings, perceptual average color, dominant colors and proportions,
+brightness, saturation, a 24-bin hue distribution, neutral-color proportion, and a 4×4 spatial
+grid with up to three local dominant colors per cell. Color diversity, palette concentration, and
+separate chromatic and neutral tone-strength values keep multicolor photographs from being treated
+as a confident single overall color. Very dark or low-chroma pixels are excluded from reliable hue
+coverage so small near-black color casts do not create false hue matches. It is derived data and should not be edited manually.
+`gallery.yaml` is never changed by this command.
+
+Inspect the generated results and test color matching in the separate local-only debug interface:
+
+```bash
+npm run color:debug
+```
+
+The debug server binds to `127.0.0.1`, opens in the default browser, and stops with `Ctrl+C`. It is
+not an Astro page and is not included in the public site build. Regenerate the feature file after
+adding, removing, or changing photographs.
+
 ## Metadata
 
 All photo metadata remains in one YAML file. Titles, descriptions, technical data, and generated features are optional.

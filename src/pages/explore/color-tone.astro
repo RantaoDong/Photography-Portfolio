@@ -1,0 +1,29 @@
+---
+import ColorToneExplorer from '../../components/ColorToneExplorer.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getImages } from '../../data/imageStore.ts';
+import generatedFeatures from '../../generated/photo-color-features.json';
+import type { OverallColorMatchFeatures } from '../../color/color-types.ts';
+
+const images = await getImages();
+const candidates = images.flatMap((image) => {
+	const features = generatedFeatures.photos[image.id];
+	if (!features) return [];
+	const matchingFeatures: OverallColorMatchFeatures = {
+		averageLab: features.averageLab as [number, number, number],
+		dominantColors: features.dominantColors.map((color) => ({
+			lab: color.lab as [number, number, number],
+			proportion: color.proportion,
+		})),
+		hueHistogram: features.hueHistogram,
+		neutralProportion: features.neutralProportion,
+		toneStrength: features.toneStrength,
+		neutralStrength: features.neutralStrength,
+	};
+	return [{ id: image.id, features: matchingFeatures }];
+});
+---
+
+<MainLayout>
+	<ColorToneExplorer images={images} candidates={candidates} />
+</MainLayout>

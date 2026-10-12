@@ -168,4 +168,14 @@ describe('createOrientationRowLayout', () => {
 
 		expect(visualOrder).toEqual(mixedImages.map((_, index) => index));
 	});
+
+	it('keeps sparse result rows near the shared target area when expansion is disabled', () => {
+		const [box] = createOrientationRowLayout([{ width: 1600, height: 900 }], 1200, {
+			expandRowsToFullWidth: false,
+		}).boxes;
+
+		expect(box.width).toBeLessThan(600);
+		expect(box.left).toBeGreaterThan(250);
+		expect(box.width * box.height).toBeLessThan(150_000);
+	});
 });
