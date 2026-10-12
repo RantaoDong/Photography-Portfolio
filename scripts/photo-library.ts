@@ -192,9 +192,47 @@ export function updateGalleryPhotos(
 		return updated;
 	});
 
-	const result = { ...gallery, photos };
+	const result = {
+		...gallery,
+		photos: update.featured === undefined ? photos : normalizeFeaturedOrders(photos),
+	};
 	validateGallery(result);
 	return result;
+}
+
+export function reorderFeaturedPhotos(gallery: GalleryData, orderedIds: string[]) {
+	const featuredIds = gallery.photos.filter((photo) => photo.featured).map((photo) => photo.id);
+	if (new Set(orderedIds).size !== orderedIds.length)
+		throw new Error('Featured order contains duplicate photo IDs.');
+	if (
+		orderedIds.length !== featuredIds.length ||
+		featuredIds.some((id) => !orderedIds.includes(id))
+	) {
+		throw new Error('Featured order must include every featured photograph exactly once.');
+	}
+	const orderById = new Map(orderedIds.map((id, index) => [id, index + 1]));
+	const result = {
+		...gallery,
+		photos: gallery.photos.map((photo) =>
+			photo.featured
+				? { ...photo, featured_order: orderById.get(photo.id) }
+				: withoutFeaturedOrder(photo),
+		),
+	};
+	validateGallery(result);
+	return result;
+}
+
+export async function commitFeaturedOrder(
+	orderedIds: string[],
+	expectedRevision: string,
+	metadataFile = libraryPaths.metadataFile,
+) {
+	const snapshot = await readGallerySnapshot(metadataFile, false);
+	if (snapshot.revision !== expectedRevision) throw new GalleryConflictError();
+	const gallery = reorderFeaturedPhotos(snapshot.gallery, orderedIds);
+	await writeGalleryFileAtomic(gallery, metadataFile, snapshot.revision);
+	return readGallerySnapshot(metadataFile);
 }
 
 export async function commitPhotoUpdate(
@@ -249,7 +287,10 @@ export async function commitImport(
 			await fs.copyFile(item.staged, item.destination, constants.COPYFILE_EXCL);
 
 		await writeGalleryFileAtomic(
-			{ ...gallery, photos: [...gallery.photos, ...plans.map((plan) => plan.photo)] },
+			{
+				...gallery,
+				photos: normalizeFeaturedOrders([...gallery.photos, ...plans.map((plan) => plan.photo)]),
+			},
 			paths.metadataFile,
 			expectedRevision,
 		);
@@ -292,7 +333,12 @@ export async function commitRemoval(
 		}
 
 		await writeGalleryFileAtomic(
-			{ ...gallery, photos: gallery.photos.filter((photo) => !selectedIds.has(photo.id)) },
+			{
+				...gallery,
+				photos: normalizeFeaturedOrders(
+					gallery.photos.filter((photo) => !selectedIds.has(photo.id)),
+				),
+			},
 			paths.metadataFile,
 			expectedRevision,
 		);
@@ -357,6 +403,7 @@ export function validateGallery(gallery: GalleryData) {
 		throw new Error('gallery.yaml must contain browseDimensions and photos arrays.');
 	const ids = new Set<string>();
 	const files = new Set<string>();
+	const featuredOrders = new Set<number>();
 	for (const photo of gallery.photos) {
 		if (!photo.id || ids.has(photo.id))
 			throw new Error(`Duplicate or missing photo ID: ${photo.id}`);
@@ -375,6 +422,15 @@ export function validateGallery(gallery: GalleryData) {
 			throw new Error(`${photo.id}.browse.all must be true or false when provided.`);
 		if (typeof photo.featured !== 'boolean')
 			throw new Error(`${photo.id} must declare featured as true or false.`);
+		if (photo.featured_order !== undefined) {
+			if (!photo.featured || !Number.isInteger(photo.featured_order) || photo.featured_order < 1)
+				throw new Error(
+					`${photo.id}.featured_order must be a positive integer on a featured photo.`,
+				);
+			if (featuredOrders.has(photo.featured_order))
+				throw new Error(`Duplicate featured_order: ${photo.featured_order}.`);
+			featuredOrders.add(photo.featured_order);
+		}
 		if (photo.published !== undefined && typeof photo.published !== 'boolean')
 			throw new Error(`${photo.id}.published must be true or false when provided.`);
 		for (const field of ['title', 'description'] as const) {
@@ -384,6 +440,36 @@ export function validateGallery(gallery: GalleryData) {
 		ids.add(photo.id);
 		files.add(file);
 	}
+}
+
+function normalizeFeaturedOrders(photos: GalleryPhoto[]) {
+	const featured = photos
+		.map((photo, index) => ({ photo, index }))
+		.filter(({ photo }) => photo.featured)
+		.sort((a, b) => {
+			const orderA = validFeaturedOrder(a.photo.featured_order);
+			const orderB = validFeaturedOrder(b.photo.featured_order);
+			if (orderA === null && orderB !== null) return 1;
+			if (orderA !== null && orderB === null) return -1;
+			if (orderA !== orderB) return (orderA ?? 0) - (orderB ?? 0);
+			return a.index - b.index;
+		});
+	const orderById = new Map(featured.map(({ photo }, index) => [photo.id, index + 1]));
+	return photos.map((photo) =>
+		photo.featured
+			? { ...photo, featured_order: orderById.get(photo.id) }
+			: withoutFeaturedOrder(photo),
+	);
+}
+
+function withoutFeaturedOrder(photo: GalleryPhoto) {
+	const rest = { ...photo };
+	delete rest.featured_order;
+	return rest;
+}
+
+function validFeaturedOrder(value: number | undefined) {
+	return Number.isInteger(value) && Number(value) > 0 ? Number(value) : null;
 }
 
 function collectValues(values: string[]) {

@@ -32,8 +32,6 @@ export interface GetImagesOptions {
 	dimension?: BrowseDimensionId;
 	category?: string;
 	featuredOnly?: boolean;
-	sortBy?: 'captureDate';
-	order?: 'asc' | 'desc';
 }
 
 export const getImages = async (options: GetImagesOptions = {}): Promise<Image[]> => {
@@ -120,16 +118,42 @@ function filterPhotos(photos: GalleryPhoto[], options: GetImagesOptions) {
 }
 
 function sortPhotos(photos: GalleryPhoto[], options: GetImagesOptions) {
-	const result = [...photos];
-	if (options.sortBy === 'captureDate') {
-		result.sort((a, b) => {
-			const dateA = a.technical?.capturedAt?.getTime() || 0;
-			const dateB = b.technical?.capturedAt?.getTime() || 0;
-			return dateA - dateB;
-		});
-	}
-	if (options.order === 'desc') result.reverse();
-	return result;
+	return options.featuredOnly ? sortFeaturedPhotos(photos) : sortPhotosByYearDescending(photos);
+}
+
+export function sortPhotosByYearDescending(photos: GalleryPhoto[]) {
+	return photos
+		.map((photo, index) => ({ photo, index, year: validYear(photo) }))
+		.sort((a, b) => {
+			if (a.year === null && b.year !== null) return 1;
+			if (a.year !== null && b.year === null) return -1;
+			if (a.year !== b.year) return (b.year ?? 0) - (a.year ?? 0);
+			return a.index - b.index;
+		})
+		.map(({ photo }) => photo);
+}
+
+export function sortFeaturedPhotos(photos: GalleryPhoto[]) {
+	return photos
+		.map((photo, index) => ({ photo, index }))
+		.sort((a, b) => {
+			const orderA = validFeaturedOrder(a.photo.featured_order);
+			const orderB = validFeaturedOrder(b.photo.featured_order);
+			if (orderA === null && orderB !== null) return 1;
+			if (orderA !== null && orderB === null) return -1;
+			if (orderA !== orderB) return (orderA ?? 0) - (orderB ?? 0);
+			return a.index - b.index;
+		})
+		.map(({ photo }) => photo);
+}
+
+function validYear(photo: GalleryPhoto) {
+	const value = photo.taxonomy.year[0];
+	return /^\d{4}$/.test(value ?? '') ? Number(value) : null;
+}
+
+function validFeaturedOrder(value: number | undefined) {
+	return Number.isInteger(value) && Number(value) > 0 ? Number(value) : null;
 }
 
 function validateGalleryData(gallery: GalleryData) {
@@ -154,6 +178,7 @@ function validateGalleryData(gallery: GalleryData) {
 
 	const photoIds = new Set<string>();
 	const files = new Set<string>();
+	const featuredOrders = new Set<number>();
 	for (const photo of gallery.photos) {
 		if (!photo.id || photoIds.has(photo.id)) {
 			throw new ImageStoreError(`Photo ID must be present and unique: ${photo.id || 'missing'}`);
@@ -190,6 +215,17 @@ function validateGalleryData(gallery: GalleryData) {
 
 		if (typeof photo.featured !== 'boolean') {
 			throw new ImageStoreError(`Photo ${photo.id} must declare featured as a boolean`);
+		}
+		if (photo.featured_order !== undefined) {
+			if (!photo.featured || !Number.isInteger(photo.featured_order) || photo.featured_order < 1) {
+				throw new ImageStoreError(
+					`Photo ${photo.id} featured_order must be a positive integer on a featured photo`,
+				);
+			}
+			if (featuredOrders.has(photo.featured_order)) {
+				throw new ImageStoreError(`Duplicate featured_order: ${photo.featured_order}`);
+			}
+			featuredOrders.add(photo.featured_order);
 		}
 		if (photo.published !== undefined && typeof photo.published !== 'boolean') {
 			throw new ImageStoreError(`Photo ${photo.id} published must be a boolean`);

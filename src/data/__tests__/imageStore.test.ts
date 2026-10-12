@@ -2,7 +2,13 @@ import { describe, expect, it } from 'vitest';
 import kukuTrees from './gallery/photos/kuku-trees.jpg';
 import popoView from './gallery/photos/popo-view.jpg';
 import landscape from './gallery/photos/landscape.jpg';
-import { getBrowseDimensions, getImages, ImageStoreError } from '../imageStore.ts';
+import type { GalleryPhoto } from '../galleryData.ts';
+import {
+	getBrowseDimensions,
+	getImages,
+	ImageStoreError,
+	sortPhotosByYearDescending,
+} from '../imageStore.ts';
 
 const GALLERY = {
 	VALID: 'src/data/__tests__/gallery/valid-gallery.yaml',
@@ -85,8 +91,8 @@ describe('Image Store', () => {
 	it('retrieves featured photos independently of taxonomy', async () => {
 		const images = await getImages({ galleryPath: GALLERY.VALID, featuredOnly: true });
 		expect(images).toHaveLength(2);
-		expect(images[0].src).toEqual(popoView);
-		expect(images[1].src).toEqual(landscape);
+		expect(images[0].src).toEqual(landscape);
+		expect(images[1].src).toEqual(popoView);
 	});
 
 	it('keeps unpublished photos out of public results and category options', async () => {
@@ -122,20 +128,22 @@ describe('Image Store', () => {
 	});
 
 	describe('sorting', () => {
-		it('sorts by capture date', async () => {
-			const images = await getImages({ galleryPath: GALLERY.VALID, sortBy: 'captureDate' });
-			expect(images[0].src).toEqual(popoView);
-			expect(images[1].src).toEqual(kukuTrees);
-		});
+		it('sorts valid years newest first, preserves ties, and puts invalid years last', () => {
+			const photos = [
+				photoWithYear('first-2025', '2025'),
+				photoWithYear('no-year', ''),
+				photoWithYear('2026', '2026'),
+				photoWithYear('second-2025', '2025'),
+				photoWithYear('invalid-year', 'recent'),
+			];
 
-		it('supports descending order', async () => {
-			const images = await getImages({
-				galleryPath: GALLERY.VALID,
-				sortBy: 'captureDate',
-				order: 'desc',
-			});
-			expect(images[0].src).toEqual(kukuTrees);
-			expect(images[1].src).toEqual(popoView);
+			expect(sortPhotosByYearDescending(photos).map((photo) => photo.id)).toEqual([
+				'2026',
+				'first-2025',
+				'second-2025',
+				'no-year',
+				'invalid-year',
+			]);
 		});
 	});
 
@@ -155,3 +163,13 @@ describe('Image Store', () => {
 		});
 	});
 });
+
+function photoWithYear(id: string, year: string): GalleryPhoto {
+	return {
+		id,
+		file: `photos/${id}.jpg`,
+		taxonomy: { year: year ? [year] : [], place: [], subject: [] },
+		browse: { all: true, year: false, place: false, subject: false },
+		featured: false,
+	};
+}

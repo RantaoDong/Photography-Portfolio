@@ -104,7 +104,7 @@ export const getStaticPaths = async () => {
 
 			{
 				images.length > 0 ? (
-					<PhotoGrid images={images} />
+					<PhotoGrid images={images} groupByYear />
 				) : (
 					<p class="text-center text-gray-500 py-16">No photographs in this category yet.</p>
 				)

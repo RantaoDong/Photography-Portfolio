@@ -8,6 +8,8 @@ let searchTerm = '';
 let browseFilter = 'all';
 let visibilityFilter = 'public';
 let importDraft = null;
+let featuredOrderDraft = [];
+let draggedFeaturedId = null;
 
 const mixedValue = '__mixed__';
 
@@ -26,6 +28,9 @@ const elements = {
 	confirmDelete: document.querySelector('#confirm-delete-button'),
 	importDialog: document.querySelector('#import-dialog'),
 	importContent: document.querySelector('#import-content'),
+	featuredOrderDialog: document.querySelector('#featured-order-dialog'),
+	featuredOrderList: document.querySelector('#featured-order-list'),
+	saveFeaturedOrder: document.querySelector('#save-featured-order-button'),
 	browseFilter: document.querySelector('#browse-filter'),
 	visibilityFilter: document.querySelector('#visibility-filter'),
 };
@@ -34,6 +39,7 @@ document
 	.querySelector('#refresh-button')
 	.addEventListener('click', () => loadState('Library refreshed.'));
 document.querySelector('#status-button').addEventListener('click', openStatus);
+document.querySelector('#featured-order-button').addEventListener('click', openFeaturedOrder);
 document.querySelector('#import-button').addEventListener('click', openImport);
 document.querySelector('#select-all-button').addEventListener('click', selectVisible);
 document.querySelector('#clear-selection-button').addEventListener('click', () => {
@@ -57,6 +63,7 @@ elements.deleteConfirmation.addEventListener('change', () => {
 	elements.confirmDelete.disabled = !elements.deleteConfirmation.checked;
 });
 elements.confirmDelete.addEventListener('click', confirmDelete);
+elements.saveFeaturedOrder.addEventListener('click', saveFeaturedOrder);
 document.querySelectorAll('[data-close-dialog]').forEach((button) => {
 	button.addEventListener('click', () =>
 		document.querySelector(`#${button.dataset.closeDialog}`).close(),
@@ -201,6 +208,109 @@ function renderLibrary() {
 			render();
 		});
 	});
+}
+
+function openFeaturedOrder() {
+	featuredOrderDraft = libraryState.photos
+		.map((photo, index) => ({ photo, index }))
+		.filter(({ photo }) => photo.featured)
+		.sort((a, b) => {
+			const orderA = validFeaturedOrder(a.photo.featured_order);
+			const orderB = validFeaturedOrder(b.photo.featured_order);
+			if (orderA === null && orderB !== null) return 1;
+			if (orderA !== null && orderB === null) return -1;
+			if (orderA !== orderB) return (orderA ?? 0) - (orderB ?? 0);
+			return a.index - b.index;
+		})
+		.map(({ photo }) => photo.id);
+	renderFeaturedOrder();
+	elements.featuredOrderDialog.showModal();
+}
+
+function renderFeaturedOrder() {
+	if (featuredOrderDraft.length === 0) {
+		elements.featuredOrderList.innerHTML =
+			'<div class="empty-grid">No photographs are currently Featured.</div>';
+		elements.saveFeaturedOrder.disabled = true;
+		return;
+	}
+	elements.saveFeaturedOrder.disabled = false;
+	const photosById = new Map(libraryState.photos.map((photo) => [photo.id, photo]));
+	elements.featuredOrderList.innerHTML = featuredOrderDraft
+		.map((id, index) => {
+			const photo = photosById.get(id);
+			return `<article class="featured-order-item" draggable="true" data-featured-id="${escapeHtml(id)}">
+				<span class="drag-handle" aria-hidden="true">⋮⋮</span>
+				<span class="featured-position">${index + 1}</span>
+				<img src="${photo.imageUrl}" alt="" loading="lazy" />
+				<div class="featured-order-details"><strong>${escapeHtml(id)}</strong><span>${escapeHtml(metadataSummary(photo))}${photo.published === false ? ' · Hidden' : ''}</span></div>
+				<div class="featured-order-actions">
+					<button class="button secondary small" type="button" data-move-featured="up" aria-label="Move ${escapeHtml(id)} up" ${index === 0 ? 'disabled' : ''}>↑</button>
+					<button class="button secondary small" type="button" data-move-featured="down" aria-label="Move ${escapeHtml(id)} down" ${index === featuredOrderDraft.length - 1 ? 'disabled' : ''}>↓</button>
+				</div>
+			</article>`;
+		})
+		.join('');
+
+	elements.featuredOrderList.querySelectorAll('.featured-order-item').forEach((item) => {
+		item.addEventListener('dragstart', (event) => {
+			draggedFeaturedId = item.dataset.featuredId;
+			event.dataTransfer.effectAllowed = 'move';
+			event.dataTransfer.setData('text/plain', draggedFeaturedId);
+			item.classList.add('dragging');
+		});
+		item.addEventListener('dragend', () => {
+			draggedFeaturedId = null;
+			item.classList.remove('dragging');
+		});
+		item.addEventListener('dragover', (event) => {
+			event.preventDefault();
+			event.dataTransfer.dropEffect = 'move';
+		});
+		item.addEventListener('drop', (event) => {
+			event.preventDefault();
+			moveFeaturedBefore(
+				draggedFeaturedId || event.dataTransfer.getData('text/plain'),
+				item.dataset.featuredId,
+			);
+		});
+		item.querySelectorAll('[data-move-featured]').forEach((button) => {
+			button.addEventListener('click', () =>
+				moveFeaturedBy(item.dataset.featuredId, button.dataset.moveFeatured),
+			);
+		});
+	});
+}
+
+function moveFeaturedBefore(movedId, targetId) {
+	if (!movedId || movedId === targetId) return;
+	const from = featuredOrderDraft.indexOf(movedId);
+	let to = featuredOrderDraft.indexOf(targetId);
+	if (from < 0 || to < 0) return;
+	featuredOrderDraft.splice(from, 1);
+	if (from < to) to -= 1;
+	featuredOrderDraft.splice(to, 0, movedId);
+	renderFeaturedOrder();
+}
+
+function moveFeaturedBy(id, direction) {
+	const from = featuredOrderDraft.indexOf(id);
+	const to = direction === 'up' ? from - 1 : from + 1;
+	if (from < 0 || to < 0 || to >= featuredOrderDraft.length) return;
+	[featuredOrderDraft[from], featuredOrderDraft[to]] = [
+		featuredOrderDraft[to],
+		featuredOrderDraft[from],
+	];
+	renderFeaturedOrder();
+}
+
+async function saveFeaturedOrder() {
+	elements.featuredOrderDialog.close();
+	await mutate('/api/featured-order', { ids: featuredOrderDraft }, 'Featured Works order saved.');
+}
+
+function validFeaturedOrder(value) {
+	return Number.isInteger(value) && value > 0 ? value : null;
 }
 
 function renderEditor() {

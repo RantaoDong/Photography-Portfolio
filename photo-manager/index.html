@@ -15,6 +15,7 @@
 			</div>
 			<div class="header-actions">
 				<button id="status-button" class="button secondary">Library status</button>
+				<button id="featured-order-button" class="button secondary">Order Featured</button>
 				<button id="refresh-button" class="button secondary">Refresh</button>
 				<button id="import-button" class="button primary">Import new photos</button>
 			</div>
@@ -106,6 +107,27 @@
 				<button class="icon-button" data-close-dialog="import-dialog" aria-label="Close">×</button>
 			</div>
 			<div id="import-content"></div>
+		</dialog>
+
+		<dialog id="featured-order-dialog" class="dialog wide">
+			<div class="dialog-header">
+				<div>
+					<p class="eyebrow">Homepage</p>
+					<h2>Featured Works order</h2>
+				</div>
+				<button class="icon-button" data-close-dialog="featured-order-dialog" aria-label="Close">
+					×
+				</button>
+			</div>
+			<p class="muted">
+				Drag photographs into order, or use the arrow buttons. The first photograph appears first on
+				the homepage.
+			</p>
+			<div id="featured-order-list" class="featured-order-list"></div>
+			<div class="dialog-actions">
+				<button class="button secondary" data-close-dialog="featured-order-dialog">Cancel</button>
+				<button id="save-featured-order-button" class="button primary">Save order</button>
+			</div>
 		</dialog>
 
 		<script type="module" src="/app.js"></script>

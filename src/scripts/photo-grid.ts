@@ -1,50 +1,5 @@
-import justifiedLayout from 'justified-layout';
 import GLightbox from 'glightbox';
-
-interface JustifiedLayoutResult {
-	/**
-	 * Height of the container containing the justified layout.
-	 */
-	containerHeight: number;
-	/**
-	 * Number of items that are in rows that aren't fully-packed.
-	 */
-	widowCount: number;
-	/**
-	 * Computed positional and sizing properties of a box in the justified layout.
-	 */
-	boxes: LayoutBox[];
-}
-
-/**
- * Computed positional and sizing properties of a box in the layout.
- */
-interface LayoutBox {
-	/**
-	 * Aspect ratio of the box.
-	 */
-	aspectRatio: number;
-	/**
-	 * Distance between the top side of the box and the top boundary of the justified layout.
-	 */
-	top: number;
-	/**
-	 * Width of the box in a justified layout.
-	 */
-	width: number;
-	/**
-	 * Height of the box in a justified layout.
-	 */
-	height: number;
-	/**
-	 * Distance between the left side of the box and the left boundary of the justified layout.
-	 */
-	left: number;
-	/**
-	 * Whether or not the aspect ratio was forced.
-	 */
-	forcedAspectRatio?: boolean;
-}
+import { createOrientationRowLayout, type RowLayout } from './orientation-row-layout';
 
 let lightboxInitialized = false;
 
@@ -64,8 +19,15 @@ export function setupGallery() {
 		return;
 	}
 
-	const layout = createLayoutFor(imageLinks, container);
-	console.log('Generated layout:', layout);
+	const layout = createOrientationRowLayout(
+		imageLinks.map((link) => ({
+			width: Number(link.dataset.width),
+			height: Number(link.dataset.height),
+			group: link.dataset.layoutGroup,
+		})),
+		container.clientWidth || window.innerWidth,
+		{ reorderWithinGroup: container.dataset.reorderWithinGroup === 'true' },
+	);
 
 	applyImagesStyleBasedOnLayout(imageLinks, layout);
 	applyContainerStyleBasedOnLayout(container, layout);
@@ -82,22 +44,7 @@ export function setupGallery() {
 	}
 }
 
-function createLayoutFor(imageLinks: HTMLElement[], container: HTMLElement): JustifiedLayoutResult {
-	const imageSizes = imageLinks.map((link) => ({
-		width: Number(link.dataset.width) || 300,
-		height: Number(link.dataset.height) || 200,
-	}));
-
-	const layout = justifiedLayout(imageSizes, {
-		containerWidth: container.clientWidth || window.innerWidth,
-		targetRowHeight: 300,
-		boxSpacing: 10,
-		containerPadding: 0,
-	});
-	return layout;
-}
-
-function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: JustifiedLayoutResult) {
+function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: RowLayout) {
 	imageLinks.forEach((el, i) => {
 		if (!layout.boxes[i]) return;
 		const { left, top, width, height } = layout.boxes[i];
@@ -111,10 +58,8 @@ function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: Justif
 	});
 }
 
-function applyContainerStyleBasedOnLayout(container: HTMLElement, layout: JustifiedLayoutResult) {
-	// Ensure the parent container has relative positioning
+function applyContainerStyleBasedOnLayout(container: HTMLElement, layout: RowLayout) {
 	container.style.position = 'relative';
-	// Set container height
 	container.style.height = `${layout.containerHeight}px`;
 }
 // Run setupGallery once the page is loaded

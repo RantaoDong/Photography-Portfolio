@@ -6,12 +6,17 @@ import type { Image as ImageType } from '../data/galleryData';
 
 interface Props {
 	images: ImageType[];
+	groupByYear?: boolean;
 }
 
-const { images } = Astro.props;
+const { images, groupByYear = false } = Astro.props;
 ---
 
-<section id="photo-grid" class="relative w-full mx-auto overflow-hidden">
+<section
+	id="photo-grid"
+	class="relative w-full mx-auto overflow-hidden"
+	data-reorder-within-group={groupByYear ? 'true' : 'false'}
+>
 	{
 		images.map((image) => (
 			<a
@@ -21,6 +26,7 @@ const { images } = Astro.props;
 				data-type="image"
 				data-width={image.src.width}
 				data-height={image.src.height}
+				data-layout-group={groupByYear ? (image.taxonomy.year?.[0] ?? '__missing__') : '__all__'}
 				data-glightbox={image.description ? `title: ${image.description}` : undefined}
 			>
 				<Image
@@ -30,7 +36,7 @@ const { images } = Astro.props;
 					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 					quality={80}
 					format="webp"
-					class="w-full h-full object-cover rounded-sm shadow-sm hover:shadow-lg transition-shadow"
+					class="w-full h-full object-contain rounded-sm shadow-sm hover:shadow-lg transition-shadow"
 					alt={image.title || 'Photograph'}
 				/>
 			</a>

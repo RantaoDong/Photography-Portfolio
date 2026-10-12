@@ -9,6 +9,7 @@ import type { GalleryPhoto } from '../src/data/galleryData.ts';
 import {
 	checkConsistency,
 	commitImport,
+	commitFeaturedOrder,
 	commitPhotoUpdate,
 	commitRemoval,
 	deriveMetadataOptions,
@@ -65,6 +66,7 @@ async function handleRequest(request: IncomingMessage, response: ServerResponse)
 		const body = await readJsonBody(request);
 		return enqueueMutation(async () => {
 			if (url.pathname === '/api/update') return updatePhotos(body, response);
+			if (url.pathname === '/api/featured-order') return updateFeaturedOrder(body, response);
 			if (url.pathname === '/api/import') return importPhotos(body, response);
 			if (url.pathname === '/api/delete') return deletePhotos(body, response);
 			if (url.pathname === '/api/remove-missing-metadata')
@@ -74,6 +76,14 @@ async function handleRequest(request: IncomingMessage, response: ServerResponse)
 	}
 	if (request.method === 'GET') return serveManagerAsset(url.pathname, response);
 	return sendJson(response, 405, { error: 'Method not allowed.' });
+}
+
+async function updateFeaturedOrder(body: unknown, response: ServerResponse) {
+	const input = asRecord(body);
+	const ids = asStringArray(input.ids, 'ids');
+	const revision = asString(input.revision, 'revision');
+	await commitFeaturedOrder(ids, revision);
+	return sendJson(response, 200, await createManagerState());
 }
 
 async function createManagerState() {

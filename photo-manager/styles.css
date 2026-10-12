@@ -476,6 +476,71 @@ button:focus-visible {
 	border-top: 1px solid #e4e4e7;
 }
 
+.featured-order-list {
+	display: grid;
+	gap: 8px;
+	margin-top: 18px;
+}
+
+.featured-order-item {
+	display: grid;
+	grid-template-columns: auto 32px 92px minmax(0, 1fr) auto;
+	align-items: center;
+	gap: 12px;
+	min-height: 76px;
+	padding: 8px 10px;
+	border: 1px solid #e4e4e7;
+	border-radius: 8px;
+	background: white;
+}
+
+.featured-order-item.dragging {
+	opacity: 0.45;
+}
+
+.drag-handle {
+	color: #a1a1aa;
+	font-weight: 800;
+	letter-spacing: -0.25em;
+	cursor: grab;
+}
+
+.featured-position {
+	color: #71717a;
+	font-size: 12px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.featured-order-item img {
+	display: block;
+	width: 92px;
+	height: 62px;
+	border-radius: 5px;
+	object-fit: cover;
+	background: #e4e4e7;
+}
+
+.featured-order-details {
+	display: grid;
+	gap: 4px;
+	min-width: 0;
+	font-size: 13px;
+}
+
+.featured-order-details span {
+	overflow: hidden;
+	color: #71717a;
+	font-size: 11px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.featured-order-actions {
+	display: flex;
+	gap: 6px;
+}
+
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -527,5 +592,19 @@ button:focus-visible {
 	.photo-grid,
 	.incoming-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.featured-order-item {
+		grid-template-columns: auto 26px 64px minmax(0, 1fr);
+		gap: 8px;
+	}
+
+	.featured-order-item img {
+		width: 64px;
+		height: 52px;
+	}
+
+	.featured-order-actions {
+		grid-column: 3 / -1;
 	}
 }

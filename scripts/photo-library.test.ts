@@ -12,6 +12,7 @@ import {
 	nextPhotoNumber,
 	readGalleryFile,
 	readGallerySnapshot,
+	reorderFeaturedPhotos,
 	updateGalleryPhotos,
 	writeGalleryFileAtomic,
 } from './photo-library.ts';
@@ -130,6 +131,31 @@ describe('photo library workflow', () => {
 		const updated = updateGalleryPhotos(gallery, ['photo-0001'], { published: false });
 		expect(updated.photos[0].published).toBe(false);
 		expect(updated.photos[0].file).toBe('photos/photo-0001.jpg');
+	});
+
+	it('normalizes featured order when featured membership changes', () => {
+		const first = { ...createPhoto('photo-0001'), featured: true, featured_order: 1 };
+		const second = createPhoto('photo-0002');
+		const featured = updateGalleryPhotos(createGallery([first, second]), [second.id], {
+			featured: true,
+		});
+		expect(featured.photos.map((photo) => photo.featured_order)).toEqual([1, 2]);
+
+		const unfeatured = updateGalleryPhotos(featured, [first.id], { featured: false });
+		expect(unfeatured.photos[0].featured_order).toBeUndefined();
+		expect(unfeatured.photos[1].featured_order).toBe(1);
+	});
+
+	it('reorders every featured photo atomically and rejects incomplete orders', () => {
+		const first = { ...createPhoto('photo-0001'), featured: true, featured_order: 1 };
+		const second = { ...createPhoto('photo-0002'), featured: true, featured_order: 1 };
+		const gallery = createGallery([first, second, createPhoto('photo-0003')]);
+
+		const reordered = reorderFeaturedPhotos(gallery, [second.id, first.id]);
+		expect(reordered.photos.map((photo) => photo.featured_order)).toEqual([2, 1, undefined]);
+		expect(() => reorderFeaturedPhotos(gallery, [first.id])).toThrow(
+			'every featured photograph exactly once',
+		);
 	});
 
 	it('uses the highest existing sequential ID or filename', () => {

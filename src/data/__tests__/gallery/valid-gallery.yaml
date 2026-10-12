@@ -35,6 +35,7 @@ photos:
       place: false
       subject: true
     featured: true
+    featured_order: 2
     technical:
       capturedAt: 2025-03-27T08:22:56.000Z
 
@@ -50,6 +51,7 @@ photos:
       place: true
       subject: true
     featured: true
+    featured_order: 1
 
   - id: unknown-image
     file: photos/unknown.jpg
@@ -76,4 +78,5 @@ photos:
       place: true
       subject: true
     featured: true
+    featured_order: 3
     published: false

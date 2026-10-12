@@ -49,6 +49,7 @@ export interface GalleryPhoto {
 	taxonomy: PhotoTaxonomy;
 	browse: BrowseVisibility;
 	featured: boolean;
+	featured_order?: number;
 	published?: boolean;
 	technical?: TechnicalMetadata;
 	features?: PhotoFeatures;
