@@ -103,6 +103,7 @@ photos:
     technical: {}
     features: {}
     published: true
+    featured_order: 1
   - id: photo-0007
     file: photos/photo-0007.jpg
     taxonomy:
@@ -308,6 +309,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 2
   - id: photo-0019
     file: photos/photo-0019.jpg
     taxonomy:
@@ -377,6 +379,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 3
   - id: photo-0023
     file: photos/photo-0023.jpg
     taxonomy:
@@ -637,6 +640,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 4
   - id: photo-0038
     file: photos/photo-0038.jpg
     taxonomy:
@@ -672,6 +676,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 5
   - id: photo-0040
     file: photos/photo-0040.jpg
     taxonomy:
@@ -743,6 +748,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 6
   - id: photo-0044
     file: photos/photo-0044.jpg
     taxonomy:
@@ -851,6 +857,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 7
   - id: photo-0050
     file: photos/photo-0050.jpg
     taxonomy:
@@ -959,6 +966,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 8
   - id: photo-0056
     file: photos/photo-0056.jpg
     taxonomy:
@@ -977,6 +985,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 9
   - id: photo-0057
     file: photos/photo-0057.jpg
     taxonomy:
@@ -1193,6 +1202,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 10
   - id: photo-0069
     file: photos/photo-0069.jpg
     taxonomy:
@@ -1801,7 +1811,7 @@ photos:
       year: true
       place: true
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}
@@ -1841,6 +1851,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 11
   - id: photo-0105
     file: photos/photo-0105.jpg
     taxonomy:
@@ -1873,7 +1884,7 @@ photos:
       year: true
       place: true
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}
@@ -1945,7 +1956,7 @@ photos:
       year: true
       place: true
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}
@@ -2021,6 +2032,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 12
   - id: photo-0115
     file: photos/photo-0115.jpg
     taxonomy:
@@ -2093,6 +2105,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 13
   - id: photo-0119
     file: photos/photo-0119.jpg
     taxonomy:
@@ -2129,6 +2142,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 14
   - id: photo-0121
     file: photos/photo-0121.jpg
     taxonomy:
@@ -2273,6 +2287,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 15
   - id: photo-0129
     file: photos/photo-0129.jpg
     taxonomy:
@@ -2291,6 +2306,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 16
   - id: photo-0130
     file: photos/photo-0130.jpg
     taxonomy:
@@ -2417,6 +2433,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 17
   - id: photo-0137
     file: photos/photo-0137.jpg
     taxonomy:
@@ -2525,6 +2542,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 18
   - id: photo-0143
     file: photos/photo-0143.jpg
     taxonomy:
@@ -2633,6 +2651,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 19
   - id: photo-0149
     file: photos/photo-0149.jpg
     taxonomy:
@@ -2669,6 +2688,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 20
   - id: photo-0151
     file: photos/photo-0151.jpg
     taxonomy:
@@ -2723,6 +2743,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 21
   - id: photo-0154
     file: photos/photo-0154.jpg
     taxonomy:
@@ -2741,6 +2762,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 22
   - id: photo-0155
     file: photos/photo-0155.jpg
     taxonomy:
@@ -2795,6 +2817,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 23
   - id: photo-0158
     file: photos/photo-0158.jpg
     taxonomy:
@@ -2939,6 +2962,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 24
   - id: photo-0166
     file: photos/photo-0166.jpg
     taxonomy:
@@ -3209,6 +3233,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 25
   - id: photo-0181
     file: photos/photo-0181.jpg
     taxonomy:
@@ -3329,6 +3354,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 26
   - id: photo-0188
     file: photos/photo-0188.jpg
     taxonomy:
@@ -3461,7 +3487,7 @@ photos:
       year: true
       place: false
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}
@@ -3669,6 +3695,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 27
   - id: photo-0208
     file: photos/photo-0208.jpg
     taxonomy:
@@ -4101,6 +4128,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 28
   - id: photo-0232
     file: photos/photo-0232.jpg
     taxonomy:
@@ -4245,6 +4273,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 29
   - id: photo-0240
     file: photos/photo-0240.jpg
     taxonomy:
@@ -4281,6 +4310,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 30
   - id: photo-0242
     file: photos/photo-0242.jpg
     taxonomy:
@@ -4299,6 +4329,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 31
   - id: photo-0243
     file: photos/photo-0243.jpg
     taxonomy:
@@ -4767,6 +4798,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 32
   - id: photo-0269
     file: photos/photo-0269.jpg
     taxonomy:
@@ -4803,6 +4835,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 33
   - id: photo-0271
     file: photos/photo-0271.jpg
     taxonomy:
@@ -4821,6 +4854,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 34
   - id: photo-0272
     file: photos/photo-0272.jpg
     taxonomy:
@@ -5091,6 +5125,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 35
   - id: photo-0287
     file: photos/photo-0287.jpg
     taxonomy:
@@ -5163,6 +5198,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 36
   - id: photo-0291
     file: photos/photo-0291.jpg
     taxonomy:
@@ -5230,7 +5266,7 @@ photos:
       year: true
       place: false
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}
@@ -5251,6 +5287,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 37
   - id: photo-0296
     file: photos/photo-0296.jpg
     taxonomy:
@@ -5319,6 +5356,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 38
   - id: photo-0300
     file: photos/photo-0300.jpg
     taxonomy:
@@ -5404,6 +5442,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 39
   - id: photo-0305
     file: photos/photo-0305.jpg
     taxonomy:
@@ -5547,6 +5586,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 40
   - id: photo-0313
     file: photos/photo-0313.jpg
     taxonomy:
@@ -5655,6 +5695,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 41
   - id: photo-0319
     file: photos/photo-0319.jpg
     taxonomy:
@@ -5745,6 +5786,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 42
   - id: photo-0324
     file: photos/photo-0324.jpg
     taxonomy:
@@ -5781,6 +5823,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 43
   - id: photo-0326
     file: photos/photo-0326.jpg
     taxonomy:
@@ -5871,6 +5914,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 44
   - id: photo-0331
     file: photos/photo-0331.jpg
     taxonomy:
@@ -5907,6 +5951,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 45
   - id: photo-0333
     file: photos/photo-0333.jpg
     taxonomy:
@@ -6213,6 +6258,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 46
   - id: photo-0350
     file: photos/photo-0350.jpg
     taxonomy:
@@ -6609,6 +6655,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 47
   - id: photo-0372
     file: photos/photo-0372.jpg
     taxonomy:
@@ -6825,6 +6872,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 48
   - id: photo-0384
     file: photos/photo-0384.jpg
     taxonomy:
@@ -6915,6 +6963,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 49
   - id: photo-0389
     file: photos/photo-0389.jpg
     taxonomy:
@@ -7059,6 +7108,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 50
   - id: photo-0397
     file: photos/photo-0397.jpg
     taxonomy:
@@ -7077,6 +7127,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 51
   - id: photo-0398
     file: photos/photo-0398.jpg
     taxonomy:
@@ -7221,6 +7272,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 52
   - id: photo-0406
     file: photos/photo-0406.jpg
     taxonomy:
@@ -7257,6 +7309,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 53
   - id: photo-0408
     file: photos/photo-0408.jpg
     taxonomy:
@@ -7275,6 +7328,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 54
   - id: photo-0409
     file: photos/photo-0409.jpg
     taxonomy:
@@ -7329,6 +7383,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 55
   - id: photo-0412
     file: photos/photo-0412.jpg
     taxonomy:
@@ -7635,6 +7690,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 56
   - id: photo-0429
     file: photos/photo-0429.jpg
     taxonomy:
@@ -7743,6 +7799,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 57
   - id: photo-0435
     file: photos/photo-0435.jpg
     taxonomy:
@@ -7887,6 +7944,7 @@ photos:
     published: true
     technical: {}
     features: {}
+    featured_order: 58
   - id: photo-0443
     file: photos/photo-0443.jpg
     taxonomy:
@@ -7919,7 +7977,7 @@ photos:
       year: true
       place: true
       subject: true
-    featured: true
+    featured: false
     published: true
     technical: {}
     features: {}

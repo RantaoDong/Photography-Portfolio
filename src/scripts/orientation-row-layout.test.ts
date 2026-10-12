@@ -45,7 +45,7 @@ describe('createOrientationRowLayout', () => {
 		}
 	});
 
-	it('keeps each row orientation-consistent and alternates nearby orientations', () => {
+	it('keeps each row orientation-consistent without forcing row alternation', () => {
 		const layout = createOrientationRowLayout(mixedImages, 1200, {
 			reorderWithinGroup: true,
 		});
@@ -60,11 +60,27 @@ describe('createOrientationRowLayout', () => {
 
 		expect(orientations).toContain('landscape');
 		expect(orientations).toContain('portrait');
+
+		const groupedByOrientation: RowImageInput[] = [
+			...Array.from({ length: 8 }, () => ({ width: 1600, height: 900 })),
+			...Array.from({ length: 8 }, () => ({ width: 800, height: 1200 })),
+		];
+		const groupedLayout = createOrientationRowLayout(groupedByOrientation, 1200, {
+			reorderWithinGroup: true,
+		});
+		const groupedRows = [...Map.groupBy(groupedLayout.boxes, (box) => box.top).values()];
+		const groupedOrientations = groupedRows.map((row) =>
+			row[0].aspectRatio >= 1 ? 'landscape' : 'portrait',
+		);
+
+		const firstPortraitRow = groupedOrientations.indexOf('portrait');
+		expect(firstPortraitRow).toBeGreaterThan(1);
 		expect(
-			orientations.some(
-				(orientation, index) => index > 0 && orientation !== orientations[index - 1],
-			),
+			groupedOrientations.slice(0, firstPortraitRow).every((value) => value === 'landscape'),
 		).toBe(true);
+		expect(groupedOrientations.slice(firstPortraitRow).every((value) => value === 'portrait')).toBe(
+			true,
+		);
 	});
 
 	it('keeps consecutive year groups vertically ordered', () => {
@@ -118,8 +134,8 @@ describe('createOrientationRowLayout', () => {
 		const orientationAreaRatio = average(landscapeAreas) / average(portraitAreas);
 
 		expect(fillRatios.every((fillRatio) => Math.abs(fillRatio - 1) < 0.000001)).toBe(true);
-	// Sparse rows are explicitly allowed to exceed the usual target area so
-	// they can span the full container width.
+		// Sparse rows are explicitly allowed to exceed the usual target area so
+		// they can span the full container width.
 		expect(upperArea / lowerArea).toBeLessThan(3.5);
 		expect(orientationAreaRatio).toBeGreaterThan(0.5);
 		expect(orientationAreaRatio).toBeLessThan(2.25);

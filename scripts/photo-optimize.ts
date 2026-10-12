@@ -6,11 +6,7 @@ import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { askYesNo } from './photo-import.ts';
-import {
-	checkConsistency,
-	readGalleryFile,
-	resolvePhotoPath,
-} from './photo-library.ts';
+import { checkConsistency, readGalleryFile, resolvePhotoPath } from './photo-library.ts';
 
 const DEFAULT_MAX_EDGE = 2560;
 const DEFAULT_QUALITY = 84;

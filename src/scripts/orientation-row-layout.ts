@@ -35,8 +35,9 @@ const MAX_AREA_SCALE = 1.25;
 
 /**
  * Builds deterministic, orientation-aware rows. Gallery groups may be locally
- * reordered to alternate orientation and balance row fill, but never cross a
- * group boundary. Passing reorderWithinGroup: false preserves strict order.
+ * reordered to balance row fill, but rows follow their earliest source position
+ * instead of being forced into a landscape/portrait alternation. Rows never
+ * cross a group boundary. Passing reorderWithinGroup: false preserves strict order.
  */
 export function createOrientationRowLayout(
 	images: RowImageInput[],
@@ -61,7 +62,7 @@ export function createOrientationRowLayout(
 			} satisfies IndexedImage;
 		});
 		const rows = options.reorderWithinGroup
-			? createBalancedAlternatingRows(items, containerWidth)
+			? createBalancedRowsInSourceOrder(items, containerWidth)
 			: createStableRows(items, containerWidth);
 
 		for (const row of rows) {
@@ -93,29 +94,15 @@ export function createOrientationRowLayout(
 	};
 }
 
-function createBalancedAlternatingRows(items: IndexedImage[], containerWidth: number) {
+function createBalancedRowsInSourceOrder(items: IndexedImage[], containerWidth: number) {
 	const landscapeItems = items.filter((item) => item.orientation === 'landscape');
 	const portraitItems = items.filter((item) => item.orientation === 'portrait');
-	const rows = {
-		landscape: partitionIntoBalancedRows(landscapeItems, containerWidth),
-		portrait: partitionIntoBalancedRows(portraitItems, containerWidth),
-	};
-	const result: IndexedImage[][] = [];
-	let orientation: Orientation =
-		(landscapeItems[0]?.index ?? Number.POSITIVE_INFINITY) <
-		(portraitItems[0]?.index ?? Number.POSITIVE_INFINITY)
-			? 'landscape'
-			: 'portrait';
+	const rows = [
+		...partitionIntoBalancedRows(landscapeItems, containerWidth),
+		...partitionIntoBalancedRows(portraitItems, containerWidth),
+	];
 
-	while (rows.landscape.length > 0 || rows.portrait.length > 0) {
-		const selectedRows = rows[orientation];
-		if (selectedRows.length > 0) result.push(selectedRows.shift()!);
-
-		const opposite = orientation === 'landscape' ? 'portrait' : 'landscape';
-		orientation = rows[opposite].length > 0 ? opposite : orientation;
-	}
-
-	return result;
+	return rows.sort((first, second) => first[0].index - second[0].index);
 }
 
 function createStableRows(items: IndexedImage[], containerWidth: number) {

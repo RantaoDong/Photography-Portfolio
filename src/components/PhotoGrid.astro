@@ -7,15 +7,16 @@ import type { Image as ImageType } from '../data/galleryData';
 interface Props {
 	images: ImageType[];
 	groupByYear?: boolean;
+	reorderWithinGroup?: boolean;
 }
 
-const { images, groupByYear = false } = Astro.props;
+const { images, groupByYear = false, reorderWithinGroup = groupByYear } = Astro.props;
 ---
 
 <section
 	id="photo-grid"
 	class="relative w-full mx-auto overflow-hidden"
-	data-reorder-within-group={groupByYear ? 'true' : 'false'}
+	data-reorder-within-group={reorderWithinGroup ? 'true' : 'false'}
 >
 	{
 		images.map((image) => (
