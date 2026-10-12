@@ -8,7 +8,7 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-        exclude: ^src/gallery/photos/
+        exclude: ^(src/gallery/photos/|src/generated/photo-color-features\.json$)
   - repo: local
     hooks:
       - id: prettier
@@ -17,6 +17,7 @@ repos:
         language: system
         types: [file]
         files: \.(js|jsx|ts|tsx|json|md|css|scss|html|astro)$
+        exclude: ^src/generated/photo-color-features\.json$
   - repo: local
     hooks:
       - id: eslint
