@@ -1,0 +1,11 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const exploreHref = `${base}/explore`;
+---
+
+<a
+	href={exploreHref}
+	class="inline-flex items-center text-sm text-gray-600 transition-colors hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+>
+	← Explore
+</a>

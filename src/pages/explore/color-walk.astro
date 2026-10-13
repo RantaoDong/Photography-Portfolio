@@ -1,0 +1,44 @@
+---
+import { getImage } from 'astro:assets';
+import ColorWalkExplorer from '../../components/ColorWalkExplorer.astro';
+import { colorWalkConfig } from '../../color/color-walk-config.ts';
+import type { SpatialColorCell } from '../../color/color-types.ts';
+import { getImages } from '../../data/imageStore.ts';
+import generatedFeatures from '../../generated/photo-color-features.json';
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const images = await getImages();
+const photos = await Promise.all(
+	images.flatMap((image) => {
+		const features = generatedFeatures.photos[image.id];
+		if (!features) return [];
+		return [
+			(async () => {
+				const landscape = image.src.width >= image.src.height;
+				const maximum = colorWalkConfig.rendering.maxDisplayDimension;
+				const optimized = await getImage({
+					src: image.src,
+					...(landscape ? { width: maximum } : { height: maximum }),
+					format: 'webp',
+					quality: colorWalkConfig.rendering.imageQuality,
+				});
+				const scale = Math.min(1, maximum / Math.max(image.src.width, image.src.height));
+				return {
+					id: image.id,
+					src: optimized.src,
+					width: Math.round(image.src.width * scale),
+					height: Math.round(image.src.height * scale),
+					alt: image.title || 'Photograph',
+					features: {
+						spatialCells: features.spatialCells as unknown as SpatialColorCell[],
+					},
+				};
+			})(),
+		];
+	}),
+);
+---
+
+<MainLayout>
+	<ColorWalkExplorer {photos} />
+</MainLayout>

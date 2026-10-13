@@ -122,6 +122,63 @@ The debug server binds to `127.0.0.1`, opens in the default browser, and stops w
 not an Astro page and is not included in the public site build. Regenerate the feature file after
 adding, removing, or changing photographs.
 
+## Color Walk effect tuning
+
+Start the separate local-only Color Walk renderer tuner:
+
+```bash
+npm run color-walk:tune
+```
+
+The tuner binds to `127.0.0.1`, opens in the default browser, and stops with `Ctrl+C`. It is not an
+Astro route and is excluded from the production build. It reads registered gallery photographs but
+never edits `src/gallery/gallery.yaml`.
+
+Use the color wheel or exact color field, choose representative photographs, and adjust the
+human-readable preservation, transition, saturation, brightness, and region controls. The
+**Pixel-only / Region-aware** switch compares the existing independent-pixel result with the
+edge-aware refinement without changing the public default. Four synchronized views show Original,
+Raw pixel mask, Refined mask, and Final effect; white mask pixels are preserved most strongly. Hold
+the Final effect preview to reveal the original photograph.
+
+Region-aware mode keeps the Lab-distance mask as its raw signal, reduces the source guidance and
+mask to a maximum 360px long edge, then applies a fixed-radius separable joint bilateral refinement.
+Source-color differences gate the support at visible edges. The upsampled result is combined with
+the full-resolution raw mask using `max`, so refinement can fill weak variations inside coherent
+regions but cannot weaken a pixel that the raw Lab mask already preserves. `Region smoothing`,
+`Edge sensitivity`, and `Region support` are deliberately centralized beside the original effect
+parameters in `src/color/color-walk-config.ts`.
+
+Slider changes are previews only. To make the current combination the public Color Walk default,
+select **Apply as public defaults**, review the confirmation message, then select **Confirm update**.
+The local server validates the values and updates only `colorWalkRenderingDefaults` in
+`src/color/color-walk-config.ts`. Reset and the Balanced preset then use the newly saved defaults.
+The technical values can also be copied for review.
+
+The tuner and public Color Walk share the same renderer, configuration schema, and default object.
+Prepared image pixels and perceptual distance data are cached so ordinary slider changes do not
+reload or decode the photograph. The public viewer prepares only the active photograph at a bounded
+1200px long edge, caches each completed photo/color result, and never recomputes either mask when
+the user holds or releases the photograph. No semantic or ML segmentation is used.
+
+Run the repeatable region-refinement benchmark with:
+
+```bash
+npm run color-walk:benchmark
+```
+
+The benchmark automatically selects one portrait and one landscape gallery photograph, uses the
+same 1200px working-image and 360px refinement limits, warms the implementation once, and reports
+the median of seven cached-guidance mask runs. On the development machine used for the initial
+implementation, `photo-0001` at 900×1200 took approximately 279ms cold / 195ms cached and
+`photo-0002` at 1200×900 took approximately 264ms cold / 190ms cached; one-time Lab preparation was
+approximately 1.05s in the Node benchmark. These figures exclude image decode and are
+device/runtime dependent. The tuner also includes
+**Benchmark active photo**, which measures one-time Lab preparation plus the median edge-mask and
+final Canvas-render costs in the actual browser. Because the measured refinement is still a visible
+one-off cost, the checked-in public default remains `pixel` until the region-aware appearance and
+browser timings are explicitly accepted.
+
 ## Metadata
 
 All photo metadata remains in one YAML file. Titles, descriptions, technical data, and generated features are optional.

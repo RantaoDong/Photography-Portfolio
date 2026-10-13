@@ -39,76 +39,98 @@ export const getStaticPaths = async () => {
 				<p class="text-gray-600 max-w-xl mx-auto">Browse photographs by year, place, or subject.</p>
 			</div>
 
-			<nav class="mb-10" aria-label="Gallery filters">
-				<p class="text-sm text-gray-500 text-center mb-3">Browse by</p>
-				<div class="flex flex-wrap gap-2 justify-center">
-					<a href={`${base}/collections/`}>
-						<div
-							class={`px-4 py-2 border ${
-								!activeDimension
-									? 'border-black bg-black text-white'
-									: 'border-gray-200 text-gray-700 hover:border-gray-300'
-							} transition-all`}
+			<div data-gallery-browser>
+				<nav class="mb-10" aria-label="Gallery filters">
+					<p class="text-sm text-gray-500 text-center mb-3">Browse by</p>
+					<div class="flex flex-wrap gap-2 justify-center">
+						<a
+							href={`${base}/collections/`}
+							data-gallery-filter
+							aria-current={!activeDimension ? 'page' : undefined}
 						>
-							All
-						</div>
-					</a>
-					{
-						browseDimensions.map((dimension) => (
-							<a href={`${base}/collections/${dimension.id}`}>
-								<div
-									class={`px-4 py-2 border ${
-										dimension.id === activeDimension
-											? 'border-black bg-black text-white'
-											: 'border-gray-200 text-gray-700 hover:border-gray-300'
-									} transition-all`}
+							<div
+								class={`px-4 py-2 border ${
+									!activeDimension
+										? 'border-black bg-black text-white'
+										: 'border-gray-200 text-gray-700 hover:border-gray-300'
+								} transition-all`}
+							>
+								All
+							</div>
+						</a>
+						{
+							browseDimensions.map((dimension) => (
+								<a
+									href={`${base}/collections/${dimension.id}`}
+									data-gallery-filter
+									aria-current={dimension.id === activeDimension ? 'page' : undefined}
 								>
-									{dimension.label}
-								</div>
-							</a>
-						))
-					}
-				</div>
-
-				{
-					activeDimensionData && (
-						<div class="flex flex-wrap gap-2 justify-center mt-4">
-							<a href={`${base}/collections/${activeDimensionData.id}`}>
-								<div
-									class={`px-4 py-2 border ${
-										!activeCategory
-											? 'border-black bg-black text-white'
-											: 'border-gray-200 text-gray-700 hover:border-gray-300'
-									} transition-all`}
-								>
-									All {activeDimensionData.label}s
-								</div>
-							</a>
-							{activeDimensionData.categories.map((category) => (
-								<a href={`${base}/collections/${activeDimensionData.id}/${category.id}`}>
 									<div
 										class={`px-4 py-2 border ${
-											category.id === activeCategory
+											dimension.id === activeDimension
 												? 'border-black bg-black text-white'
 												: 'border-gray-200 text-gray-700 hover:border-gray-300'
 										} transition-all`}
 									>
-										{category.name}
+										{dimension.label}
 									</div>
 								</a>
-							))}
-						</div>
+							))
+						}
+					</div>
+
+					{
+						activeDimensionData && (
+							<div class="flex flex-wrap gap-2 justify-center mt-4">
+								<a
+									href={`${base}/collections/${activeDimensionData.id}`}
+									data-gallery-filter
+									aria-current={!activeCategory ? 'page' : undefined}
+								>
+									<div
+										class={`px-4 py-2 border ${
+											!activeCategory
+												? 'border-black bg-black text-white'
+												: 'border-gray-200 text-gray-700 hover:border-gray-300'
+										} transition-all`}
+									>
+										All {activeDimensionData.label}s
+									</div>
+								</a>
+								{activeDimensionData.categories.map((category) => (
+									<a
+										href={`${base}/collections/${activeDimensionData.id}/${category.id}`}
+										data-gallery-filter
+										aria-current={category.id === activeCategory ? 'page' : undefined}
+									>
+										<div
+											class={`px-4 py-2 border ${
+												category.id === activeCategory
+													? 'border-black bg-black text-white'
+													: 'border-gray-200 text-gray-700 hover:border-gray-300'
+											} transition-all`}
+										>
+											{category.name}
+										</div>
+									</a>
+								))}
+							</div>
+						)
+					}
+				</nav>
+
+				{
+					images.length > 0 ? (
+						<PhotoGrid images={images} groupByYear />
+					) : (
+						<p class="text-center text-gray-500 py-16">No photographs in this category yet.</p>
 					)
 				}
-			</nav>
-
-			{
-				images.length > 0 ? (
-					<PhotoGrid images={images} groupByYear />
-				) : (
-					<p class="text-center text-gray-500 py-16">No photographs in this category yet.</p>
-				)
-			}
+			</div>
 		</div>
 	</section>
 </MainLayout>
+
+<script>
+	import '../../scripts/gallery-filters';
+</script>

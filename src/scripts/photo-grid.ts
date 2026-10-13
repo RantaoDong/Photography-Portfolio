@@ -1,23 +1,17 @@
 import GLightbox from 'glightbox';
 import { createOrientationRowLayout, type RowLayout } from './orientation-row-layout';
 
-let lightboxInitialized = false;
+let lightbox: ReturnType<typeof GLightbox> | null = null;
 
 export function setupGallery() {
 	if (typeof document === 'undefined') return;
 
 	const container = document.getElementById('photo-grid');
-	if (!container) {
-		console.error('Photo grid container not found.');
-		return;
-	}
+	if (!container) return;
 
 	const imageLinks = Array.from(container.querySelectorAll('.photo-item')) as HTMLElement[];
 
-	if (imageLinks.length === 0) {
-		console.warn('No images found inside the photo grid.');
-		return;
-	}
+	if (imageLinks.length === 0) return;
 
 	const layout = createOrientationRowLayout(
 		imageLinks.map((link) => ({
@@ -32,16 +26,14 @@ export function setupGallery() {
 	applyImagesStyleBasedOnLayout(imageLinks, layout);
 	applyContainerStyleBasedOnLayout(container, layout);
 
-	if (!lightboxInitialized) {
-		GLightbox({
-			selector: '.glightbox',
-			openEffect: 'zoom',
-			closeEffect: 'fade',
-			width: 'auto',
-			height: 'auto',
-		});
-		lightboxInitialized = true;
-	}
+	lightbox?.destroy();
+	lightbox = GLightbox({
+		selector: '.glightbox',
+		openEffect: 'zoom',
+		closeEffect: 'fade',
+		width: 'auto',
+		height: 'auto',
+	});
 }
 
 function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: RowLayout) {
@@ -62,11 +54,12 @@ function applyContainerStyleBasedOnLayout(container: HTMLElement, layout: RowLay
 	container.style.position = 'relative';
 	container.style.height = `${layout.containerHeight}px`;
 }
-// Run setupGallery once the page is loaded
+// Module scripts run after their markup is parsed, so lay out immediately instead of
+// waiting on unrelated deferred resources to release DOMContentLoaded.
 if (typeof window !== 'undefined') {
 	const debouncedSetup = debounce(setupGallery, 250);
 
-	document.addEventListener('DOMContentLoaded', setupGallery);
+	setupGallery();
 	window.addEventListener('resize', debouncedSetup);
 }
 

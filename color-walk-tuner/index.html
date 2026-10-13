@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Color Walk Effect Tuner</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<header class="page-header">
+			<div>
+				<p class="eyebrow">Local development tool</p>
+				<h1>Color Walk Effect Tuner</h1>
+				<p>Compare the shared Color Walk renderer against the original photograph.</p>
+			</div>
+			<p id="status" class="status" role="status">Loading gallery…</p>
+		</header>
+
+		<main>
+			<aside class="controls" aria-label="Effect controls">
+				<section class="panel color-panel" aria-labelledby="color-heading">
+					<div class="section-heading">
+						<div>
+							<p class="eyebrow">Selected family</p>
+							<h2 id="color-heading">Color</h2>
+						</div>
+						<label class="native-color">
+							<span class="sr-only">Exact selected color</span>
+							<input id="color-field" type="color" value="#00aaff" />
+						</label>
+					</div>
+					<canvas
+						id="color-wheel"
+						class="color-wheel"
+						width="300"
+						height="300"
+						role="slider"
+						tabindex="0"
+						aria-label="Hue"
+						aria-valuemin="0"
+						aria-valuemax="359"
+					></canvas>
+					<div class="color-readout">
+						<span id="color-swatch"></span><output id="color-value"></output>
+					</div>
+				</section>
+
+				<section class="panel" aria-labelledby="effect-heading">
+					<div class="section-heading">
+						<div>
+							<p class="eyebrow">Live parameters</p>
+							<h2 id="effect-heading">Effect</h2>
+						</div>
+						<button id="reset" class="text-button" type="button">Reset to public defaults</button>
+					</div>
+					<fieldset class="mode-switch">
+						<legend>Mask refinement</legend>
+						<label
+							><input type="radio" name="refinement-mode" value="pixel" checked /> Pixel-only</label
+						>
+						<label
+							><input type="radio" name="refinement-mode" value="edge-aware" /> Region-aware</label
+						>
+					</fieldset>
+					<div id="sliders" class="sliders"></div>
+					<div class="presets" aria-label="Effect presets">
+						<span>Presets</span>
+						<div id="presets"></div>
+					</div>
+				</section>
+
+				<section class="panel parameter-panel" aria-labelledby="parameter-heading">
+					<div class="section-heading">
+						<h2 id="parameter-heading">Technical values</h2>
+						<button id="copy-values" class="text-button" type="button">Copy</button>
+					</div>
+					<pre id="parameter-values"></pre>
+					<div class="benchmark-controls">
+						<button id="run-benchmark" class="text-button" type="button">
+							Benchmark active photo
+						</button>
+						<output id="benchmark-result">No benchmark run yet.</output>
+					</div>
+					<div class="apply-defaults">
+						<p>Preview changes remain local to this session until they are applied.</p>
+						<button id="apply-defaults" class="primary-button" type="button">
+							Apply as public defaults
+						</button>
+						<div id="apply-confirmation" class="apply-confirmation" hidden>
+							<p>
+								This updates <code>colorWalkRenderingDefaults</code> in the shared source
+								configuration.
+							</p>
+							<div>
+								<button id="cancel-apply" class="text-button" type="button">Cancel</button>
+								<button id="confirm-apply" class="primary-button" type="button">
+									Confirm update
+								</button>
+							</div>
+						</div>
+						<p id="apply-status" class="apply-status" role="status"></p>
+					</div>
+				</section>
+			</aside>
+
+			<section class="workspace" aria-label="Photo comparison">
+				<div class="comparison">
+					<figure class="preview-card">
+						<figcaption>Original</figcaption>
+						<div class="photo-stage"><img id="original-preview" alt="" /></div>
+					</figure>
+					<figure class="preview-card">
+						<figcaption>Raw pixel mask <span>white = preserve</span></figcaption>
+						<div class="photo-stage"><canvas id="raw-mask-preview"></canvas></div>
+					</figure>
+					<figure class="preview-card">
+						<figcaption>Refined mask <span>white = preserve</span></figcaption>
+						<div class="photo-stage"><canvas id="refined-mask-preview"></canvas></div>
+					</figure>
+					<figure class="preview-card">
+						<figcaption>Final effect</figcaption>
+						<button
+							id="effect-surface"
+							class="photo-stage effect-surface"
+							type="button"
+							aria-label="Hold to reveal original photograph"
+						>
+							<canvas id="effect-preview"></canvas>
+							<img id="held-original" alt="" hidden />
+						</button>
+						<p id="hold-instruction" class="hold-instruction">Hold effect to reveal original</p>
+					</figure>
+				</div>
+
+				<section class="photo-chooser" aria-labelledby="photos-heading">
+					<div class="section-heading">
+						<div>
+							<p class="eyebrow">Registered gallery</p>
+							<h2 id="photos-heading">Photograph</h2>
+						</div>
+						<label class="search"
+							><span class="sr-only">Filter photographs</span
+							><input id="photo-filter" type="search" placeholder="Filter by ID or title"
+						/></label>
+					</div>
+					<div id="photo-list" class="photo-list"></div>
+				</section>
+			</section>
+		</main>
+
+		<script type="module" src="/app.ts"></script>
+	</body>
+</html>

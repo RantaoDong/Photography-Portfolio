@@ -4,10 +4,11 @@ import siteConfig from '../../site.config.mjs';
 const title = siteConfig.title;
 
 const base = import.meta.env.BASE_URL;
+const exploreBase = base.replace(/\/$/, '');
 const menuItems = [
 	{ name: 'Home', link: `${base}` },
 	{ name: 'Gallery', link: `${base}/collections` },
-	{ name: 'Explore', link: `${base}/explore/color-tone` },
+	{ name: 'Explore', link: `${exploreBase}/explore` },
 	{ name: 'About', link: `${base}/about` },
 ];
 ---

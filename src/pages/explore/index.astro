@@ -1,0 +1,69 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const modes = [
+	{
+		name: 'Color Tone',
+		description: 'Explore photographs through their overall color and tone.',
+		href: `${base}/explore/color-tone`,
+		status: null,
+	},
+	{
+		name: 'Color Walk',
+		description: 'Move through the collection one color connection at a time.',
+		href: `${base}/explore/color-walk`,
+		status: null,
+	},
+	{
+		name: 'Color Path',
+		description: 'Follow a path shaped by the colors within the photographs.',
+		href: `${base}/explore/color-path`,
+		status: 'Coming soon',
+	},
+];
+---
+
+<MainLayout>
+	<section class="pt-32 pb-20 min-h-[70vh]">
+		<div class="container-custom">
+			<div class="max-w-3xl mx-auto">
+				<header class="mb-12 md:mb-16">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4">Explore</h1>
+					<p class="text-gray-600 max-w-xl">
+						Discover the collection through color, tone, and visual connections.
+					</p>
+				</header>
+
+				<nav aria-label="Explore modes" class="border-t border-gray-200">
+					{
+						modes.map((mode) => (
+							<a
+								href={mode.href}
+								class="group grid gap-4 border-b border-gray-200 py-7 transition-colors hover:bg-gray-50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black sm:grid-cols-[1fr_auto] sm:items-center sm:px-4"
+							>
+								<div>
+									<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+										<h2 class="text-2xl font-semibold">{mode.name}</h2>
+										{mode.status && (
+											<span class="text-xs uppercase tracking-[0.14em] text-gray-500">
+												{mode.status}
+											</span>
+										)}
+									</div>
+									<p class="mt-2 text-sm leading-6 text-gray-600">{mode.description}</p>
+								</div>
+								<span
+									aria-hidden="true"
+									class="text-lg text-gray-500 transition-transform group-hover:translate-x-1 group-hover:text-black"
+								>
+									→
+								</span>
+							</a>
+						))
+					}
+				</nav>
+			</div>
+		</div>
+	</section>
+</MainLayout>

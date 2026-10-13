@@ -1,0 +1,319 @@
+---
+import type { ColorWalkCandidate } from '../color/color-walk-matching.ts';
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import ExploreBackLink from './ExploreBackLink.astro';
+
+interface ColorWalkPhoto extends ColorWalkCandidate {
+	src: string;
+	width: number;
+	height: number;
+	alt: string;
+}
+
+interface Props {
+	photos: ColorWalkPhoto[];
+}
+
+const { photos } = Astro.props;
+---
+
+<section class="pt-24 pb-20 min-h-[70vh]">
+	<div class="container-custom">
+		<div class="mb-10">
+			<ExploreBackLink />
+		</div>
+
+		<header class="mb-10 text-center">
+			<h1 class="text-4xl md:text-5xl font-bold mb-4">Color Walk</h1>
+			<p class="text-gray-600 max-w-xl mx-auto">
+				Choose a color, then move through photographs where it appears.
+			</p>
+		</header>
+
+		<section id="color-walk-selection" aria-labelledby="color-walk-selection-title">
+			<h2 id="color-walk-selection-title" class="sr-only">Choose a color</h2>
+			<div class="color-walk-picker">
+				<canvas
+					id="color-walk-wheel"
+					class="color-walk-wheel"
+					width="240"
+					height="240"
+					tabindex="0"
+					role="slider"
+					aria-label="Hue"
+					aria-valuemin="0"
+					aria-valuemax="359"></canvas>
+				<div class="control-actions">
+					<button id="color-walk-start" class="primary-action" type="button" disabled
+						>Start walk</button
+					>
+				</div>
+			</div>
+		</section>
+
+		<section id="color-walk-session" class="max-w-5xl mx-auto" hidden>
+			<div class="walk-controls" aria-label="Color Walk controls">
+				<div class="flex items-center gap-2 text-sm text-gray-600">
+					<span id="color-walk-swatch" class="selected-color" aria-hidden="true"></span>
+					<span>Selected color</span>
+				</div>
+				<div class="flex items-center gap-4">
+					<button id="color-walk-change" class="text-action" type="button">Change color</button>
+					<button id="color-walk-reset" class="text-action" type="button">Reset</button>
+				</div>
+			</div>
+
+			<figure class="mt-8">
+				<nav id="color-walk-navigation" class="walk-navigation" aria-label="Photograph navigation">
+					<button
+						id="color-walk-previous"
+						class="walk-arrow"
+						type="button"
+						aria-label="Previous photograph"
+						title="Previous photograph"
+					>
+						<ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true" />
+					</button>
+
+					<div class="photo-stage">
+						<p id="color-walk-status" class="photo-status" role="status">Preparing photograph…</p>
+						<div
+							id="color-walk-photo-surface"
+							class="photo-surface"
+							tabindex="0"
+							role="button"
+							aria-label="Hold to reveal the original photograph"
+							hidden
+						>
+							<canvas id="color-walk-treated" aria-label="Selected-color emphasis view"></canvas>
+							<img id="color-walk-original" alt="" draggable="false" hidden />
+						</div>
+					</div>
+
+					<button
+						id="color-walk-next"
+						class="walk-arrow"
+						type="button"
+						aria-label="Next photograph"
+						title="Next photograph"
+					>
+						<ChevronRight size={20} strokeWidth={1.5} aria-hidden="true" />
+					</button>
+				</nav>
+				<figcaption
+					id="color-walk-instruction"
+					class="mt-3 text-center text-xs tracking-wide text-gray-500"
+					hidden
+				>
+					Hold image to reveal original
+				</figcaption>
+				<p id="color-walk-index" class="mt-3 text-center text-xs tracking-widest text-gray-500">
+					01 / 01
+				</p>
+			</figure>
+		</section>
+	</div>
+</section>
+
+<script id="color-walk-data" type="application/json" set:html={JSON.stringify(photos)} />
+
+<script>
+	import '../scripts/color-walk-explorer.ts';
+</script>
+
+<style>
+	.color-walk-picker {
+		width: min(100%, 17rem);
+		margin-inline: auto;
+		padding: 0.8rem;
+		border: 1px solid rgb(229 231 235);
+	}
+
+	.color-walk-wheel {
+		display: block;
+		width: 10.5rem;
+		height: 10.5rem;
+		margin-inline: auto;
+		cursor: crosshair;
+	}
+
+	.color-walk-wheel:focus-visible,
+	.photo-surface:focus-visible,
+	button:focus-visible {
+		outline: 2px solid black;
+		outline-offset: 2px;
+	}
+
+	.control-actions {
+		display: flex;
+		justify-content: center;
+		margin-top: 1.25rem;
+	}
+
+	.primary-action {
+		padding: 0.55rem 1rem;
+		border: 1px solid black;
+		background: black;
+		color: white;
+		font-size: 0.875rem;
+	}
+
+	.primary-action:disabled {
+		cursor: default;
+		opacity: 0.35;
+	}
+
+	.walk-controls {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding-block: 0.85rem;
+		border-block: 1px solid rgb(229 231 235);
+	}
+
+	.selected-color {
+		width: 0.8rem;
+		height: 0.8rem;
+		border: 1px solid rgb(209 213 219);
+		border-radius: 9999px;
+	}
+
+	.text-action {
+		font-size: 0.875rem;
+		color: rgb(75 85 99);
+		text-decoration-line: underline;
+		text-decoration-color: transparent;
+		text-underline-offset: 3px;
+		transition:
+			color 150ms ease,
+			text-decoration-color 150ms ease;
+	}
+
+	.text-action:hover {
+		color: black;
+		text-decoration-color: currentColor;
+	}
+
+	.text-action:disabled {
+		cursor: default;
+		opacity: 0.35;
+		text-decoration: none;
+	}
+
+	.photo-surface {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		width: 100%;
+		height: 100%;
+		min-width: 0;
+		min-height: 0;
+		cursor: pointer;
+		touch-action: pan-y;
+		user-select: none;
+	}
+
+	.photo-surface[hidden] {
+		display: none;
+	}
+
+	.photo-surface canvas,
+	.photo-surface img {
+		grid-area: 1 / 1;
+		display: block;
+		width: 100%;
+		height: 100%;
+		min-width: 0;
+		min-height: 0;
+		object-fit: contain;
+	}
+
+	.photo-surface canvas[hidden],
+	.photo-surface img[hidden] {
+		display: none;
+	}
+
+	.walk-navigation {
+		display: grid;
+		grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+		align-items: center;
+		gap: clamp(0.25rem, 1.5vw, 1rem);
+	}
+
+	.photo-stage {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 100%;
+		max-width: 100%;
+		height: clamp(20rem, 68svh, 44rem);
+		min-width: 0;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.photo-surface:focus-visible {
+		outline-offset: -2px;
+	}
+
+	.photo-status {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		padding: 1rem;
+		color: rgb(107 114 128);
+		font-size: 0.875rem;
+		text-align: center;
+		pointer-events: none;
+	}
+
+	.photo-status[hidden] {
+		display: none;
+	}
+
+	.walk-arrow {
+		display: inline-grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		color: rgb(75 85 99);
+		border: 1px solid transparent;
+		transition:
+			color 150ms ease,
+			border-color 150ms ease;
+	}
+
+	.walk-arrow:hover:not(:disabled) {
+		color: black;
+		border-color: rgb(229 231 235);
+	}
+
+	.walk-arrow:disabled {
+		cursor: default;
+		opacity: 0.25;
+	}
+
+	@media (max-width: 480px) {
+		.walk-controls {
+			align-items: flex-start;
+			flex-direction: column;
+		}
+
+		.walk-navigation {
+			grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+			gap: 0.125rem;
+		}
+
+		.walk-arrow {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.photo-stage {
+			height: clamp(16rem, 58svh, 30rem);
+		}
+	}
+</style>
