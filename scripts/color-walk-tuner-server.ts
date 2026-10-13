@@ -11,6 +11,12 @@ import {
 	validateColorWalkRenderingParameters,
 	type ColorWalkRenderingParameters,
 } from '../src/color/color-walk-config.ts';
+import {
+	validateColorWalkRankingWeights,
+	type ColorWalkRankingWeights,
+} from '../src/color/color-walk-ranking-config.ts';
+import type { SpatialColorCell } from '../src/color/color-types.ts';
+import generatedFeatures from '../src/generated/photo-color-features.json';
 import { libraryPaths, readGallerySnapshot, resolvePhotoPath } from './photo-library.ts';
 
 const host = '127.0.0.1';
@@ -21,6 +27,12 @@ const colorWalkConfigFile = path.join(
 	'src',
 	'color',
 	'color-walk-config.ts',
+);
+const colorWalkRankingConfigFile = path.join(
+	libraryPaths.repositoryRoot,
+	'src',
+	'color',
+	'color-walk-ranking-config.ts',
 );
 const imageCache = new Map<string, { modified: number; buffer: Buffer }>();
 const thumbnailCache = new Map<string, { modified: number; buffer: Buffer }>();
@@ -57,7 +69,7 @@ async function main() {
 
 	await server.listen();
 	const url = `http://${host}:${port}`;
-	console.log(`Color Walk Effect Tuner is running at ${url}`);
+	console.log(`Color Walk Dev Tool is running at ${url}`);
 	console.log('Press Ctrl+C to stop it.');
 	if (!process.argv.includes('--no-open')) openBrowser(url);
 }
@@ -71,6 +83,9 @@ async function handleLocalRequest(
 	if (url.pathname === '/api/defaults' && request.method === 'POST') {
 		return updatePublicDefaults(request, response);
 	}
+	if (url.pathname === '/api/ranking-defaults' && request.method === 'POST') {
+		return updatePublicRankingDefaults(request, response);
+	}
 	if (request.method !== 'GET') return next();
 	if (url.pathname === '/api/photos') {
 		const { gallery } = await gallerySnapshot;
@@ -80,6 +95,15 @@ async function handleLocalRequest(
 				label: photo.title || photo.id,
 				imageUrl: `/media?id=${encodeURIComponent(photo.id)}`,
 				thumbnailUrl: `/media?id=${encodeURIComponent(photo.id)}&thumbnail=1`,
+				features: {
+					spatialCells:
+						(
+							generatedFeatures.photos as unknown as Record<
+								string,
+								{ spatialCells?: SpatialColorCell[] }
+							>
+						)[photo.id]?.spatialCells ?? [],
+				},
 			})),
 		});
 	}
@@ -87,27 +111,48 @@ async function handleLocalRequest(
 	return next();
 }
 
+async function updatePublicRankingDefaults(request: IncomingMessage, response: ServerResponse) {
+	if (!validateLocalJsonRequest(request, response)) return;
+	const body = await readJsonBody(request);
+	const weights = validateColorWalkRankingWeights(readRankingWeights(body.weights));
+	const source = await fs.readFile(colorWalkRankingConfigFile, 'utf8');
+	const updated = replaceRankingDefaults(source, weights);
+	await writeSourceAtomically(colorWalkRankingConfigFile, updated);
+	return sendJson(response, 200, { weights });
+}
+
 async function updatePublicDefaults(request: IncomingMessage, response: ServerResponse) {
-	if (request.headers['content-type']?.split(';')[0] !== 'application/json') {
-		return sendJson(response, 415, { error: 'Expected an application/json request.' });
-	}
-	const origin = request.headers.origin;
-	if (origin && origin !== `http://${host}:${port}`) {
-		return sendJson(response, 403, { error: 'Cross-origin updates are not allowed.' });
-	}
+	if (!validateLocalJsonRequest(request, response)) return;
 
 	const body = await readJsonBody(request);
 	const parameters = validateColorWalkRenderingParameters(readRenderingParameters(body.parameters));
 	const source = await fs.readFile(colorWalkConfigFile, 'utf8');
 	const updated = replaceRenderingDefaults(source, parameters);
-	const temporaryFile = `${colorWalkConfigFile}.tmp-${randomUUID()}`;
+	await writeSourceAtomically(colorWalkConfigFile, updated);
+	return sendJson(response, 200, { parameters });
+}
+
+function validateLocalJsonRequest(request: IncomingMessage, response: ServerResponse) {
+	if (request.headers['content-type']?.split(';')[0] !== 'application/json') {
+		sendJson(response, 415, { error: 'Expected an application/json request.' });
+		return false;
+	}
+	const origin = request.headers.origin;
+	if (origin && origin !== `http://${host}:${port}`) {
+		sendJson(response, 403, { error: 'Cross-origin updates are not allowed.' });
+		return false;
+	}
+	return true;
+}
+
+async function writeSourceAtomically(file: string, source: string) {
+	const temporaryFile = `${file}.tmp-${randomUUID()}`;
 	try {
-		await fs.writeFile(temporaryFile, updated, { encoding: 'utf8', flag: 'wx' });
-		await fs.rename(temporaryFile, colorWalkConfigFile);
+		await fs.writeFile(temporaryFile, source, { encoding: 'utf8', flag: 'wx' });
+		await fs.rename(temporaryFile, file);
 	} finally {
 		await fs.rm(temporaryFile, { force: true });
 	}
-	return sendJson(response, 200, { parameters });
 }
 
 function readRenderingParameters(value: unknown): ColorWalkRenderingParameters {
@@ -144,6 +189,21 @@ function readNumber(value: unknown, label: string) {
 	return value;
 }
 
+function readRankingWeights(value: unknown): ColorWalkRankingWeights {
+	if (!value || typeof value !== 'object') throw new Error('Ranking weights are required.');
+	const candidate = value as Record<string, unknown>;
+	return {
+		presenceWeight: readNumber(candidate.presenceWeight, 'presenceWeight'),
+		coherenceWeight: readNumber(candidate.coherenceWeight, 'coherenceWeight'),
+		colorSeparationWeight: readNumber(candidate.colorSeparationWeight, 'colorSeparationWeight'),
+		revealImpactWeight: readNumber(candidate.revealImpactWeight, 'revealImpactWeight'),
+		overspreadPenaltyStrength: readNumber(
+			candidate.overspreadPenaltyStrength,
+			'overspreadPenaltyStrength',
+		),
+	};
+}
+
 async function readJsonBody(request: IncomingMessage) {
 	const chunks: Buffer[] = [];
 	let size = 0;
@@ -153,7 +213,10 @@ async function readJsonBody(request: IncomingMessage) {
 		if (size > 16_384) throw new Error('Request body is too large.');
 		chunks.push(buffer);
 	}
-	return JSON.parse(Buffer.concat(chunks).toString('utf8')) as { parameters?: unknown };
+	return JSON.parse(Buffer.concat(chunks).toString('utf8')) as {
+		parameters?: unknown;
+		weights?: unknown;
+	};
 }
 
 export function replaceRenderingDefaults(source: string, parameters: ColorWalkRenderingParameters) {
@@ -171,6 +234,22 @@ export function replaceRenderingDefaults(source: string, parameters: ColorWalkRe
 		`\tregionSmoothing: ${formatNumber(parameters.regionSmoothing)},`,
 		`\tedgeSensitivity: ${formatNumber(parameters.edgeSensitivity)},`,
 		`\tregionSupport: ${formatNumber(parameters.regionSupport)},`,
+		'};',
+	].join('\n');
+	return source.replace(pattern, replacement);
+}
+
+export function replaceRankingDefaults(source: string, weights: ColorWalkRankingWeights) {
+	const pattern =
+		/export const colorWalkRankingDefaults: ColorWalkRankingWeights = \{[\s\S]*?\n\};/;
+	if (!pattern.test(source)) throw new Error('Could not locate Color Walk ranking defaults.');
+	const replacement = [
+		'export const colorWalkRankingDefaults: ColorWalkRankingWeights = {',
+		`\tpresenceWeight: ${formatNumber(weights.presenceWeight)},`,
+		`\tcoherenceWeight: ${formatNumber(weights.coherenceWeight)},`,
+		`\tcolorSeparationWeight: ${formatNumber(weights.colorSeparationWeight)},`,
+		`\trevealImpactWeight: ${formatNumber(weights.revealImpactWeight)},`,
+		`\toverspreadPenaltyStrength: ${formatNumber(weights.overspreadPenaltyStrength)},`,
 		'};',
 	].join('\n');
 	return source.replace(pattern, replacement);

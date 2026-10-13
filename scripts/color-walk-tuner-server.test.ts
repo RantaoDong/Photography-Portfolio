@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { replaceRenderingDefaults } from './color-walk-tuner-server.ts';
+import { replaceRankingDefaults, replaceRenderingDefaults } from './color-walk-tuner-server.ts';
 
 describe('Color Walk tuner default persistence', () => {
 	it('replaces only the shared defaults block with formatted values', () => {
@@ -52,5 +52,35 @@ describe('Color Walk tuner default persistence', () => {
 				regionSupport: 0.45,
 			}),
 		).toThrow(/Could not locate/);
+	});
+});
+
+describe('Color Walk ranking default persistence', () => {
+	it('replaces only the ranking defaults block', () => {
+		const source = [
+			'const before = true;',
+			'export const colorWalkRankingDefaults: ColorWalkRankingWeights = {',
+			'\tpresenceWeight: 1,',
+			'\tcoherenceWeight: 0.3,',
+			'\tcolorSeparationWeight: 0.25,',
+			'\trevealImpactWeight: 0.4,',
+			'\toverspreadPenaltyStrength: 0.35,',
+			'};',
+			'const after = true;',
+		].join('\n');
+
+		const updated = replaceRankingDefaults(source, {
+			presenceWeight: 1.2,
+			coherenceWeight: 0.48,
+			colorSeparationWeight: 0.36,
+			revealImpactWeight: 0.6,
+			overspreadPenaltyStrength: 0.42,
+		});
+
+		expect(updated).toContain('\tpresenceWeight: 1.2,');
+		expect(updated).toContain('\tcoherenceWeight: 0.48,');
+		expect(updated).toContain('\toverspreadPenaltyStrength: 0.42,');
+		expect(updated).toContain('const before = true;');
+		expect(updated).toContain('const after = true;');
 	});
 });

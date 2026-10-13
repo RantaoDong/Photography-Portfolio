@@ -41,6 +41,7 @@ describe('Color Walk saturation falloff', () => {
 	});
 
 	it('uses caller-supplied parameters without changing the shared defaults', () => {
+		const defaultsBefore = { ...colorWalkRenderingDefaults };
 		const custom = {
 			...colorWalkRenderingDefaults,
 			preserveRadius: 4,
@@ -52,7 +53,7 @@ describe('Color Walk saturation falloff', () => {
 		expect(applyColorWalkEmphasis([50, 120, 220], 4, custom)).toEqual([50, 120, 220]);
 		expect(saturationRetentionForDistance(20, custom)).toBe(0.35);
 		expect(brightnessRetentionForDistance(20, custom)).toBe(0.9);
-		expect(colorWalkRenderingDefaults.preserveRadius).toBe(18);
+		expect(colorWalkRenderingDefaults).toEqual(defaultsBefore);
 	});
 
 	it('round-trips the public defaults through the friendly tuner controls', () => {
@@ -74,7 +75,7 @@ describe('Color Walk saturation falloff', () => {
 		expect(parameters.regionSmoothing).toBeCloseTo(colorWalkRenderingDefaults.regionSmoothing);
 		expect(parameters.edgeSensitivity).toBeCloseTo(colorWalkRenderingDefaults.edgeSensitivity);
 		expect(parameters.regionSupport).toBeCloseTo(colorWalkRenderingDefaults.regionSupport);
-		expect(parameters.refinementMode).toBe('pixel');
+		expect(parameters.refinementMode).toBe(colorWalkRenderingDefaults.refinementMode);
 	});
 
 	it('rejects defaults outside the tuner-safe visual ranges', () => {

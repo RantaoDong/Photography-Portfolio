@@ -25,10 +25,10 @@ export interface ColorWalkTunerControls {
 
 export const colorWalkRenderingDefaults: ColorWalkRenderingParameters = {
 	refinementMode: 'edge-aware',
-	preserveRadius: 23.94,
-	fadeEnd: 49.94,
+	preserveRadius: 13.02,
+	fadeEnd: 39.02,
 	falloffSteepness: 2.4,
-	minimumSaturationRetention: 0.24,
+	minimumSaturationRetention: 0.185,
 	minimumBrightnessRetention: 0.856,
 	regionSmoothing: 0.67,
 	edgeSensitivity: 0.72,

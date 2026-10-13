@@ -122,17 +122,27 @@ The debug server binds to `127.0.0.1`, opens in the default browser, and stops w
 not an Astro page and is not included in the public site build. Regenerate the feature file after
 adding, removing, or changing photographs.
 
-## Color Walk effect tuning
+## Color Walk development tool
 
-Start the separate local-only Color Walk renderer tuner:
+Start the separate local-only Color Walk development tool:
 
 ```bash
 npm run color-walk:tune
 ```
 
-The tuner binds to `127.0.0.1`, opens in the default browser, and stops with `Ctrl+C`. It is not an
+The tool binds to `127.0.0.1`, opens in the default browser, and stops with `Ctrl+C`. It is not an
 Astro route and is excluded from the production build. It reads registered gallery photographs but
 never edits `src/gallery/gallery.yaml`.
+
+The tool keeps two concerns in separate views:
+
+- **Effect Tuner** keeps the single-photo workflow for inspecting Original, Raw pixel mask,
+  Refined mask, and Final effect while tuning rendering and region parameters.
+- **Ranking Debug** applies one continuously selected color to the registered library and presents
+  the eligible photographs in ranked visual order. Each card exposes expandable presence,
+  coherence, boundary clarity, color separation, reveal impact, overspread penalty, support ratio,
+  and final-score diagnostics. Five high-level controls tune presence, coherence, color separation,
+  reveal impact, and overspread penalty without mixing ranking controls into the renderer panel.
 
 Use the color wheel or exact color field, choose representative photographs, and adjust the
 human-readable preservation, transition, saturation, brightness, and region controls. The
@@ -155,7 +165,13 @@ The local server validates the values and updates only `colorWalkRenderingDefaul
 `src/color/color-walk-config.ts`. Reset and the Balanced preset then use the newly saved defaults.
 The technical values can also be copied for review.
 
-The tuner and public Color Walk share the same renderer, configuration schema, and default object.
+The Effect Tuner and public Color Walk share the same renderer, rendering schema, and default
+object. Ranking Debug and the public walk call the same `findColorWalkMatches` scoring and sorting
+function; the debugger does not maintain an approximation. Ranking weights live separately in
+`src/color/color-walk-ranking-config.ts`, while rendering and region defaults remain in
+`src/color/color-walk-config.ts`. Ranking slider changes are local previews until **Apply ranking
+defaults** is confirmed; the local server then updates only `colorWalkRankingDefaults`.
+
 Prepared image pixels and perceptual distance data are cached so ordinary slider changes do not
 reload or decode the photograph. The public viewer prepares only the active photograph at a bounded
 1200px long edge, caches each completed photo/color result, and never recomputes either mask when
@@ -175,9 +191,9 @@ implementation, `photo-0001` at 900×1200 took approximately 279ms cold / 195ms 
 approximately 1.05s in the Node benchmark. These figures exclude image decode and are
 device/runtime dependent. The tuner also includes
 **Benchmark active photo**, which measures one-time Lab preparation plus the median edge-mask and
-final Canvas-render costs in the actual browser. Because the measured refinement is still a visible
-one-off cost, the checked-in public default remains `pixel` until the region-aware appearance and
-browser timings are explicitly accepted.
+final Canvas-render costs in the actual browser. The active public refinement mode is always the
+explicit `refinementMode` saved in `colorWalkRenderingDefaults`; changing the comparison switch by
+itself never changes that default.
 
 ## Metadata
 

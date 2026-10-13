@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { rgbToLab } from './color-conversion.ts';
 import { colorWalkConfig } from './color-walk-config.ts';
 import { findColorWalkMatches } from './color-walk-matching.ts';
+import { colorWalkRankingDefaults } from './color-walk-ranking-config.ts';
 import type { RgbColor, SpatialColorCell } from './color-types.ts';
 
 describe('Color Walk matching', () => {
@@ -40,6 +41,37 @@ describe('Color Walk matching', () => {
 		expect(findColorWalkMatches(candidates, [255, 0, 0])).toHaveLength(
 			colorWalkConfig.matching.resultSafetyCap,
 		);
+	});
+
+	it('returns bounded diagnostics from the same default ranking path', () => {
+		const candidates = [candidate('red-detail', [cell(0, 0, [220, 35, 35], 0.8)])];
+		const implicit = findColorWalkMatches(candidates, [255, 0, 0]);
+		const explicit = findColorWalkMatches(candidates, [255, 0, 0], colorWalkRankingDefaults);
+
+		expect(explicit).toEqual(implicit);
+		for (const value of Object.values(implicit[0].diagnostics)) {
+			expect(value).toBeGreaterThanOrEqual(0);
+			expect(value).toBeLessThanOrEqual(1);
+		}
+	});
+
+	it('uses coherence weights to prefer one connected color region', () => {
+		const candidates = [
+			candidate('fragmented', [cell(0, 0, [220, 35, 35], 0.8), cell(3, 3, [220, 35, 35], 0.8)]),
+			candidate('coherent', [cell(0, 0, [220, 35, 35], 0.8), cell(1, 0, [220, 35, 35], 0.8)]),
+		];
+		const weights = {
+			presenceWeight: 0,
+			coherenceWeight: 2,
+			colorSeparationWeight: 0,
+			revealImpactWeight: 0,
+			overspreadPenaltyStrength: 0,
+		};
+
+		const matches = findColorWalkMatches(candidates, [255, 0, 0], weights);
+
+		expect(matches.map((match) => match.id)).toEqual(['coherent', 'fragmented']);
+		expect(matches[0].diagnostics.coherence).toBeGreaterThan(matches[1].diagnostics.coherence);
 	});
 });
 
