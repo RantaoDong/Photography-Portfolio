@@ -1,49 +1,79 @@
 ---
 import 'glightbox/dist/css/glightbox.css';
 import '../styles/glightbox-custom.css';
-import { Image } from 'astro:assets';
 import type { Image as ImageType } from '../data/galleryData';
+import PhotoGridItem from './PhotoGridItem.astro';
 
 interface Props {
 	images: ImageType[];
 	groupByYear?: boolean;
 	reorderWithinGroup?: boolean;
+	progressive?: boolean;
+	batchSize?: number;
 }
 
-const { images, groupByYear = false, reorderWithinGroup = groupByYear } = Astro.props;
+const {
+	images,
+	groupByYear = false,
+	reorderWithinGroup = groupByYear,
+	progressive = false,
+	batchSize = 40,
+} = Astro.props;
+const normalizedBatchSize = Math.max(1, Math.floor(batchSize));
+const batches = progressive
+	? Array.from({ length: Math.ceil(images.length / normalizedBatchSize) }, (_, index) =>
+			images.slice(index * normalizedBatchSize, (index + 1) * normalizedBatchSize),
+		)
+	: [images];
+const initialImages = batches[0] ?? [];
+const deferredBatches = batches.slice(1);
 ---
 
-<section
-	id="photo-grid"
-	class="relative w-full mx-auto overflow-hidden"
-	data-reorder-within-group={reorderWithinGroup ? 'true' : 'false'}
->
+<div data-photo-grid-root data-total-count={images.length}>
+	<section
+		id="photo-grid"
+		class="relative w-full mx-auto overflow-hidden"
+		data-reorder-within-group={reorderWithinGroup ? 'true' : 'false'}
+	>
+		{
+			initialImages.map((image, index) => (
+				<PhotoGridItem {image} {groupByYear} batchIndex={0} photoIndex={index} />
+			))
+		}
+	</section>
+
 	{
-		images.map((image) => (
-			<a
-				href={image.src.src}
-				class="photo-item glightbox absolute transition-transform hover:scale-[1.02] hover:z-10"
-				data-gallery="gallery1"
-				data-type="image"
-				data-width={image.src.width}
-				data-height={image.src.height}
-				data-layout-group={groupByYear ? (image.taxonomy.year?.[0] ?? '__missing__') : '__all__'}
-				data-glightbox={image.description ? `title: ${image.description}` : undefined}
-			>
-				<Image
-					src={image.src}
-					width={960}
-					widths={[480, 960, 1600]}
-					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-					quality={80}
-					format="webp"
-					class="w-full h-full object-contain rounded-sm shadow-sm hover:shadow-lg transition-shadow"
-					alt={image.title || 'Photograph'}
-				/>
-			</a>
-		))
+		deferredBatches.map((batch, deferredIndex) => {
+			const batchIndex = deferredIndex + 1;
+			const startIndex = batchIndex * normalizedBatchSize;
+			return (
+				<template data-photo-grid-batch>
+					{batch.map((image, index) => (
+						<PhotoGridItem {image} {groupByYear} {batchIndex} photoIndex={startIndex + index} />
+					))}
+				</template>
+			);
+		})
 	}
-</section>
+
+	{
+		progressive && images.length > initialImages.length && (
+			<div class="mt-8 flex flex-col items-center gap-2" data-photo-grid-controls>
+				<button
+					type="button"
+					class="px-4 py-2 text-sm text-gray-600 border border-gray-200 transition-colors hover:border-gray-400 hover:text-black focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-black"
+					data-photo-grid-load-more
+					aria-controls="photo-grid"
+				>
+					Load more
+				</button>
+				<span class="text-xs text-gray-400" data-photo-grid-count aria-live="polite">
+					{initialImages.length} / {images.length}
+				</span>
+			</div>
+		)
+	}
+</div>
 
 <script>
 	import '../scripts/photo-grid';

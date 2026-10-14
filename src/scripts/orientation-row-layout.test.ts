@@ -99,6 +99,25 @@ describe('createOrientationRowLayout', () => {
 		expect(secondGroupTop).toBeGreaterThanOrEqual(firstGroupBottom + 10);
 	});
 
+	it('keeps existing photo positions stable when a later batch is appended', () => {
+		const firstBatch = mixedImages.slice(0, 6).map((image) => ({
+			...image,
+			group: '0:2026',
+		}));
+		const secondBatch = mixedImages.slice(6).map((image) => ({
+			...image,
+			group: '1:2025',
+		}));
+		const initial = createOrientationRowLayout(firstBatch, 390, {
+			reorderWithinGroup: true,
+		});
+		const expanded = createOrientationRowLayout([...firstBatch, ...secondBatch], 390, {
+			reorderWithinGroup: true,
+		});
+
+		expect(expanded.boxes.slice(0, firstBatch.length)).toEqual(initial.boxes);
+	});
+
 	it('is deterministic and responsive', () => {
 		const options = { reorderWithinGroup: true };
 		const wide = createOrientationRowLayout(mixedImages, 1200, options);
@@ -108,6 +127,58 @@ describe('createOrientationRowLayout', () => {
 		expect(repeated).toEqual(wide);
 		expect(narrow.boxes).not.toEqual(wide.boxes);
 		expect(narrow.boxes.every((box) => box.left + box.width <= 480.000001)).toBe(true);
+	});
+
+	it.each([320, 375, 390, 430])(
+		'keeps the same orientation-aware layout while fitting several thumbnails at %ipx',
+		(containerWidth) => {
+			const mobileImages = Array.from({ length: 12 }, () => ({ width: 1600, height: 900 }));
+			const layout = createOrientationRowLayout(mobileImages, containerWidth, {
+				reorderWithinGroup: true,
+			});
+			const rows = [...Map.groupBy(layout.boxes, (box) => box.top).values()];
+
+			expect(rows.length).toBeGreaterThan(1);
+			expect(rows.every((row) => row.length >= 3)).toBe(true);
+			expect(
+				layout.boxes.every(
+					(box) =>
+						box.left >= 0 &&
+						box.left + box.width <= containerWidth + 0.000001 &&
+						Math.abs(box.width / box.height - 16 / 9) < 0.000001,
+				),
+			).toBe(true);
+		},
+	);
+
+	it.each([320, 375, 390, 430, 768, 1200])(
+		'keeps mixed-orientation photographs bounded and uncropped at %ipx',
+		(containerWidth) => {
+			const layout = createOrientationRowLayout(mixedImages, containerWidth, {
+				reorderWithinGroup: true,
+			});
+
+			layout.boxes.forEach((box, index) => {
+				expect(box.left).toBeGreaterThanOrEqual(0);
+				expect(box.left + box.width).toBeLessThanOrEqual(containerWidth + 0.000001);
+				expect(box.width / box.height).toBeCloseTo(
+					mixedImages[index].width / mixedImages[index].height,
+					8,
+				);
+			});
+		},
+	);
+
+	it('uses compact mobile gaps without changing the desktop gap', () => {
+		const grouped = [
+			{ width: 1600, height: 900, group: 'first' },
+			{ width: 1600, height: 900, group: 'second' },
+		];
+		const mobile = createOrientationRowLayout(grouped, 360);
+		const desktop = createOrientationRowLayout(grouped, 1200);
+
+		expect(mobile.boxes[1].top - (mobile.boxes[0].top + mobile.boxes[0].height)).toBeCloseTo(4);
+		expect(desktop.boxes[1].top - (desktop.boxes[0].top + desktop.boxes[0].height)).toBeCloseTo(10);
 	});
 
 	it('prioritizes comparable photo areas and expands every row to full width', () => {

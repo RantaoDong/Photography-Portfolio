@@ -31,7 +31,9 @@ interface IndexedImage {
 	orientation: Orientation;
 }
 
-const GAP = 10;
+const DESKTOP_GAP = 10;
+const MOBILE_GAP = 4;
+const MOBILE_BREAKPOINT = 640;
 const MAX_AREA_SCALE = 1.25;
 
 /**
@@ -50,6 +52,7 @@ export function createOrientationRowLayout(
 	}
 
 	const boxes: RowLayoutBox[] = new Array(images.length);
+	const gap = gapFor(containerWidth);
 	let top = 0;
 
 	for (const group of splitIntoConsecutiveGroups(images)) {
@@ -73,7 +76,7 @@ export function createOrientationRowLayout(
 					: calculateRowHeight(row, containerWidth);
 			const contentWidth =
 				row.reduce((sum, item) => sum + rowHeight * item.aspectRatio, 0) +
-				GAP * Math.max(0, row.length - 1);
+				gap * Math.max(0, row.length - 1);
 			let left = Math.max(0, (containerWidth - contentWidth) / 2);
 
 			for (const item of row) {
@@ -85,16 +88,16 @@ export function createOrientationRowLayout(
 					width,
 					height: rowHeight,
 				};
-				left += width + GAP;
+				left += width + gap;
 			}
 
-			top += rowHeight + GAP;
+			top += rowHeight + gap;
 		}
 	}
 
 	return {
 		boxes,
-		containerHeight: Math.max(0, top - GAP),
+		containerHeight: Math.max(0, top - gap),
 	};
 }
 
@@ -160,7 +163,7 @@ function calculateRowCost(row: IndexedImage[], ratioSum: number, containerWidth:
 	const count = row.length;
 	const targetArea = targetAreaFor(containerWidth);
 	const displayedHeight = calculateTargetConstrainedHeight(row, containerWidth);
-	const filledWidth = ratioSum * displayedHeight + GAP * (count - 1);
+	const filledWidth = ratioSum * displayedHeight + gapFor(containerWidth) * (count - 1);
 	const fillRatio = Math.min(1, filledWidth / containerWidth);
 	const areaError = row.reduce((sum, item) => {
 		const area = item.aspectRatio * displayedHeight ** 2;
@@ -175,7 +178,7 @@ function calculateRowCost(row: IndexedImage[], ratioSum: number, containerWidth:
 }
 
 function calculateRowHeight(row: IndexedImage[], containerWidth: number) {
-	const gapWidth = GAP * Math.max(0, row.length - 1);
+	const gapWidth = gapFor(containerWidth) * Math.max(0, row.length - 1);
 	const availableWidth = Math.max(1, containerWidth - gapWidth);
 	const ratioSum = row.reduce((sum, item) => sum + item.aspectRatio, 0);
 
@@ -196,14 +199,18 @@ function calculateTargetConstrainedHeight(row: IndexedImage[], containerWidth: n
 }
 
 function targetAreaFor(containerWidth: number) {
-	// A narrow screen needs a larger share of its width per photograph; wider
-	// screens can fit several photographs in a row. Both modes still feed the
-	// same area objective for portrait and landscape images.
+	// Narrow screens intentionally use small thumbnails so the same row-building
+	// algorithm can retain its multi-photo rhythm on a phone. Both modes still
+	// feed the same area objective for portrait and landscape images.
 	const targetEdge =
-		containerWidth <= 640
-			? Math.min(340, Math.max(160, containerWidth * 0.58))
+		containerWidth <= MOBILE_BREAKPOINT
+			? Math.min(112, Math.max(72, containerWidth * 0.24))
 			: Math.min(300, Math.max(160, containerWidth / 3.6));
 	return targetEdge ** 2;
+}
+
+function gapFor(containerWidth: number) {
+	return containerWidth <= MOBILE_BREAKPOINT ? MOBILE_GAP : DESKTOP_GAP;
 }
 
 function splitIntoConsecutiveGroups(images: RowImageInput[]) {

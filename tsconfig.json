@@ -10,6 +10,12 @@
 		"types": ["astro/client"]
 	},
 	"extends": "astro/tsconfigs/strict",
-	"include": [".astro/types.d.ts", "src/**/*", "scripts/**/*", "color-walk-tuner/**/*"],
+	"include": [
+		".astro/types.d.ts",
+		"src/**/*",
+		"scripts/**/*",
+		"color-walk-tuner/**/*",
+		"color-path-debug/**/*"
+	],
 	"exclude": ["dist"]
 }

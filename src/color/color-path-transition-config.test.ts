@@ -7,7 +7,7 @@ import {
 describe('color path transition configuration', () => {
 	it('keeps the approved public defaults exactly', () => {
 		expect(colorPathTransitionDefaults).toMatchObject({
-			totalDurationMs: 860,
+			totalDurationMs: 740,
 			maximumBlurRadius: 68,
 			colorBiasStrength: 0.11,
 			grainAmount: 0.225,

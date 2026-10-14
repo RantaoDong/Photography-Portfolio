@@ -17,7 +17,7 @@ export function setupGallery() {
 		imageLinks.map((link) => ({
 			width: Number(link.dataset.width),
 			height: Number(link.dataset.height),
-			group: link.dataset.layoutGroup,
+			group: `${link.dataset.layoutBatch ?? '0'}:${link.dataset.layoutGroup ?? '__all__'}`,
 		})),
 		container.clientWidth || window.innerWidth,
 		{ reorderWithinGroup: container.dataset.reorderWithinGroup === 'true' },
@@ -34,6 +34,32 @@ export function setupGallery() {
 		width: 'auto',
 		height: 'auto',
 	});
+
+	const root = container.closest<HTMLElement>('[data-photo-grid-root]');
+	if (root) updateProgressiveControls(root, imageLinks.length);
+}
+
+function loadNextBatch(button: HTMLButtonElement) {
+	const root = button.closest<HTMLElement>('[data-photo-grid-root]');
+	const container = root?.querySelector<HTMLElement>('#photo-grid');
+	const template = root?.querySelector<HTMLTemplateElement>('template[data-photo-grid-batch]');
+	if (!root || !container || !template) return;
+
+	container.append(template.content.cloneNode(true));
+	template.remove();
+	setupGallery();
+	button.focus({ preventScroll: true });
+}
+
+function updateProgressiveControls(root: HTMLElement, visibleCount: number) {
+	const controls = root.querySelector<HTMLElement>('[data-photo-grid-controls]');
+	if (!controls) return;
+
+	const hasMore = Boolean(root.querySelector('template[data-photo-grid-batch]'));
+	const totalCount = Number(root.dataset.totalCount) || visibleCount;
+	const count = controls.querySelector<HTMLElement>('[data-photo-grid-count]');
+	controls.hidden = !hasMore;
+	if (count) count.textContent = `${visibleCount} / ${totalCount}`;
 }
 
 function applyImagesStyleBasedOnLayout(imageLinks: HTMLElement[], layout: RowLayout) {
@@ -61,6 +87,11 @@ if (typeof window !== 'undefined') {
 
 	setupGallery();
 	window.addEventListener('resize', debouncedSetup);
+	document.addEventListener('click', (event) => {
+		if (!(event.target instanceof Element)) return;
+		const button = event.target.closest<HTMLButtonElement>('[data-photo-grid-load-more]');
+		if (button) loadNextBatch(button);
+	});
 }
 
 // Debounce helper

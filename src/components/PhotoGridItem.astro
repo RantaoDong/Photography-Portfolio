@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import type { Image as GalleryImage } from '../data/galleryData';
+
+interface Props {
+	image: GalleryImage;
+	groupByYear: boolean;
+	batchIndex: number;
+	photoIndex: number;
+}
+
+const { image, groupByYear, batchIndex, photoIndex } = Astro.props;
+---
+
+<a
+	href={image.src.src}
+	class="photo-item glightbox absolute transition-transform hover:scale-[1.02] hover:z-10"
+	data-gallery="gallery1"
+	data-type="image"
+	data-width={image.src.width}
+	data-height={image.src.height}
+	data-layout-group={groupByYear ? (image.taxonomy.year?.[0] ?? '__missing__') : '__all__'}
+	data-layout-batch={batchIndex}
+	data-photo-index={photoIndex}
+	data-glightbox={image.description ? `title: ${image.description}` : undefined}
+>
+	<Image
+		src={image.src}
+		width={960}
+		widths={[240, 480, 960, 1600]}
+		sizes="(max-width: 640px) 30vw, (max-width: 1024px) 50vw, 33vw"
+		quality={80}
+		format="webp"
+		loading="lazy"
+		decoding="async"
+		class="w-full h-full object-contain rounded-sm shadow-sm hover:shadow-lg transition-shadow"
+		alt={image.title || 'Photograph'}
+	/>
+</a>
