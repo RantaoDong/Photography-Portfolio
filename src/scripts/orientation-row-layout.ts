@@ -35,6 +35,13 @@ const DESKTOP_GAP = 10;
 const MOBILE_GAP = 4;
 const MOBILE_BREAKPOINT = 640;
 const MAX_AREA_SCALE = 1.25;
+const PORTRAIT_ORPHAN_REPAIR = {
+	maximumSourceDistance: 3,
+	minimumDonorRowSize: 3,
+	minimumHeightScale: 0.65,
+	maximumHeightScale: 2,
+	maximumContainerHeightRatio: 0.58,
+} as const;
 
 /**
  * Builds deterministic, orientation-aware rows. Gallery groups may be locally
@@ -65,9 +72,13 @@ export function createOrientationRowLayout(
 				orientation: aspectRatio >= 1 ? 'landscape' : 'portrait',
 			} satisfies IndexedImage;
 		});
-		const rows = options.reorderWithinGroup
+		const normalRows = options.reorderWithinGroup
 			? createBalancedRowsInSourceOrder(items, containerWidth)
 			: createStableRows(items, containerWidth);
+		const rows =
+			options.expandRowsToFullWidth === false
+				? normalRows
+				: repairPortraitOrphanRows(normalRows, containerWidth);
 
 		for (const row of rows) {
 			const rowHeight =
@@ -99,6 +110,63 @@ export function createOrientationRowLayout(
 		boxes,
 		containerHeight: Math.max(0, top - gap),
 	};
+}
+
+function repairPortraitOrphanRows(rows: IndexedImage[][], containerWidth: number) {
+	const repairedRows = rows.map((row) => [...row]);
+	const orphanPortraits = repairedRows
+		.filter((row) => row.length === 1 && row[0].orientation === 'portrait')
+		.map((row) => row[0]);
+
+	for (const portrait of orphanPortraits) {
+		const orphanRowIndex = repairedRows.findIndex((row) => row.length === 1 && row[0] === portrait);
+		if (orphanRowIndex < 0) continue;
+
+		const candidate = repairedRows
+			.flatMap((row, rowIndex) =>
+				row.length >= PORTRAIT_ORPHAN_REPAIR.minimumDonorRowSize
+					? row
+							.filter((item) => item.orientation === 'landscape')
+							.map((item) => ({ item, rowIndex }))
+					: [],
+			)
+			.filter(
+				({ item }) =>
+					Math.abs(item.index - portrait.index) <= PORTRAIT_ORPHAN_REPAIR.maximumSourceDistance,
+			)
+			.filter(({ item }) => isReasonablePortraitPair([portrait, item], containerWidth))
+			.sort((first, second) => {
+				const firstDistance = Math.abs(first.item.index - portrait.index);
+				const secondDistance = Math.abs(second.item.index - portrait.index);
+				if (firstDistance !== secondDistance) return firstDistance - secondDistance;
+				const firstIsAhead = first.item.index > portrait.index ? 0 : 1;
+				const secondIsAhead = second.item.index > portrait.index ? 0 : 1;
+				return firstIsAhead - secondIsAhead;
+			})[0];
+
+		if (!candidate) continue;
+
+		repairedRows[candidate.rowIndex] = repairedRows[candidate.rowIndex].filter(
+			(item) => item !== candidate.item,
+		);
+		repairedRows[orphanRowIndex] = [portrait, candidate.item].sort(
+			(first, second) => first.index - second.index,
+		);
+	}
+
+	return repairedRows
+		.filter((row) => row.length > 0)
+		.sort((first, second) => first[0].index - second[0].index);
+}
+
+function isReasonablePortraitPair(row: IndexedImage[], containerWidth: number) {
+	const rowHeight = calculateRowHeight(row, containerWidth);
+	const targetEdge = targetEdgeFor(containerWidth);
+	return (
+		rowHeight >= targetEdge * PORTRAIT_ORPHAN_REPAIR.minimumHeightScale &&
+		rowHeight <= targetEdge * PORTRAIT_ORPHAN_REPAIR.maximumHeightScale &&
+		rowHeight <= containerWidth * PORTRAIT_ORPHAN_REPAIR.maximumContainerHeightRatio
+	);
 }
 
 function createBalancedRowsInSourceOrder(items: IndexedImage[], containerWidth: number) {
@@ -202,11 +270,13 @@ function targetAreaFor(containerWidth: number) {
 	// Narrow screens intentionally use small thumbnails so the same row-building
 	// algorithm can retain its multi-photo rhythm on a phone. Both modes still
 	// feed the same area objective for portrait and landscape images.
-	const targetEdge =
-		containerWidth <= MOBILE_BREAKPOINT
-			? Math.min(112, Math.max(72, containerWidth * 0.24))
-			: Math.min(300, Math.max(160, containerWidth / 3.6));
-	return targetEdge ** 2;
+	return targetEdgeFor(containerWidth) ** 2;
+}
+
+function targetEdgeFor(containerWidth: number) {
+	return containerWidth <= MOBILE_BREAKPOINT
+		? Math.min(112, Math.max(72, containerWidth * 0.24))
+		: Math.min(300, Math.max(160, containerWidth / 3.6));
 }
 
 function gapFor(containerWidth: number) {

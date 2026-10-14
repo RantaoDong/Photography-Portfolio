@@ -99,6 +99,89 @@ describe('createOrientationRowLayout', () => {
 		expect(secondGroupTop).toBeGreaterThanOrEqual(firstGroupBottom + 10);
 	});
 
+	it('repairs a single portrait row with the nearest local landscape candidate', () => {
+		const images: RowImageInput[] = [
+			{ width: 1600, height: 900 },
+			{ width: 800, height: 1200 },
+			{ width: 1600, height: 900 },
+			{ width: 1600, height: 900 },
+			{ width: 1600, height: 900 },
+		];
+		const layout = createOrientationRowLayout(images, 1200, {
+			reorderWithinGroup: true,
+		});
+		const rows = [
+			...Map.groupBy(
+				layout.boxes.map((box, index) => ({ ...box, index })),
+				(box) => box.top,
+			).values(),
+		];
+		const [mixedRow] = rows.filter(
+			(row) =>
+				new Set(row.map((box) => (box.aspectRatio >= 1 ? 'landscape' : 'portrait'))).size > 1,
+		);
+
+		expect(mixedRow.map((box) => box.index)).toEqual([1, 2]);
+		expect(mixedRow[0].height).toBeCloseTo(mixedRow[1].height, 8);
+		expect(mixedRow[0].left).toBeCloseTo(0, 8);
+		expect(mixedRow[1].left + mixedRow[1].width).toBeCloseTo(1200, 8);
+		expect(mixedRow[0].width + 10 + mixedRow[1].width).toBeCloseTo(1200, 8);
+	});
+
+	it('does not pair a portrait across a year boundary', () => {
+		const images: RowImageInput[] = [
+			{ width: 800, height: 1200, group: '2026' },
+			...Array.from({ length: 4 }, () => ({ width: 1600, height: 900, group: '2025' })),
+		];
+		const layout = createOrientationRowLayout(images, 1200, {
+			reorderWithinGroup: true,
+		});
+		const portraitRow = layout.boxes.filter((box) => box.top === layout.boxes[0].top);
+
+		expect(portraitRow).toHaveLength(1);
+		expect(portraitRow[0].aspectRatio).toBeLessThan(1);
+	});
+
+	it('keeps single-landscape rows and unreasonable portrait pairings unchanged', () => {
+		const singlePair = createOrientationRowLayout(
+			[
+				{ width: 800, height: 1200 },
+				{ width: 1600, height: 900 },
+			],
+			1200,
+			{ reorderWithinGroup: true },
+		);
+		expect(singlePair.boxes[0].top).not.toBe(singlePair.boxes[1].top);
+
+		const unreasonable = createOrientationRowLayout(
+			[
+				{ width: 800, height: 1200 },
+				...Array.from({ length: 4 }, () => ({ width: 5000, height: 500 })),
+			],
+			1200,
+			{ reorderWithinGroup: true },
+		);
+		const portraitRow = unreasonable.boxes.filter((box) => box.top === unreasonable.boxes[0].top);
+		expect(portraitRow).toHaveLength(1);
+	});
+
+	it('does not apply the gallery fallback to target-constrained Explore layouts', () => {
+		const images: RowImageInput[] = [
+			{ width: 1600, height: 900 },
+			{ width: 800, height: 1200 },
+			{ width: 1600, height: 900 },
+			{ width: 1600, height: 900 },
+			{ width: 1600, height: 900 },
+		];
+		const layout = createOrientationRowLayout(images, 1200, {
+			reorderWithinGroup: true,
+			expandRowsToFullWidth: false,
+		});
+		const portraitRow = layout.boxes.filter((box) => box.top === layout.boxes[1].top);
+
+		expect(portraitRow).toHaveLength(1);
+	});
+
 	it('keeps existing photo positions stable when a later batch is appended', () => {
 		const firstBatch = mixedImages.slice(0, 6).map((image) => ({
 			...image,
