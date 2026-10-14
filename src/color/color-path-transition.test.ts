@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { getColorPathTransitionFrame, getContainedImageBounds } from './color-path-transition.ts';
+import {
+	getColorPathRenderScale,
+	getColorPathTransitionFrame,
+	getContainedImageBounds,
+} from './color-path-transition.ts';
 
 const current: [number, number, number] = [255, 0, 0];
 const next: [number, number, number] = [0, 0, 255];
@@ -16,11 +20,21 @@ describe('color path transition timeline', () => {
 		expect(blurred.grainStrength).toBeGreaterThan(0);
 	});
 
+	it('holds a fully abstract target before the late reveal', () => {
+		const held = getColorPathTransitionFrame(0.75, current, next);
+		expect(held.currentSharp).toBe(0);
+		expect(held.currentBlurred).toBe(0);
+		expect(held.nextBlurred).toBe(1);
+		expect(held.nextSharp).toBe(0);
+	});
+
 	it('interpolates both blurred structure and path color through the middle', () => {
 		const middle = getColorPathTransitionFrame(0.48, current, next);
-		expect(middle.currentBlurred).toBeCloseTo(0.5);
-		expect(middle.nextBlurred).toBeCloseTo(0.5);
-		expect(middle.biasColor).toEqual([128, 0, 128]);
+		expect(middle.currentBlurred).toBeGreaterThan(0);
+		expect(middle.nextBlurred).toBeGreaterThan(0);
+		expect(middle.currentBlurred + middle.nextBlurred).toBeCloseTo(1);
+		expect(middle.biasColor[0]).toBeGreaterThan(0);
+		expect(middle.biasColor[2]).toBeGreaterThan(0);
 	});
 
 	it('finishes on a clear next photograph without color bias', () => {
@@ -44,5 +58,10 @@ describe('color path transition timeline', () => {
 			width: 1200,
 			height: 675,
 		});
+	});
+
+	it('bounds high-density mobile rendering without changing the timeline', () => {
+		expect(getColorPathRenderScale(390, 520, 3)).toBe(1.5);
+		expect(getColorPathRenderScale(1200, 800, 2)).toBe(0.8);
 	});
 });

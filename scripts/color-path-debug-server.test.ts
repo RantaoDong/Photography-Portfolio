@@ -17,6 +17,8 @@ describe('Color Path Debug default saving', () => {
 		};
 		const updated = replaceTransitionDefaults(source, parameters);
 		expect(updated).toContain('\ttotalDurationMs: 740,');
+		expect(updated).toContain('\tabstractHold: 0.54,');
+		expect(updated).toContain('\trevealStart: 0.82,');
 		expect(updated).toContain('\tspreadIrregularity: 0.52,');
 		expect(updated).toContain('const before = true;');
 		expect(updated).toContain('const after = true;');

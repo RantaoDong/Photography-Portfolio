@@ -50,6 +50,10 @@ interface PreparedPhoto {
 	bounds: ColorPathImageBounds;
 }
 
+const maximumRenderPixelRatio = 1.5;
+const abstractSampleSizeCssPixels = 5;
+const abstractBlendPortion = 0.72;
+
 export class ColorPathImagePreloader {
 	private readonly cache = new Map<string, Promise<HTMLImageElement>>();
 
@@ -69,13 +73,16 @@ export class ColorPathImagePreloader {
 
 export function createColorPathTransitionRenderer(
 	input: Omit<ColorPathTransitionInput, 'parameters' | 'direction'>,
+	parameters?: Partial<ColorPathTransitionParameters>,
 ): ColorPathTransitionRenderer | null {
 	const { canvas, currentImage, nextImage, currentColor, nextColor } = input;
 	const bounds = canvas.parentElement?.getBoundingClientRect() ?? canvas.getBoundingClientRect();
 	if (bounds.width <= 0 || bounds.height <= 0) return null;
-	const renderScale = Math.min(
+	const renderScale = getColorPathRenderScale(
+		bounds.width,
+		bounds.height,
 		window.devicePixelRatio || 1,
-		colorPathTransitionDefaults.maximumRenderDimension / Math.max(bounds.width, bounds.height),
+		resolveColorPathTransitionParameters(parameters).maximumRenderDimension,
 	);
 	canvas.width = Math.max(1, Math.round(bounds.width * renderScale));
 	canvas.height = Math.max(1, Math.round(bounds.height * renderScale));
@@ -106,12 +113,14 @@ export function createColorPathTransitionRenderer(
 				direction === 'forward' ? 'current' : 'next',
 				source.sharp,
 				blurRadius,
+				renderScale,
 			);
 			const targetBlurred = getBlurredSurface(
 				blurredCache,
 				direction === 'forward' ? 'next' : 'current',
 				target.sharp,
 				blurRadius,
+				renderScale,
 			);
 
 			context.clearRect(0, 0, canvas.width, canvas.height);
@@ -167,7 +176,7 @@ export function createColorPathTransitionRenderer(
 
 export async function runColorPathTransition(input: ColorPathTransitionInput) {
 	const parameters = resolveColorPathTransitionParameters(input.parameters);
-	const renderer = createColorPathTransitionRenderer(input);
+	const renderer = createColorPathTransitionRenderer(input, parameters);
 	if (!renderer) return;
 	const direction = input.direction ?? 'forward';
 	renderer.render(0, parameters, direction);
@@ -197,16 +206,12 @@ export function getColorPathTransitionFrame(
 	parameters: ColorPathTransitionParameters = colorPathTransitionDefaults,
 ): ColorPathTransitionFrame {
 	const value = clamp(progress, 0, 1);
-	const {
-		colorBiasStrength,
-		grainAmount,
-		middleInterpolationStart,
-		middleInterpolationEnd,
-		sharpeningStart,
-	} = parameters;
+	const { colorBiasStrength, grainAmount, abstractHold, revealStart } = parameters;
+	const abstractStart = revealStart - abstractHold;
+	const targetAbstractAt = abstractStart + abstractHold * abstractBlendPortion;
 	const geometryProgress = ease(value);
-	if (value <= middleInterpolationStart) {
-		const phase = ease(value / middleInterpolationStart);
+	if (value <= abstractStart) {
+		const phase = ease(value / abstractStart);
 		return {
 			currentSharp: 1 - phase,
 			currentBlurred: phase,
@@ -218,10 +223,8 @@ export function getColorPathTransitionFrame(
 			geometryProgress,
 		};
 	}
-	if (value <= middleInterpolationEnd) {
-		const phase = ease(
-			(value - middleInterpolationStart) / (middleInterpolationEnd - middleInterpolationStart),
-		);
+	if (value <= targetAbstractAt) {
+		const phase = ease((value - abstractStart) / (targetAbstractAt - abstractStart));
 		return {
 			currentSharp: 0,
 			currentBlurred: 1 - phase,
@@ -233,7 +236,7 @@ export function getColorPathTransitionFrame(
 			geometryProgress,
 		};
 	}
-	if (value < sharpeningStart) {
+	if (value < revealStart) {
 		return {
 			currentSharp: 0,
 			currentBlurred: 0,
@@ -245,7 +248,7 @@ export function getColorPathTransitionFrame(
 			geometryProgress,
 		};
 	}
-	const phase = ease((value - sharpeningStart) / (1 - sharpeningStart));
+	const phase = ease((value - revealStart) / (1 - revealStart));
 	return {
 		currentSharp: 0,
 		currentBlurred: 0,
@@ -281,6 +284,19 @@ export function getContainedImageBounds(
 	};
 }
 
+export function getColorPathRenderScale(
+	width: number,
+	height: number,
+	devicePixelRatio: number,
+	maximumRenderDimension = colorPathTransitionDefaults.maximumRenderDimension,
+) {
+	return Math.min(
+		Math.max(1, devicePixelRatio),
+		maximumRenderPixelRatio,
+		maximumRenderDimension / Math.max(width, height),
+	);
+}
+
 function preparePhoto(
 	image: HTMLImageElement,
 	width: number,
@@ -301,16 +317,30 @@ function getBlurredSurface(
 	key: string,
 	source: HTMLCanvasElement,
 	radius: number,
+	renderScale: number,
 ) {
-	const cacheKey = `${key}:${Math.round(radius * 10)}`;
+	const sampleScale = Math.min(1, 1 / (renderScale * abstractSampleSizeCssPixels));
+	const cacheKey = `${key}:${Math.round(radius * 10)}:${Math.round(sampleScale * 1000)}`;
 	const cached = cache.get(cacheKey);
 	if (cached) return cached;
+	const sampled = createCanvas(
+		Math.max(1, Math.round(source.width * sampleScale)),
+		Math.max(1, Math.round(source.height * sampleScale)),
+	);
+	const sampledContext = sampled.getContext('2d');
+	if (sampledContext) {
+		sampledContext.imageSmoothingEnabled = true;
+		sampledContext.imageSmoothingQuality = 'high';
+		sampledContext.filter = `blur(${Math.max(1, radius * sampleScale)}px)`;
+		sampledContext.drawImage(source, 0, 0, sampled.width, sampled.height);
+		sampledContext.filter = 'none';
+	}
 	const surface = createCanvas(source.width, source.height);
 	const context = surface.getContext('2d');
 	if (context) {
-		context.filter = `blur(${radius}px)`;
-		context.drawImage(source, 0, 0);
-		context.filter = 'none';
+		context.imageSmoothingEnabled = true;
+		context.imageSmoothingQuality = 'high';
+		context.drawImage(sampled, 0, 0, surface.width, surface.height);
 	}
 	cache.set(cacheKey, surface);
 	return surface;
@@ -480,8 +510,8 @@ function loadImage(src: string) {
 				if (typeof image.decode === 'function') {
 					void image
 						.decode()
-						.catch(() => undefined)
-						.finally(() => resolve(image));
+						.then(() => resolve(image))
+						.catch(reject);
 				} else resolve(image);
 			},
 			{ once: true },

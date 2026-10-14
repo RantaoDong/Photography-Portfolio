@@ -6,9 +6,8 @@ export interface ColorPathTransitionParameters {
 	grainScale: number;
 	spreadIrregularity: number;
 	spreadSoftness: number;
-	middleInterpolationStart: number;
-	middleInterpolationEnd: number;
-	sharpeningStart: number;
+	abstractHold: number;
+	revealStart: number;
 	maximumRenderDimension: number;
 }
 
@@ -20,9 +19,8 @@ export const colorPathTransitionDefaults: ColorPathTransitionParameters = {
 	grainScale: 2.5,
 	spreadIrregularity: 0,
 	spreadSoftness: 0.38,
-	middleInterpolationStart: 0.28,
-	middleInterpolationEnd: 0.68,
-	sharpeningStart: 0.72,
+	abstractHold: 0.54,
+	revealStart: 0.82,
 	maximumRenderDimension: 960,
 };
 
@@ -36,15 +34,11 @@ export function validateColorPathTransitionParameters(
 	assertRange(value.grainScale, 1, 12, 'grainScale');
 	assertRange(value.spreadIrregularity, 0, 1, 'spreadIrregularity');
 	assertRange(value.spreadSoftness, 0.01, 0.4, 'spreadSoftness');
-	assertRange(value.middleInterpolationStart, 0.05, 0.6, 'middleInterpolationStart');
-	assertRange(value.middleInterpolationEnd, 0.4, 0.9, 'middleInterpolationEnd');
-	assertRange(value.sharpeningStart, 0.5, 0.95, 'sharpeningStart');
+	assertRange(value.abstractHold, 0.12, 0.8, 'abstractHold');
+	assertRange(value.revealStart, 0.35, 0.95, 'revealStart');
 	assertRange(value.maximumRenderDimension, 320, 2000, 'maximumRenderDimension');
-	if (value.middleInterpolationStart >= value.middleInterpolationEnd) {
-		throw new Error('middleInterpolationStart must be before middleInterpolationEnd.');
-	}
-	if (value.middleInterpolationEnd > value.sharpeningStart) {
-		throw new Error('middleInterpolationEnd must not be after sharpeningStart.');
+	if (value.revealStart - value.abstractHold < 0.08) {
+		throw new Error('abstractHold must leave time for the current photograph to lose detail.');
 	}
 	return value;
 }

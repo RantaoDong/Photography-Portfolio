@@ -146,14 +146,10 @@ function readTransitionParameters(value: unknown): ColorPathTransitionParameters
 		colorBiasStrength: readNumber(candidate.colorBiasStrength, 'colorBiasStrength'),
 		grainAmount: readNumber(candidate.grainAmount, 'grainAmount'),
 		grainScale: readNumber(candidate.grainScale, 'grainScale'),
+		abstractHold: readNumber(candidate.abstractHold, 'abstractHold'),
+		revealStart: readNumber(candidate.revealStart, 'revealStart'),
 		spreadIrregularity: readNumber(candidate.spreadIrregularity, 'spreadIrregularity'),
 		spreadSoftness: readNumber(candidate.spreadSoftness, 'spreadSoftness'),
-		middleInterpolationStart: readNumber(
-			candidate.middleInterpolationStart,
-			'middleInterpolationStart',
-		),
-		middleInterpolationEnd: readNumber(candidate.middleInterpolationEnd, 'middleInterpolationEnd'),
-		sharpeningStart: readNumber(candidate.sharpeningStart, 'sharpeningStart'),
 		maximumRenderDimension: readNumber(candidate.maximumRenderDimension, 'maximumRenderDimension'),
 	};
 }
@@ -187,11 +183,10 @@ export function replaceTransitionDefaults(
 		`\tcolorBiasStrength: ${formatNumber(parameters.colorBiasStrength)},`,
 		`\tgrainAmount: ${formatNumber(parameters.grainAmount)},`,
 		`\tgrainScale: ${formatNumber(parameters.grainScale)},`,
+		`\tabstractHold: ${formatNumber(parameters.abstractHold)},`,
+		`\trevealStart: ${formatNumber(parameters.revealStart)},`,
 		`\tspreadIrregularity: ${formatNumber(parameters.spreadIrregularity)},`,
 		`\tspreadSoftness: ${formatNumber(parameters.spreadSoftness)},`,
-		`\tmiddleInterpolationStart: ${formatNumber(parameters.middleInterpolationStart)},`,
-		`\tmiddleInterpolationEnd: ${formatNumber(parameters.middleInterpolationEnd)},`,
-		`\tsharpeningStart: ${formatNumber(parameters.sharpeningStart)},`,
 		`\tmaximumRenderDimension: ${formatNumber(parameters.maximumRenderDimension)},`,
 		'};',
 	].join('\n');

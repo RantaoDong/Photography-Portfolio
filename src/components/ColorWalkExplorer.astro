@@ -212,6 +212,8 @@ const { photos } = Astro.props;
 		min-height: 0;
 		cursor: pointer;
 		touch-action: pan-y;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
 		user-select: none;
 	}
 
@@ -228,6 +230,9 @@ const { photos } = Astro.props;
 		min-width: 0;
 		min-height: 0;
 		object-fit: contain;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	.photo-surface canvas[hidden],

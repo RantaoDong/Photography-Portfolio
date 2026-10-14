@@ -40,7 +40,9 @@ interface ParameterDefinition {
 		| 'grainAmount'
 		| 'grainScale'
 		| 'spreadIrregularity'
-		| 'spreadSoftness';
+		| 'spreadSoftness'
+		| 'abstractHold'
+		| 'revealStart';
 	label: string;
 	minimum: number;
 	maximum: number;
@@ -56,6 +58,22 @@ const parameterDefinitions: ParameterDefinition[] = [
 		maximum: 1600,
 		step: 20,
 		format: (value) => `${Math.round(value)} ms`,
+	},
+	{
+		key: 'abstractHold',
+		label: 'Abstract hold',
+		minimum: 0.2,
+		maximum: 0.62,
+		step: 0.01,
+		format: (value) => `${Math.round(value * 100)}%`,
+	},
+	{
+		key: 'revealStart',
+		label: 'Reveal start',
+		minimum: 0.72,
+		maximum: 0.92,
+		step: 0.01,
+		format: (value) => `${Math.round(value * 100)}%`,
 	},
 	{
 		key: 'maximumBlurRadius',
@@ -441,6 +459,8 @@ function renderParameterValues() {
 			colorBiasStrength: parameters.colorBiasStrength,
 			grainAmount: parameters.grainAmount,
 			grainScale: parameters.grainScale,
+			abstractHold: parameters.abstractHold,
+			revealStart: parameters.revealStart,
 			spreadIrregularity: parameters.spreadIrregularity,
 			spreadSoftness: parameters.spreadSoftness,
 		},

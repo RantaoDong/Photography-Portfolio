@@ -134,7 +134,9 @@ until an edited draft path is confirmed again.
 Previous/Next navigation uses a fixed, contain-fitted photo stage. Its Canvas transition removes
 detail from the current photograph, shifts a restrained color bias between the two corresponding
 path positions while preserving broad spatial color regions, then restores detail in the next
-photograph. Adjacent images are preloaded, overlapping navigation is disabled during the effect,
+photograph. The shared timeline exposes an abstract hold and a late reveal point, while a bounded,
+downsampled blur surface keeps fine detail hidden consistently across pixel densities. Adjacent
+images are preloaded and decoded, overlapping navigation is disabled during the effect,
 and `prefers-reduced-motion: reduce` switches immediately without animation. Sequence settings
 live in `src/color/color-path-config.ts`, while public transition defaults and validation live
 separately in `src/color/color-path-transition-config.ts`. The renderer lives in

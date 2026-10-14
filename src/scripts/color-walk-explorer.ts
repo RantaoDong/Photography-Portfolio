@@ -115,6 +115,7 @@ function setupColorWalk(elements: {
 	let activeIndex = 0;
 	let draggingWheel = false;
 	let holdingOriginal = false;
+	let heldPointerId: number | null = null;
 	let loadVersion = 0;
 	let photoReady = false;
 	let hasRenderedPhoto = false;
@@ -156,9 +157,12 @@ function setupColorWalk(elements: {
 	nextButton.addEventListener('click', () => navigate(1));
 
 	photoSurface.addEventListener('pointerdown', revealOriginal);
+	photoSurface.addEventListener('pointermove', cancelHoldOutsideSurface);
 	photoSurface.addEventListener('pointerup', restoreEmphasis);
 	photoSurface.addEventListener('pointercancel', restoreEmphasis);
+	photoSurface.addEventListener('pointerleave', restoreEmphasis);
 	photoSurface.addEventListener('lostpointercapture', restoreEmphasis);
+	photoSurface.addEventListener('contextmenu', (event) => event.preventDefault());
 	originalImage.addEventListener('dragstart', (event) => event.preventDefault());
 	photoSurface.addEventListener('keydown', (event) => {
 		if ((event.key === ' ' || event.key === 'Enter') && !event.repeat) {
@@ -174,6 +178,10 @@ function setupColorWalk(elements: {
 	});
 	photoSurface.addEventListener('blur', showEmphasis);
 	window.addEventListener('blur', showEmphasis);
+	window.addEventListener('pagehide', showEmphasis);
+	document.addEventListener('visibilitychange', () => {
+		if (document.hidden) showEmphasis();
+	});
 
 	function selectFromPointer(event: PointerEvent) {
 		const bounds = wheel.getBoundingClientRect();
@@ -293,16 +301,27 @@ function setupColorWalk(elements: {
 	}
 
 	function revealOriginal(event: PointerEvent) {
-		if (!photoReady || event.button !== 0) return;
-		event.preventDefault();
+		if (!photoReady || event.button !== 0 || !event.isPrimary || heldPointerId !== null) return;
+		heldPointerId = event.pointerId;
 		(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
 		showOriginal();
 	}
 
-	function restoreEmphasis(event: PointerEvent) {
-		const target = event.currentTarget as HTMLElement;
-		if (target.hasPointerCapture(event.pointerId)) target.releasePointerCapture(event.pointerId);
+	function restoreEmphasis() {
 		showEmphasis();
+	}
+
+	function cancelHoldOutsideSurface(event: PointerEvent) {
+		if (event.pointerId !== heldPointerId) return;
+		const bounds = photoSurface.getBoundingClientRect();
+		if (
+			event.clientX < bounds.left ||
+			event.clientX > bounds.right ||
+			event.clientY < bounds.top ||
+			event.clientY > bounds.bottom
+		) {
+			showEmphasis();
+		}
 	}
 
 	function showOriginal() {
@@ -314,6 +333,11 @@ function setupColorWalk(elements: {
 	}
 
 	function showEmphasis() {
+		const pointerId = heldPointerId;
+		heldPointerId = null;
+		if (pointerId !== null && photoSurface.hasPointerCapture(pointerId)) {
+			photoSurface.releasePointerCapture(pointerId);
+		}
 		holdingOriginal = false;
 		originalImage.hidden = true;
 		treatedCanvas.hidden = !hasRenderedPhoto;

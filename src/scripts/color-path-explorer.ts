@@ -382,11 +382,14 @@ function formatIndex(value: number) {
 }
 
 function waitForImage(image: HTMLImageElement) {
-	if (image.complete && image.naturalWidth > 0) return Promise.resolve();
-	return new Promise<void>((resolve, reject) => {
-		image.addEventListener('load', () => resolve(), { once: true });
-		image.addEventListener('error', () => reject(new Error('Image failed to load.')), {
-			once: true,
-		});
-	});
+	const loaded =
+		image.complete && image.naturalWidth > 0
+			? Promise.resolve()
+			: new Promise<void>((resolve, reject) => {
+					image.addEventListener('load', () => resolve(), { once: true });
+					image.addEventListener('error', () => reject(new Error('Image failed to load.')), {
+						once: true,
+					});
+				});
+	return loaded.then(() => (typeof image.decode === 'function' ? image.decode() : undefined));
 }
