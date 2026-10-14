@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Color Path Debug</title>
+		<link rel="stylesheet" href="/styles.css" />
+	</head>
+	<body>
+		<header class="page-header">
+			<div>
+				<p class="eyebrow">Local development tool</p>
+				<h1>Color Path Debug</h1>
+				<p>Inspect the real sequence first, then tune transitions between adjacent photographs.</p>
+			</div>
+			<p id="status" class="status" role="status">Loading gallery…</p>
+		</header>
+
+		<main>
+			<section class="panel sequence-panel" aria-labelledby="sequence-heading">
+				<header class="section-heading">
+					<div>
+						<p class="step-label">01 · Sequence</p>
+						<h2 id="sequence-heading">Build and inspect the path</h2>
+						<p>Uses the public control points, matching, sequencing, and ordering.</p>
+					</div>
+					<div class="path-actions">
+						<button id="undo-point" class="secondary-button" type="button" disabled>Undo</button>
+						<button id="reset-path" class="secondary-button" type="button" disabled>Reset</button>
+						<button id="generate-sequence" class="primary-button" type="button" disabled>
+							Generate sequence
+						</button>
+					</div>
+				</header>
+
+				<div class="sequence-workspace">
+					<div class="disk-column">
+						<canvas
+							id="color-path-disk"
+							class="color-path-disk"
+							width="460"
+							height="460"
+							role="application"
+							tabindex="0"
+							aria-label="Color disk. Select three to five ordered points."
+						></canvas>
+						<p id="path-guidance" class="guidance">Choose 3–5 points in order.</p>
+						<div class="legend" aria-label="Path marker legend">
+							<span><i class="control-marker"></i>Control point</span>
+							<span><i class="photo-marker"></i>Sequence photograph</span>
+						</div>
+					</div>
+
+					<div class="sequence-inspector">
+						<div class="inspector-header">
+							<div>
+								<h3>Generated sequence</h3>
+								<p id="sequence-summary">Create a path to inspect its photographs.</p>
+							</div>
+						</div>
+						<div id="sequence-list" class="sequence-list empty-state">
+							<p>No sequence generated yet.</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section
+				id="transition-section"
+				class="panel transition-panel"
+				aria-labelledby="transition-heading"
+			>
+				<header class="section-heading">
+					<div>
+						<p class="step-label">02 · Transition</p>
+						<h2 id="transition-heading">Tune an adjacent pair</h2>
+						<p id="pair-description">
+							Generate a sequence, then select a connection between two thumbnails.
+						</p>
+					</div>
+					<div class="transition-actions">
+						<div class="direction-toggle" aria-label="Preview direction">
+							<button id="direction-forward" type="button" aria-pressed="true">A → B</button>
+							<button id="direction-reverse" type="button" aria-pressed="false">B → A</button>
+						</div>
+						<button id="play-transition" class="primary-button" type="button" disabled>
+							Play transition
+						</button>
+					</div>
+				</header>
+
+				<div class="transition-workspace">
+					<div class="preview-column">
+						<div id="transition-stage" class="transition-stage">
+							<canvas id="transition-canvas" aria-label="Color Path transition preview"></canvas>
+							<p id="stage-placeholder">Select an adjacent pair above.</p>
+						</div>
+						<div class="timeline">
+							<div class="timeline-readout">
+								<label for="timeline-range">Timeline</label>
+								<output id="timeline-value">0%</output>
+							</div>
+							<input
+								id="timeline-range"
+								type="range"
+								min="0"
+								max="100"
+								value="0"
+								step="1"
+								disabled
+							/>
+							<div class="timeline-labels" aria-hidden="true">
+								<span id="timeline-start-label">A clear</span><span>Color transfer</span
+								><span id="timeline-end-label">B clear</span>
+							</div>
+						</div>
+					</div>
+
+					<aside class="parameter-panel" aria-labelledby="parameter-heading">
+						<div class="parameter-heading">
+							<div>
+								<h3 id="parameter-heading">Transition parameters</h3>
+								<p>Tune locally, then explicitly save to the shared public defaults.</p>
+							</div>
+							<button id="reset-parameters" class="text-button" type="button">Reset</button>
+						</div>
+						<div id="parameter-controls" class="parameter-controls"></div>
+						<pre id="parameter-values" aria-label="Current transition parameter values"></pre>
+						<div class="save-defaults">
+							<button id="save-defaults" class="primary-button" type="button">
+								Save as current defaults
+							</button>
+							<p id="save-status" role="status">
+								Writes only the centralized Color Path transition defaults.
+							</p>
+						</div>
+					</aside>
+				</div>
+			</section>
+		</main>
+
+		<script type="module" src="/app.ts"></script>
+	</body>
+</html>

@@ -1,0 +1,344 @@
+---
+import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import type { ColorToneCandidate } from '../color/color-tone-matching.ts';
+import ExploreBackLink from './ExploreBackLink.astro';
+
+export interface ColorPathPhoto extends ColorToneCandidate {
+	src: string;
+	width: number;
+	height: number;
+	alt: string;
+}
+
+interface Props {
+	photos: ColorPathPhoto[];
+}
+
+const { photos } = Astro.props;
+---
+
+<section class="pt-24 pb-20 min-h-[70vh]">
+	<div class="container-custom">
+		<div class="mb-10">
+			<ExploreBackLink />
+		</div>
+
+		<header class="mb-10 text-center">
+			<h1 class="text-4xl md:text-5xl font-bold mb-4">Color Path</h1>
+			<p class="text-gray-600 max-w-xl mx-auto">
+				Choose three to five colors, then follow the path they create through the collection.
+			</p>
+		</header>
+
+		<section class="color-path-picker" aria-labelledby="color-path-picker-title">
+			<h2 id="color-path-picker-title" class="sr-only">Create a color path</h2>
+			<canvas
+				id="color-path-disk"
+				class="color-path-disk"
+				width="320"
+				height="320"
+				tabindex="0"
+				role="application"
+				aria-label="Color disk. Choose three to five ordered colors."></canvas>
+			<p class="picker-guidance">Choose 3–5 colors</p>
+			<p id="color-path-status" class="sr-only" aria-live="polite"></p>
+			<div class="control-actions">
+				<button id="color-path-undo" class="secondary-action" type="button" disabled>
+					Undo point
+				</button>
+				<button id="color-path-reset" class="secondary-action" type="button" disabled>Reset</button>
+				<button id="color-path-explore" class="primary-action" type="button" disabled
+					>Explore</button
+				>
+			</div>
+		</section>
+
+		<section
+			id="color-path-results"
+			class="color-path-results"
+			aria-labelledby="color-path-results-title"
+			hidden
+		>
+			<div class="result-context">
+				<div>
+					<h2 id="color-path-results-title" class="text-xl font-semibold">Your color path</h2>
+					<p id="color-path-draft-note" class="draft-note" hidden>
+						Draft changed. Explore again to update the photographs.
+					</p>
+				</div>
+				<canvas
+					id="color-path-preview"
+					class="color-path-preview"
+					width="160"
+					height="160"
+					aria-label="Committed color path preview"></canvas>
+			</div>
+
+			<p id="color-path-empty" class="photo-status" role="status" hidden>
+				No photographs match this path closely enough.
+			</p>
+
+			<figure id="color-path-figure" class="mt-8" hidden>
+				<nav class="path-navigation" aria-label="Photograph navigation">
+					<button
+						id="color-path-previous"
+						class="path-arrow"
+						type="button"
+						aria-label="Previous photograph"
+						title="Previous photograph"
+					>
+						<ChevronLeft size={20} strokeWidth={1.5} aria-hidden="true" />
+					</button>
+
+					<div class="photo-stage">
+						<img id="color-path-photo" class="path-photo" src="" alt="" draggable="false" />
+						<canvas id="color-path-transition" class="path-transition" aria-hidden="true" hidden
+						></canvas>
+					</div>
+
+					<button
+						id="color-path-next"
+						class="path-arrow"
+						type="button"
+						aria-label="Next photograph"
+						title="Next photograph"
+					>
+						<ChevronRight size={20} strokeWidth={1.5} aria-hidden="true" />
+					</button>
+				</nav>
+				<div
+					id="color-path-position"
+					class="path-position"
+					role="img"
+					aria-label="Current photograph at the start of the color path"
+				>
+					<span id="color-path-position-marker" class="path-position-marker"></span>
+				</div>
+				<figcaption
+					id="color-path-index"
+					class="mt-2 text-center text-xs tracking-widest text-gray-500"
+				>
+					01 / 01
+				</figcaption>
+			</figure>
+		</section>
+	</div>
+</section>
+
+<script id="color-path-data" type="application/json" set:html={JSON.stringify(photos)} />
+
+<script>
+	import '../scripts/color-path-explorer.ts';
+</script>
+
+<style>
+	.color-path-picker {
+		width: min(100%, 25rem);
+		margin-inline: auto;
+		padding: clamp(0.9rem, 3vw, 1.5rem);
+		border: 1px solid rgb(229 231 235);
+	}
+
+	.color-path-disk {
+		display: block;
+		width: min(100%, 18rem);
+		height: auto;
+		margin-inline: auto;
+		cursor: crosshair;
+		touch-action: none;
+	}
+
+	.color-path-disk:focus-visible,
+	button:focus-visible {
+		outline: 2px solid black;
+		outline-offset: 2px;
+	}
+
+	.picker-guidance {
+		min-height: 1.25rem;
+		margin-top: 1rem;
+		color: rgb(107 114 128);
+		font-size: 0.8rem;
+		text-align: center;
+	}
+
+	.control-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.55rem;
+		margin-top: 1rem;
+	}
+
+	.control-actions button {
+		padding: 0.55rem 0.85rem;
+		border: 1px solid black;
+		font-size: 0.8rem;
+		transition: opacity 150ms ease;
+	}
+
+	.primary-action {
+		background: black;
+		color: white;
+	}
+
+	.secondary-action {
+		background: white;
+		color: black;
+	}
+
+	.control-actions button:disabled {
+		cursor: default;
+		opacity: 0.32;
+	}
+
+	.color-path-results {
+		max-width: 64rem;
+		margin: 3.5rem auto 0;
+	}
+
+	.result-context {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding-block: 0.75rem;
+		border-block: 1px solid rgb(229 231 235);
+	}
+
+	.draft-note {
+		margin-top: 0.25rem;
+		color: rgb(107 114 128);
+		font-size: 0.75rem;
+	}
+
+	.color-path-preview {
+		width: 4.75rem;
+		height: 4.75rem;
+		flex: 0 0 auto;
+	}
+
+	.path-navigation {
+		display: grid;
+		grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+		align-items: center;
+		gap: clamp(0.25rem, 1.5vw, 1rem);
+	}
+
+	.photo-stage {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 100%;
+		height: clamp(20rem, 68svh, 44rem);
+		min-width: 0;
+	}
+
+	.path-photo {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		max-height: none;
+		object-fit: contain;
+		object-position: center;
+	}
+
+	.path-transition {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.path-transition[hidden] {
+		display: none;
+	}
+
+	.path-arrow {
+		display: inline-grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		color: rgb(75 85 99);
+		border: 1px solid transparent;
+		transition:
+			color 150ms ease,
+			border-color 150ms ease;
+	}
+
+	.path-arrow:hover:not(:disabled) {
+		color: black;
+		border-color: rgb(229 231 235);
+	}
+
+	.path-arrow:disabled {
+		cursor: default;
+		opacity: 0.25;
+	}
+
+	.path-position {
+		position: relative;
+		width: min(9rem, 36vw);
+		height: 0.75rem;
+		margin: 0.85rem auto 0;
+		--path-ribbon: rgb(209 213 219);
+	}
+
+	.path-position::before {
+		position: absolute;
+		top: 50%;
+		right: 0;
+		left: 0;
+		height: 3px;
+		border-radius: 1px;
+		background: var(--path-ribbon);
+		box-shadow: 0 0 4px rgb(107 114 128 / 0.14);
+		content: '';
+		transform: translateY(-50%);
+	}
+
+	.path-position-marker {
+		position: absolute;
+		top: 50%;
+		left: 0%;
+		width: 0.42rem;
+		height: 0.42rem;
+		border: 1px solid rgb(31 41 55 / 0.6);
+		border-radius: 999px;
+		background: rgb(255 255 255 / 0.82);
+		box-shadow: 0 0 0 1px rgb(255 255 255 / 0.5);
+		transform: translate(-50%, -50%);
+	}
+
+	.photo-status {
+		padding-block: 4rem;
+		color: rgb(107 114 128);
+		font-size: 0.875rem;
+		text-align: center;
+	}
+
+	@media (max-width: 480px) {
+		.result-context {
+			align-items: flex-start;
+		}
+
+		.path-navigation {
+			grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+			gap: 0.125rem;
+		}
+
+		.path-arrow {
+			width: 2.5rem;
+			height: 2.5rem;
+		}
+
+		.photo-stage {
+			height: clamp(16rem, 58svh, 30rem);
+		}
+	}
+</style>

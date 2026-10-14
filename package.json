@@ -18,6 +18,7 @@
 		"photo:manage": "tsx scripts/photo-manager-server.ts",
 		"color:analyze": "tsx scripts/color-analyze.ts",
 		"color:debug": "tsx scripts/color-debug-server.ts",
+		"color-path:debug": "tsx scripts/color-path-debug-server.ts",
 		"color-walk:tune": "tsx scripts/color-walk-tuner-server.ts",
 		"color-walk:benchmark": "tsx scripts/color-walk-region-benchmark.ts"
 	},

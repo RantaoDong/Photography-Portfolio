@@ -1,19 +1,52 @@
 ---
-import ExploreBackLink from '../../components/ExploreBackLink.astro';
+import { getImage } from 'astro:assets';
+import ColorPathExplorer from '../../components/ColorPathExplorer.astro';
+import type { OverallColorMatchFeatures } from '../../color/color-types.ts';
+import { getImages } from '../../data/imageStore.ts';
+import generatedFeatures from '../../generated/photo-color-features.json';
 import MainLayout from '../../layouts/MainLayout.astro';
+
+const images = await getImages();
+const photos = await Promise.all(
+	images.flatMap((image) => {
+		const features = generatedFeatures.photos[image.id];
+		if (!features) return [];
+		return [
+			(async () => {
+				const landscape = image.src.width >= image.src.height;
+				const maximum = 1440;
+				const optimized = await getImage({
+					src: image.src,
+					...(landscape ? { width: maximum } : { height: maximum }),
+					format: 'webp',
+					quality: 82,
+				});
+				const scale = Math.min(1, maximum / Math.max(image.src.width, image.src.height));
+				const matchingFeatures: OverallColorMatchFeatures = {
+					averageLab: features.averageLab as [number, number, number],
+					dominantColors: features.dominantColors.map((color) => ({
+						lab: color.lab as [number, number, number],
+						proportion: color.proportion,
+					})),
+					hueHistogram: features.hueHistogram,
+					neutralProportion: features.neutralProportion,
+					toneStrength: features.toneStrength,
+					neutralStrength: features.neutralStrength,
+				};
+				return {
+					id: image.id,
+					src: optimized.src,
+					width: Math.round(image.src.width * scale),
+					height: Math.round(image.src.height * scale),
+					alt: image.title || 'Photograph',
+					features: matchingFeatures,
+				};
+			})(),
+		];
+	}),
+);
 ---
 
 <MainLayout>
-	<section class="pt-24 pb-20 min-h-[70vh]">
-		<div class="container-custom">
-			<div class="mb-12">
-				<ExploreBackLink />
-			</div>
-
-			<div class="max-w-2xl mx-auto text-center">
-				<h1 class="text-4xl md:text-5xl font-bold mb-4">Color Path</h1>
-				<p class="text-gray-600">This exploration mode is not available yet.</p>
-			</div>
-		</div>
-	</section>
+	<ColorPathExplorer {photos} />
 </MainLayout>

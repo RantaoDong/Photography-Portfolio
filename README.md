@@ -122,6 +122,57 @@ The debug server binds to `127.0.0.1`, opens in the default browser, and stops w
 not an Astro page and is not included in the public site build. Regenerate the feature file after
 adding, removing, or changing photographs.
 
+## Color Path
+
+The public Color Path mode lets visitors define three to five ordered points on a two-dimensional
+hue-and-saturation disk. It converts those anchors into a continuous path, chooses an adaptive
+five-to-fifteen-photo sequence using the shared overall-color features, and keeps results stable
+until an edited draft path is confirmed again.
+
+Previous/Next navigation uses a fixed, contain-fitted photo stage. Its Canvas transition removes
+detail from the current photograph, shifts a restrained color bias between the two corresponding
+path positions while preserving broad spatial color regions, then restores detail in the next
+photograph. Adjacent images are preloaded, overlapping navigation is disabled during the effect,
+and `prefers-reduced-motion: reduce` switches immediately without animation. Sequence settings
+live in `src/color/color-path-config.ts`, while public transition defaults and validation live
+separately in `src/color/color-path-transition-config.ts`. The renderer lives in
+`src/color/color-path-transition.ts` and does not participate in sequence selection.
+The viewer's minimal linear indicator uses a softened gradient sampled from the committed path and
+places each result at its actual normalized path position, so adaptively spaced photographs are not
+displayed at artificial, uniform intervals. This display-only color treatment does not affect
+matching or transition colors.
+
+### Color Path Debug tool
+
+Start the integrated, local-only sequence inspector and transition tuner:
+
+```bash
+npm run color-path:debug
+```
+
+The tool binds to `127.0.0.1:4178`, opens in the default browser, and stops with `Ctrl+C`. It is a
+separate Vite development surface, not an Astro route, so it is excluded from the public build. It
+reads the registered gallery and generated color features without editing `gallery.yaml`.
+
+First create a three-to-five-point path and select **Generate sequence**. The inspector calls the
+same public path interpolation, Color Tone scoring, sequence generator, ordering, and adaptive
+length logic, then presents the resulting photographs as ordered thumbnails with their IDs, path
+positions, target colors, and similarity values. Numbered sequence markers are also drawn over the
+path for diagnosing gaps and density.
+
+Select an arrow between any two adjacent thumbnails to feed those real sequence entries into the
+shared transition renderer. The fixed-stage preview supports forward and reverse playback,
+direction-aware 0–100% scrubbing, and controls for duration, detail loss, color pull, grain amount,
+grain scale, spread irregularity, and spread softness. **Save as current defaults** validates and
+atomically writes the current values to the centralized transition configuration; it never changes
+sequence weights.
+
+Clear frames remain contain-fitted inside the stable stage. During the abstract middle, the active
+transition region interpolates between the two photographs' actual contained bounds, so portrait
+and landscape combinations expand or contract without moving the page. A lightweight,
+deterministic distance-field mask adds soft watercolor-like edge variation while the shared blur,
+path-color bias, residual spatial structure, and film-like grain remain intact.
+
 ## Color Walk development tool
 
 Start the separate local-only Color Walk development tool:
